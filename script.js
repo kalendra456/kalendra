@@ -1,47 +1,32 @@
-const design_card_butttons = document.querySelectorAll('.design-card');
-const introduction_text = document.querySelectorAll('.introduction-text');
-
-const single_profile_card = document.querySelectorAll('.single-profile-card');
-const testimonial_card = document.querySelectorAll('.testimonial-card');
-
-design_card_butttons.forEach((button, index) => {
-    button.addEventListener('click', () => {
-        introduction_text.forEach((introduction, introductionIndex) => {
-            if (index === introductionIndex) {
-                introduction.style.display = 'block';
-            } else {
-                introduction.style.display = 'none';
-            }
-        });
-        design_card_butttons.forEach((btn, btnIndex) => {
-            if (index === btnIndex) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-                
-            }
-        });
-    });
+// Theme toggle
+const themeBtn = document.getElementById('themeToggle');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+const saved = localStorage.getItem('theme');
+function applyTheme(mode){
+  document.body.classList.toggle('dark', mode !== 'light');
+  document.body.classList.toggle('light', mode === 'light');
+  localStorage.setItem('theme', mode);
+}
+applyTheme(saved || (prefersDark.matches ? 'dark' : 'light'));
+themeBtn?.addEventListener('click', ()=>{
+  const now = document.body.classList.contains('dark') ? 'light' : 'dark';
+  applyTheme(now);
 });
 
-single_profile_card.forEach((btn, index) => {
-    btn.addEventListener('click', ()=> {
-        testimonial_card.forEach((testimonialCard, testimonialCardIndex) => {
-            if (index === testimonialCardIndex) {
-                testimonialCard.style.display = 'block';
-            } else {
-                testimonialCard.style.display = 'none';
-            }
-        });
-        single_profile_card.forEach((cardBtn, cardIndex) => {
-            if (index === cardIndex) {
-                cardBtn.classList.add('profile-card-active');
-            } else {
-                cardBtn.classList.remove('profile-card-active');
-            }
-        });
-    });
+// Year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+},{ threshold:.12 });
+document.querySelectorAll('.section, .card, .item, .proj').forEach(el=>{
+  el.classList.add('reveal'); observer.observe(el);
 });
 
-
-
+// Smooth nav close on hash click (placeholder for mobile)
+document.querySelectorAll('.nav a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', ()=>{/* close mobile menu if you add one */});
+});
