@@ -1,32 +1,49 @@
-// Theme toggle
-const themeBtn = document.getElementById('themeToggle');
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-const saved = localStorage.getItem('theme');
-function applyTheme(mode){
-  document.body.classList.toggle('dark', mode !== 'light');
-  document.body.classList.toggle('light', mode === 'light');
-  localStorage.setItem('theme', mode);
-}
-applyTheme(saved || (prefersDark.matches ? 'dark' : 'light'));
-themeBtn?.addEventListener('click', ()=>{
-  const now = document.body.classList.contains('dark') ? 'light' : 'dark';
-  applyTheme(now);
-});
+// ====================
+// DARK / LIGHT THEME
+// ====================
 
-// Year
-document.getElementById('year').textContent = new Date().getFullYear();
+// Wait for DOM to load
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("themeToggle");
+  const body = document.body;
 
-// Scroll reveal
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  // Load saved theme if any
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    body.classList.remove("dark", "light");
+    body.classList.add(savedTheme);
+  }
+
+  // Toggle event
+  toggle.addEventListener("click", () => {
+    const isDark = body.classList.contains("dark");
+    body.classList.toggle("dark", !isDark);
+    body.classList.toggle("light", isDark);
+
+    // Save preference
+    localStorage.setItem("theme", isDark ? "light" : "dark");
   });
-},{ threshold:.12 });
-document.querySelectorAll('.section, .card, .item, .proj').forEach(el=>{
-  el.classList.add('reveal'); observer.observe(el);
 });
 
-// Smooth nav close on hash click (placeholder for mobile)
-document.querySelectorAll('.nav a[href^="#"]').forEach(a=>{
-  a.addEventListener('click', ()=>{/* close mobile menu if you add one */});
+// ====================
+// Dynamic Year in Footer
+// ====================
+document.addEventListener("DOMContentLoaded", () => {
+  const yearSpan = document.getElementById("year");
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
+});
+
+// ====================
+// Smooth scrolling (optional enhancement)
+// ====================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function (e) {
+    const target = document.querySelector(this.getAttribute("href"));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
 });
