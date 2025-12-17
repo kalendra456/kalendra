@@ -6,22 +6,37 @@
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("themeToggle");
   const body = document.body;
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
 
-  // Load saved theme if any
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme) {
+  const getPreferredTheme = () => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark" || savedTheme === "light") return savedTheme;
+    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  };
+
+  const updateToggleUI = (theme) => {
+    if (!toggle) return;
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    toggle.textContent = theme === "dark" ? "☀️" : "🌙";
+    toggle.setAttribute("aria-label", `Switch to ${nextTheme} mode`);
+    toggle.setAttribute("aria-pressed", theme === "light");
+  };
+
+  const applyTheme = (theme) => {
     body.classList.remove("dark", "light");
-    body.classList.add(savedTheme);
-  }
+    body.classList.add(theme);
+    localStorage.setItem("theme", theme);
+    if (themeMeta) {
+      themeMeta.setAttribute("content", theme === "dark" ? "#0b1220" : "#f8fafc");
+    }
+    updateToggleUI(theme);
+  };
 
-  // Toggle event
-  toggle.addEventListener("click", () => {
-    const isDark = body.classList.contains("dark");
-    body.classList.toggle("dark", !isDark);
-    body.classList.toggle("light", isDark);
+  applyTheme(getPreferredTheme());
 
-    // Save preference
-    localStorage.setItem("theme", isDark ? "light" : "dark");
+  toggle?.addEventListener("click", () => {
+    const nextTheme = body.classList.contains("dark") ? "light" : "dark";
+    applyTheme(nextTheme);
   });
 });
 
