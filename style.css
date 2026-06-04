@@ -1139,3 +1139,93 @@ body::before {
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* ====== Responsive optimization v14: desktop + mobile ====== */
+html, body { overflow-x: hidden; }
+body { min-width: 320px; }
+img, svg, video { max-width: 100%; height: auto; }
+.container { max-width: min(var(--max-width), calc(100vw - 32px)); }
+.site-header { max-width: min(var(--max-width), calc(100vw - 32px)); border-radius: 0 0 18px 18px; }
+.section { scroll-margin-top: 96px; }
+.card, .item, .project-feature, .recognition-card, .proof-gallery { overflow-wrap: anywhere; }
+.cards-grid, .skills-grid, .projects-grid, .recognition-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.hero-art img { max-height: 420px; object-fit: contain; }
+.trust-row, .quick-stats, .tags, .project-outcomes { min-width: 0; }
+
+@media (min-width: 1180px) {
+  .container { max-width: 1160px; }
+  .hero { grid-template-columns: minmax(0, 1.45fr) minmax(340px, 0.95fr); }
+  .projects-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #recognition .recognition-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+}
+
+@media (max-width: 1024px) {
+  .container { max-width: calc(100vw - 28px); padding-left: 1rem; padding-right: 1rem; }
+  .site-header { max-width: calc(100vw - 28px); }
+  .hero { gap: 1.8rem; }
+  .hero-text h1 { font-size: clamp(2rem, 6vw, 2.8rem); }
+  .cards-grid, .skills-grid, .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-feature { padding: 1.25rem; }
+  .proj { min-height: auto; }
+}
+
+@media (max-width: 760px) {
+  .container { max-width: 100%; padding-left: 1rem; padding-right: 1rem; }
+  .site-header {
+    top: 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    padding: .75rem 1rem;
+    align-items: flex-start;
+  }
+  .brand { font-size: .95rem; }
+  .nav {
+    width: 100%;
+    justify-content: flex-start;
+    gap: .45rem;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: .15rem;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a, .nav .btn, .nav button { flex: 0 0 auto; font-size: .82rem; padding: .42rem .72rem; }
+  .nav a:not(.btn) { display: inline-flex; }
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 2rem 1rem 2.25rem;
+    gap: 1.25rem;
+  }
+  .hero-art { order: -1; }
+  .hero-art img { max-height: 260px; width: 100%; object-fit: contain; }
+  .lead { font-size: .95rem; }
+  .quick-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; }
+  .quick-stats li { width: auto; font-size: .78rem; }
+  .trust-row { gap: .45rem; }
+  .trust-row span { font-size: .72rem; padding: .32rem .55rem; }
+  .section { padding: 3rem 0; scroll-margin-top: 130px; }
+  .section h2 { font-size: 1.65rem; }
+  .cards-grid, .skills-grid, .projects-grid, .highlights, .timeline, .achievement-strip { grid-template-columns: 1fr !important; }
+  .project-feature, .card, .item { padding: 1rem; border-radius: 16px; }
+  .proj p, .project-feature p, .card p, .item li { font-size: .93rem; }
+  .tags, .project-outcomes { gap: .35rem; }
+  .tags li, .project-outcomes span { font-size: .72rem; }
+  .btn { width: fit-content; max-width: 100%; }
+  #recognition .recognition-hero { grid-template-columns: 1fr !important; padding: 1rem !important; }
+  #recognition .recognition-stats { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  #recognition .recognition-stats div { min-height: 74px; padding: .65rem .45rem !important; }
+  #recognition .recognition-grid { grid-template-columns: 1fr !important; }
+  #recognition .proof-gallery-header { grid-template-columns: 1fr !important; }
+  #recognition .proof-preview-row { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+
+@media (max-width: 430px) {
+  .hero-text h1 { font-size: clamp(1.82rem, 11vw, 2.35rem); line-height: 1.06; }
+  .quick-stats { grid-template-columns: 1fr; }
+  #recognition .recognition-stats { grid-template-columns: 1fr !important; }
+  #recognition .proof-preview-row { grid-template-columns: 1fr !important; }
+  .cta { flex-direction: column; align-items: stretch; }
+  .cta .btn { width: 100%; }
+}
