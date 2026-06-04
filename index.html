@@ -1,21 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yaswanth Kalendra | Security Researcher & Bug Bounty Hunter</title>
-  <meta name="description" content="Portfolio of Yaswanth Kalendra — Security Researcher, Bug Bounty Hunter, SOC engineer. Recognized by SAP, Accenture, Aldi, Stanford, Texas A&M, Axway and more.">
-  <link rel="preload" href="style.css" as="style">
-  <link rel="stylesheet" href="style.css">
-  <link rel="preload" href="script.js" as="script">
-  <link rel="icon" href="assets/cyber.png">
-  <meta name="theme-color" content="#0b1220" />
-  <!-- Open Graph -->
-  <meta property="og:title" content="Yaswanth Kalendra — Cybersecurity Portfolio">
-  <meta property="og:description" content="Security researcher • Bug bounty hunter • SOC engineering • Recognized by SAP, Accenture, Aldi & global security teams.">
-  <meta property="og:type" content="website">
-  <!-- Structured Data -->
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Yaswanth Kalendra | Application Security Researcher &amp; SOC Engineer</title>
+<meta content="Portfolio of Yaswanth Kalendra — Application Security Researcher, Bug Bounty Hunter, and SOC Engineer with 3+ years of vulnerability research, SAST/DAST, Wazuh/Zabbix/Grafana projects, and high-impact responsible disclosures." name="description"/>
+<link as="style" href="style.css" rel="preload"/>
+<link href="style.css" rel="stylesheet"/>
+<link as="script" href="script.js" rel="preload"/>
+<link href="assets/cyber.png" rel="icon"/>
+<meta content="#0b1220" name="theme-color">
+<!-- Open Graph -->
+<meta content="Yaswanth Kalendra — Cybersecurity Portfolio" property="og:title"/>
+<meta content="Application security researcher • Bug bounty hunter • SAST/DAST • SOC engineering • Wazuh, Zabbix, Grafana • High-impact responsible disclosure." property="og:description"/>
+<meta content="website" property="og:type"/>
+<!-- Structured Data -->
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -40,274 +41,289 @@
     ]
   }
   </script>
-</head>
+</meta></head>
 <body class="dark">
-  <a class="skip" href="#main">Skip to content</a>
-
-  <header class="site-header container" role="banner">
-    <a class="brand" href="#top" aria-label="Home">
-      <img src="assets/cyber.png" alt="" width="28" height="28" loading="eager">
-      <span>Yaswanth Kalendra</span>
-    </a>
-    <nav class="nav" aria-label="Primary">
-      <button id="themeToggle" class="btn ghost" aria-label="Toggle theme">🌗</button>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#recognition">Recognition</a>
-      <a href="#contact" class="btn">Contact</a>
-    </nav>
-  </header>
-
-  <main id="main">
-
-    <!-- HERO -->
-    <section class="hero container" id="top" aria-label="Intro">
-      <div class="hero-text">
-        <h1>Security Researcher <span class="accent">&amp; Bug Bounty Hunter</span></h1>
-        <p class="lead">
-          Offensive-focused cybersecurity professional with <strong>3+ years</strong> of hands-on vulnerability research and application security testing,
-          backed by real-world <strong>SOC engineering</strong> experience. I help teams validate, triage, and remediate security issues across web apps,
-          APIs, and infrastructure—combining attacker mindset with practical defensive insight.
-          Recognized with multiple <strong>Hall of Fame</strong> acknowledgments and an <strong>official CISO appreciation letter</strong> for high-impact disclosures.
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header container" role="banner">
+<a aria-label="Home" class="brand" href="#top">
+<img alt="" height="28" loading="eager" src="assets/cyber.png" width="28"/>
+<span>Yaswanth Kalendra</span>
+</a>
+<nav aria-label="Primary" class="nav">
+<button aria-label="Toggle theme" class="btn ghost" id="themeToggle">🌗</button>
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#experience">Experience</a>
+<a href="#projects">Projects</a>
+<a href="#recognition">Recognition</a>
+<a class="btn" href="#contact">Contact</a>
+</nav>
+</header>
+<main id="main">
+<!-- HERO -->
+<section aria-label="Intro" class="hero container" id="top">
+<div class="hero-text">
+<p class="hero-kicker">Application Security • Bug Bounty • SOC Engineering</p>
+<h1>Finding real attack paths. <span class="accent">Building stronger defenses.</span></h1>
+<p class="lead">
+          I’m <strong>Yaswanth Kalendra</strong>, an offensive-focused cybersecurity professional with <strong>3+ years</strong> of vulnerability research across web apps, APIs, and enterprise environments.
+          My work combines <strong>manual exploitation</strong>, <strong>SAST/DAST</strong>, and practical <strong>SOC engineering</strong> with Wazuh, Zabbix, Grafana, GLPI, and Linux.
+          Recognized through Hall of Fame acknowledgments, validated disclosures, and a critical Swiss Federal program finding.
         </p>
-        <div class="cta">
-          <a class="btn" href="#projects">See Projects</a>
-          <a class="btn ghost" href="#contact">Hire Me</a>
-        </div>
-        <ul class="quick-stats" role="list">
-          <li><strong>3+ yrs</strong> bug bounty</li>
-          <li><strong>Bounties</strong> earned</li>
-          <li><strong>SOC</strong> deployments</li>
-        </ul>
-      </div>
-      <div class="hero-art">
-        <img src="assets/email-background.png" alt="Cybersecurity dashboard" loading="eager">
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="section container" aria-labelledby="about-title">
-      <h2 id="about-title">About</h2>
-       <p>
-        I'm <strong>Yaswanth Kalendra</strong>, an offensive-focused security researcher with strong experience in web &amp; API testing and vulnerability triage.
-        Alongside offensive work, I’ve contributed to SOC engineering—building monitoring pipelines and detection visibility—so I can assess risk not only from exploitation,
-        but also from detection and response gaps.
+<div class="cta">
+<a class="btn" href="#projects">View Work</a>
+<a class="btn ghost" href="#contact">Contact Me</a>
+</div>
+<ul class="quick-stats" role="list">
+<li><strong>20+ </strong>programs tested</li>
+<li><strong>3+ yrs</strong> vulnerability research</li>
+<li><strong>~$10k</strong> single critical bounty</li>
+<li><strong>CEH</strong> certified</li>
+</ul>
+<div class="trust-row" aria-label="Portfolio highlights">
+<span>Hall of Fame Recognitions</span>
+<span>SAST + DAST</span>
+<span>Wazuh / Zabbix / Grafana</span>
+<span>OSCP + CCSE in progress</span>
+</div>
+</div>
+<div class="hero-art">
+<img alt="Cybersecurity dashboard" loading="eager" src="assets/email-background.png"/>
+</div>
+</section>
+<!-- ABOUT -->
+<section aria-labelledby="about-title" class="section container" id="about">
+<h2 id="about-title">About</h2>
+<p>
+        I work at the intersection of <strong>application security, bug bounty research, and SOC operations</strong>. My strength is not only finding vulnerabilities, but proving real-world impact, reducing false positives, and translating findings into clear remediation steps.
       </p>
-      <p>
-        I specialize in validating real attack paths, writing precise reports in technical and business language, and helping engineering teams close findings quickly.
-        My goal is to work in <strong>Product Security / Application Security</strong> where security is embedded into SDLC and continuous remediation is part of the culture.
+<p>
+        I’m focused on <strong>Product Security / Application Security / VAPT</strong> roles where I can perform deep manual testing, review code, improve security monitoring, and help teams fix issues before they become incidents.
       </p>
+<div class="highlights">
+<div class="card">
+<h3>Focus Areas</h3>
+<ul>
+<li>Web &amp; API security testing (IDOR, access control, auth/session flaws, business logic)</li>
+<li>Vulnerability validation &amp; triage (risk rating, exploitability, false-positive reduction)</li>
+<li>Secure reporting: clear PoCs, impact, and developer-ready remediation guidance</li>
+<li>SOC &amp; monitoring fundamentals (Wazuh, Zabbix, Grafana) to identify detection gaps</li>
+</ul>
+</div>
+<div class="card">
+<h3>Currently</h3>
+<ul>
+<li>Completed <strong>CEH</strong>; currently pursuing <strong>OSCP</strong> and <strong>Certified Cloud Security Engineer (CCSE)</strong> to strengthen offensive security and cloud security depth</li>
+<li>Improving automation for recon, asset discovery, and validation workflows</li>
+<li>Building cloud &amp; CI/CD security foundations (containers, dependency risk, security testing in pipelines)</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- SKILLS -->
+<section class="section container" id="skills">
+<h2>Skills</h2>
+<div class="skills-grid">
+<div class="skill card">
+<h3>Application Security</h3>
+<p>Manual web/API testing for IDOR/BOLA, auth flaws, business logic, injections, XSS, file upload issues, and access-control bypasses.</p>
+</div>
+<div class="skill card">
+<h3>SAST + DAST</h3>
+<p>Source-code review combined with dynamic exploitation, Burp Suite workflows, scanner validation, PoC creation, and risk-based reporting.</p>
+</div>
+<div class="skill card">
+<h3>SOC Engineering</h3>
+<p>Wazuh, Zabbix, Grafana, GLPI, OpenSearch, syslog pipelines, alert tuning, incident ticketing, and compliance-oriented monitoring.</p>
+</div>
+<div class="skill card">
+<h3>Infrastructure Security</h3>
+<p>Linux, Docker, firewall/VPN basics, Sophos XGS, SNMP monitoring, network troubleshooting, and enterprise availability monitoring.</p>
+</div>
+</div>
+</section>
+<!-- EXPERIENCE -->
+<section class="section container" id="experience">
+<h2>Experience</h2>
+<div class="timeline">
+<article class="item featured-experience">
+<header>
+<h3>Independent Security Researcher / Bug Bounty Hunter</h3>
+<span class="meta">2022 — Present · Remote · Web, API, SAST &amp; DAST</span>
+</header>
+<ul>
+<li>Performed advanced security testing across <strong>20+ bug bounty and responsible disclosure programs</strong>, identifying high-impact vulnerabilities in authentication, authorization, and business-logic workflows.</li>
+<li>Conducted <strong>SAST</strong> through source code review and <strong>DAST</strong> through real-world attack simulations, combining code-level reasoning with exploit-driven validation.</li>
+<li>Identified a <strong>critical vulnerability in a Swiss Federal program</strong>, resulting in an approximately <strong>$10,000 bounty for a single finding</strong> and demonstrating strong expertise in authentication, trust systems, and exploit impact analysis.</li>
+<li>Specialized in manual testing for <strong>IDOR/BOLA</strong>, injection flaws, XSS, privilege escalation paths, file upload issues, and complex business-logic vulnerabilities.</li>
+<li>Produced professional vulnerability reports with clear reproduction steps, technical impact, business risk, evidence, and developer-ready remediation guidance.</li>
+</ul>
+</article>
+<article class="item">
+<header>
+<h3>Tatva Networks — Cybersecurity Analyst</h3>
+<span class="meta">2025 — Present · India</span>
+</header>
+<ul>
+<li>Supported SOC engineering and monitoring deployments using Wazuh, Zabbix, and Grafana dashboards.</li>
+<li>Worked on large-scale network security operations including firewall rule reviews, VPN, NAT, and segmentation.</li>
+<li>Performed vulnerability assessment support and assisted remediation by translating findings into actionable fixes.</li>
+<li>Improved security visibility by tuning alerts and ensuring infrastructure stability for security tooling.</li>
+</ul>
+</article>
+</div>
+<div aria-label="Bug bounty impact highlights" class="achievement-strip">
+<div class="mini-card">
+<strong>20+ Programs</strong>
+<span>Private bug bounty and responsible disclosure testing across web, API, and enterprise platforms.</span>
+</div>
+<div class="mini-card">
+<strong>Critical Swiss Federal Finding</strong>
+<span>Single high-impact authentication/trust-system vulnerability rewarded at approximately $10,000.</span>
+</div>
+<div class="mini-card">
+<strong>SAST + DAST</strong>
+<span>Source-code review combined with dynamic exploitation and manual validation workflows.</span>
+</div>
+</div>
+</section>
+<!-- PROJECTS -->
+<section class="section container" id="projects">
+<h2>Projects</h2>
+<p class="section-lead">
+        Practical cybersecurity projects showing deployment skill, troubleshooting depth, automation mindset, and SOC/demo readiness.
+      </p>
+<div class="project-feature card">
+<div>
+<p class="eyebrow">Flagship SOC Lab</p>
+<h3>Wazuh 5 Beta SOC Lab — ISO 27001 Validation</h3>
+<p>Deployed an isolated Wazuh 5 beta environment to test ISO 27001/regulatory compliance features without affecting the stable SOC setup.</p>
+<div class="project-outcomes">
+<span>Docker single-node stack</span>
+<span>Windows + Linux agents</span>
+<span>Certificate and health fixes</span>
+</div>
+<ul class="tags"><li>Wazuh 5</li><li>Docker</li><li>ISO 27001</li><li>Compliance</li></ul>
+<a class="btn small" href="docs/Wazuh_5_Beta2_ISO27001_Test_Lab_Documentation(2).docx">View Documentation</a>
+</div>
+</div>
+<div class="cards-grid projects-grid">
+<article class="card proj">
+<p class="eyebrow">SOC Dashboard</p>
+<h3>Wazuh + Grafana + Zabbix Dashboard</h3>
+<p>Combined Wazuh security events with Zabbix infrastructure metrics in Grafana for host-wise SOC visibility.</p>
+<div class="project-outcomes"><span>OpenSearch datasource</span><span>Agent-wise Lucene queries</span></div>
+<ul class="tags"><li>Grafana</li><li>Zabbix</li><li>Wazuh</li><li>OpenSearch</li></ul>
+<a class="btn small" href="docs/Wazuh_5_Grafana_Zabbix_SOC_Dashboard_Documentation(1).docx">View Documentation</a>
+</article>
+<article class="card proj">
+<p class="eyebrow">Log Pipeline</p>
+<h3>Firewall Syslog to Wazuh 5</h3>
+<p>Built a working firewall log ingestion pipeline from collector host to Wazuh Engine, Indexer, and Dashboard Discover.</p>
+<div class="project-outcomes"><span>System-activity data stream</span><span>Engine connector fixes</span></div>
+<ul class="tags"><li>Syslog</li><li>Firewall</li><li>Wazuh</li><li>Linux</li></ul>
+<a class="btn small" href="docs/Wazuh5 Firewall Syslog Integration Documentation.docx">View Documentation</a>
+</article>
+<article class="card proj">
+<p class="eyebrow">SOC Automation</p>
+<h3>Wazuh → GLPI Incident Ticketing</h3>
+<p>Automated high-value Wazuh alerts into GLPI incident tickets using a custom integration script with deduplication.</p>
+<div class="project-outcomes"><span>ITSM workflow</span><span>Noise-controlled ticketing</span></div>
+<ul class="tags"><li>Wazuh</li><li>GLPI</li><li>ITSM</li><li>Automation</li></ul>
+<a class="btn small" href="docs/Wazuh_GLPI_SOC_Integration_Documentation(1).docx">View Documentation</a>
+</article>
+<article class="card proj">
+<p class="eyebrow">Enterprise Monitoring</p>
+<h3>High Court Network Monitoring</h3>
+<p>Supported real client monitoring for switches, access points, servers, and network availability using Zabbix and Grafana.</p>
+<div class="project-outcomes"><span>SNMP monitoring</span><span>Network troubleshooting</span></div>
+<ul class="tags"><li>Zabbix</li><li>SNMP</li><li>Grafana</li><li>Network Ops</li></ul>
+<a aria-disabled="true" class="btn small">Internal Project</a>
+</article>
+<article class="card proj">
+<p class="eyebrow">Offensive Security</p>
+<h3>Recon &amp; Vulnerability Validation</h3>
+<p>Repeatable bug bounty workflows for asset discovery, HTTP probing, template checks, and manual exploit validation.</p>
+<div class="project-outcomes"><span>IDOR/Auth focus</span><span>Impact-based triage</span></div>
+<ul class="tags"><li>Bug Bounty</li><li>Recon</li><li>Burp Suite</li><li>Nuclei</li></ul>
+<a aria-disabled="true" class="btn small">Private</a>
+</article>
+</div>
+</section>
+<!-- RECOGNITION -->
+<section class="section container" id="recognition">
+<h2>Recognition</h2>
+<div class="cards-grid">
+<div class="card">
+<h3>Highlights</h3>
+<ul>
+<li><strong>SAP</strong> — Security researcher recognition/credits.</li>
+<li><strong>Accenture</strong> — Hall of Fame recognition (responsible disclosure).</li>
+<li><strong>Aldi</strong> — Hall of Fame recognition.</li>
+<li><strong>Drexel University</strong> — Validated vulnerability &amp; <strong>CISO appreciation letter</strong>.</li>
+<li><strong>Stanford University</strong> — Validated report &amp; fix acknowledgment.</li>
+<li><strong>Texas A&amp;M University</strong> — Security acknowledgment.</li>
+<li><strong>Axway</strong> — Acknowledgment for responsible disclosure.</li>
+<li><strong>Hager Group</strong> — Validated vulnerability acknowledgment.</li>
+<li><strong>Swiss Federal program</strong> — Critical vulnerability accepted with approximately <strong>$10,000 single-finding bounty</strong>.</li>
+<li><strong>Private programs</strong> — Invitations and bounties earned across multiple engagements.</li>
+</ul>
+</div>
+<div class="card">
+<h3>Certifications</h3>
+<ul>
+<li><strong>Certified Ethical Hacker (CEH)</strong> — Completed</li>
+<li><strong>OSCP</strong> — In progress / hands-on offensive security preparation</li>
+<li><strong>Certified Cloud Security Engineer (CCSE)</strong> — In progress</li>
+<li>Practical stack experience: <strong>Wazuh</strong>, <strong>Zabbix</strong>, <strong>Grafana</strong>, <strong>Sophos XGS</strong>, <strong>GLPI</strong>, <strong>Docker</strong>, <strong>Linux</strong></li>
+</ul>
+</div>
+</div>
+</section>
 
-      <div class="highlights">
-        <div class="card">
-          <h3>Focus Areas</h3>
-          <ul>
-            <li>Web &amp; API security testing (IDOR, access control, auth/session flaws, business logic)</li>
-            <li>Vulnerability validation &amp; triage (risk rating, exploitability, false-positive reduction)</li>
-            <li>Secure reporting: clear PoCs, impact, and developer-ready remediation guidance</li>
-            <li>SOC &amp; monitoring fundamentals (Wazuh, Zabbix, Grafana) to identify detection gaps</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Currently</h3>
-          <ul>
-            <li>Preparing for <strong>OSCP</strong> and strengthening hands-on pentesting depth</li>
-            <li>Improving automation for recon, asset discovery, and validation workflows</li>
-            <li>Building cloud &amp; CI/CD security foundations (containers, dependency risk, security testing in pipelines)</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills" class="section container">
-      <h2>Skills</h2>
-      <div class="skills-grid">
-
-        <div class="skill card">
-          
-          <h3>Offensive Security</h3>
-          <p>
-            Web &amp; API penetration testing focused on authorization, authentication/session, IDOR, business logic, and data exposure.
-            Strong in manual validation and exploit-driven triage over scanner-only findings.
-          </p>
-        </div>
-
-        <div class="skill card">
-          
-         <h3>SOC &amp; Monitoring</h3>
-          <p>
-            Wazuh SIEM, Zabbix, and Grafana for monitoring, alerting, and visibility. Helps bridge offensive findings to detection gaps
-            and practical remediation priorities.
-          </p>
-        </div>
-
-        <div class="skill card">
-          
-           <h3>Infra &amp; Network Security</h3>
-          <p>
-            Linux administration, firewall/VPN basics, segmentation, and secure configuration practices. Experience with Sophos XGS deployments
-            and enterprise switching environments.
-          </p>
-        </div>
-
-        <div class="skill card">
-            <h3>Automation &amp; Tooling</h3>
-          <p>
-            Burp Suite, Nmap, ffuf, nuclei, Nessus, ZAP, Wayback workflows, and Python/Bash scripting for repeatable recon and validation.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience" class="section container">
-      <h2>Experience</h2>
-      <div class="timeline">
-
-        <article class="item">
-          <header>
-             <h3>Security Researcher / Bug Bounty — Independent</h3>
-            <span class="meta">2022 — Present · Remote</span>
-          </header>
-          <ul>
-            <li>Discovered and validated vulnerabilities across web apps and APIs through private programs and responsible disclosure.</li>
-            <li>Delivered professional reports with clear reproduction steps, exploit scenarios, business impact, and remediation guidance.</li>
-            <li>Specialized in authorization/access control (IDOR), authentication/session issues, information disclosure, and logic flaws.</li>
-            <li>Built repeatable recon and validation workflows to improve coverage while keeping findings high quality.</li>
-          </ul>
-        </article>
-
-        <article class="item">
-          <header>
-            <h3>Tatva Networks — Cybersecurity Analyst</h3>
-            <span class="meta">2025 — Present · India</span>
-          </header>
-         <ul>
-            <li>Supported SOC engineering and monitoring deployments using Wazuh, Zabbix, and Grafana dashboards.</li>
-            <li>Worked on large-scale network security operations including firewall rule reviews, VPN, NAT, and segmentation.</li>
-            <li>Performed vulnerability assessment support and assisted remediation by translating findings into actionable fixes.</li>
-            <li>Improved security visibility by tuning alerts and ensuring infrastructure stability for security tooling.</li>
-          </ul>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="section container">
-      <h2>Projects</h2>
-      <div class="cards-grid">
-
-        <article class="card proj">
-          <h3>AlertHub (Django)</h3>
-          <p>
-            Unified monitoring dashboard concept integrating Zabbix, Wazuh, and Grafana  
-            with alert deduplication, REST hooks, and incident triage UI.
-          </p>
-          <ul class="tags">
-            <li>Django</li><li>Wazuh</li><li>Zabbix</li><li>Grafana</li>
-          </ul>
-          <a class="btn small" aria-disabled="true">Private</a>
-        </article>
-
-        <article class="card proj">
-          <h3>Recon Automation Scripts</h3>
-          <p>
-            Personal automation scripts for subdomain discovery, HTTP probing, fuzzing,  
-            tech detection, and vulnerability surface mapping.
-          </p>
-          <ul class="tags">
-            <li>Automation</li><li>Recon</li><li>Python</li>
-          </ul>
-          <a class="btn small" aria-disabled="true">Private</a>
-        </article>
-
-        <article class="card proj">
-          <h3>SOC Dashboards</h3>
-          <p>
-            Grafana dashboards combining Wazuh SIEM events & Zabbix metrics  
-            for infra health, anomaly detection, and security posture insights.
-          </p>
-          <ul class="tags">
-            <li>Grafana</li><li>Wazuh</li><li>Zabbix</li>
-          </ul>
-          <a class="btn small" aria-disabled="true">Screenshots</a>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- RECOGNITION -->
-    <section id="recognition" class="section container">
-      <h2>Recognition</h2>
-      <div class="cards-grid">
-        <div class="card">
-          <h3>Highlights</h3>
-          <ul>
-            <li><strong>SAP</strong> — Security researcher recognition/credits.</li>
-            <li><strong>Accenture</strong> — Hall of Fame recognition (responsible disclosure).</li>
-            <li><strong>Aldi</strong> — Hall of Fame recognition.</li>
-            <li><strong>Drexel University</strong> — Validated vulnerability &amp; <strong>CISO appreciation letter</strong>.</li>
-            <li><strong>Stanford University</strong> — Validated report &amp; fix acknowledgment.</li>
-            <li><strong>Texas A&amp;M University</strong> — Security acknowledgment.</li>
-            <li><strong>Axway</strong> — Acknowledgment for responsible disclosure.</li>
-            <li><strong>Hager Group</strong> — Validated vulnerability acknowledgment.</li>
-            <li><strong>Private programs</strong> — Invitations and bounties earned across multiple engagements.</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Certifications</h3>
-          <ul>
-            <li><strong>CEH v13 (AI Master Track)</strong> — In progress</li>
-            <li><strong>OSCP</strong> — Preparing</li>
-            <li>Hands-on experience: <strong>Wazuh</strong>, <strong>Zabbix</strong>, <strong>Grafana</strong>, <strong>Sophos XGS</strong></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section container">
-      <h2>Contact</h2>
-      <div class="contact-grid">
-        <div>
-          <p>For collaborations, pentests, or responsible disclosure:</p>
-          <ul class="contact-list">
-            <li>Email: <a href="mailto:yaswanthkukkala123@gmail.com">yaswanthkukkala123@gmail.com</a></li>
-            <li>LinkedIn: <a href="https://www.linkedin.com/in/yaswanth-kalendra-kukkala-37b7701a0/" target="_blank">yaswanth-kalendra</a></li>
-          </ul>
-        </div>
-
-        <form class="contact-form" name="contact" netlify>
-          <input type="hidden" name="form-name" value="contact" />
-          <label>
-            <span>Your Name</span>
-            <input required name="name" />
-          </label>
-          <label>
-            <span>Email</span>
-            <input required type="email" name="email" />
-          </label>
-          <label>
-            <span>Message</span>
-            <textarea required name="message" rows="5"></textarea>
-          </label>
-          <button class="btn" type="submit">Send</button>
-        </form>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="site-footer container">
-    <p>© <span id="year"></span> Yaswanth Kalendra • Built with HTML/CSS/JS</p>
-  </footer>
-
-  <script src="script.js" defer></script>
+<section class="section container callout-section" aria-label="Career focus">
+<div class="callout card">
+<div>
+<p class="eyebrow">Career Focus</p>
+<h2>Application Security, VAPT, Product Security, and SOC Engineering</h2>
+<p>I bring a practical attacker mindset, real bug bounty impact, and hands-on SIEM/monitoring implementation experience — useful for teams that need both finding vulnerabilities and improving detection/remediation workflows.</p>
+</div>
+<a class="btn" href="#contact">Let’s Connect</a>
+</div>
+</section>
+<!-- CONTACT -->
+<section class="section container" id="contact">
+<h2>Contact</h2>
+<div class="contact-grid">
+<div>
+<p>For collaborations, pentests, or responsible disclosure:</p>
+<ul class="contact-list">
+<li>Email: <a href="mailto:yaswanthkukkala123@gmail.com">yaswanthkukkala123@gmail.com</a></li>
+<li>LinkedIn: <a href="https://www.linkedin.com/in/yaswanth-kalendra-kukkala-37b7701a0/" target="_blank">yaswanth-kalendra</a></li>
+</ul>
+</div>
+<form class="contact-form" name="contact" netlify="">
+<input name="form-name" type="hidden" value="contact"/>
+<label>
+<span>Your Name</span>
+<input name="name" required=""/>
+</label>
+<label>
+<span>Email</span>
+<input name="email" required="" type="email"/>
+</label>
+<label>
+<span>Message</span>
+<textarea name="message" required="" rows="5"></textarea>
+</label>
+<button class="btn" type="submit">Send</button>
+</form>
+</div>
+</section>
+</main>
+<footer class="site-footer container">
+<p>© <span id="year"></span> Yaswanth Kalendra • Built with HTML/CSS/JS</p>
+</footer>
+<script defer="" src="script.js"></script>
 </body>
 </html>
