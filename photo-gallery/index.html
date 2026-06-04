@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recognition Proof Gallery | Yaswanth Kalendra</title>
+<style>
+:root{
+  --bg:#030712;--surface:rgba(15,23,42,.86);--surface-strong:rgba(17,24,39,.96);--surface-soft:rgba(30,41,59,.64);
+  --text:#eef6ff;--muted:#a9b8d4;--soft:#cbd5e1;--accent:#7c6cff;--accent2:#22d3ee;--success:#34d399;--warning:#f59e0b;
+  --border:rgba(148,163,184,.22);--border2:rgba(124,108,255,.45);--shadow:0 24px 90px rgba(0,0,0,.42);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:
+  radial-gradient(circle at 12% 0%,rgba(124,108,255,.28),transparent 32%),
+  radial-gradient(circle at 88% 8%,rgba(34,211,238,.16),transparent 30%),
+  linear-gradient(180deg,#070b1d 0%,#030712 46%,#020617 100%);color:var(--text);}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 75%);pointer-events:none}
+a{color:inherit;text-decoration:none}
+.container{width:min(1220px,92vw);margin:0 auto;position:relative}
+.header{padding:1.5rem 0;display:flex;justify-content:space-between;gap:1rem;align-items:center;position:sticky;top:0;z-index:50;backdrop-filter:blur(14px)}
+.back,.pill{border:1px solid var(--border);padding:.7rem 1rem;border-radius:999px;background:rgba(15,23,42,.72);color:#dbeafe;font-weight:800;font-size:.9rem;box-shadow:0 12px 30px rgba(0,0,0,.16)}
+.back:hover{border-color:var(--border2);transform:translateY(-1px)}
+.nav-pills{display:flex;gap:.55rem;flex-wrap:wrap;justify-content:flex-end}
+.pill{color:var(--muted);font-weight:700}
+.hero{padding:3rem;border:1px solid var(--border);background:linear-gradient(145deg,rgba(15,23,42,.96),rgba(30,41,59,.54));border-radius:34px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(124,108,255,.34),transparent 65%);filter:blur(4px)}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.76rem;color:#a5b4fc;font-weight:900;margin:0 0 .85rem}
+h1{margin:0;max-width:850px;font-size:clamp(2.4rem,5vw,5.5rem);letter-spacing:-.06em;line-height:.96}
+.hero p{max-width:840px;color:var(--muted);line-height:1.75;font-size:1.08rem;position:relative;z-index:2}
+.hero-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.4rem;position:relative;z-index:2}
+.btn{display:inline-flex;align-items:center;gap:.45rem;background:linear-gradient(135deg,var(--accent),#5b5ff7);color:white;border:1px solid rgba(255,255,255,.12);font-weight:900;border-radius:999px;padding:.82rem 1.05rem;box-shadow:0 14px 34px rgba(92,92,255,.28)}
+.btn.secondary{background:rgba(15,23,42,.72);color:#e2e8f0;border-color:var(--border)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9rem;margin:1rem 0 1.35rem}
+.stat{border:1px solid var(--border);background:rgba(15,23,42,.78);border-radius:22px;padding:1rem;box-shadow:0 16px 50px rgba(0,0,0,.2)}
+.stat strong{display:block;font-size:1.45rem;color:white;letter-spacing:-.03em}
+.stat span{color:var(--muted);font-size:.86rem;font-weight:700}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;margin:2.5rem 0 1rem}
+.section-head h2{margin:0;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:-.035em}
+.section-head p{max-width:620px;margin:.45rem 0 0;color:var(--muted);line-height:1.65}
+.note{padding:1rem 1.1rem;border:1px solid rgba(245,158,11,.34);border-radius:20px;background:rgba(146,64,14,.16);color:#fed7aa;margin-top:1rem;position:relative;z-index:2}
+.feature-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
+.feature-grid .featured-card:nth-child(1){grid-column:span 2}
+.feature-grid .featured-card:nth-child(2){grid-column:span 2}
+.feature-grid .featured-card:nth-child(3){grid-column:span 1}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1rem;padding:0 0 3rem}
+.gallery-card{overflow:hidden;border:1px solid var(--border);border-radius:26px;background:linear-gradient(180deg,rgba(15,23,42,.95),rgba(15,23,42,.72));box-shadow:0 16px 46px rgba(0,0,0,.25);transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.gallery-card:hover{transform:translateY(-5px);border-color:rgba(124,108,255,.64);box-shadow:0 24px 65px rgba(0,0,0,.34)}
+.image-wrap{position:relative;display:block;background:#0f172a;overflow:hidden}
+.image-wrap img{width:100%;height:245px;object-fit:cover;object-position:top center;display:block;transition:transform .35s ease,filter .35s ease}
+.featured-card .image-wrap img{height:300px}
+.gallery-card:hover img{transform:scale(1.035);filter:saturate(1.1)}
+.open-label{position:absolute;right:.75rem;bottom:.75rem;padding:.45rem .65rem;border-radius:999px;background:rgba(2,6,23,.76);border:1px solid rgba(255,255,255,.14);color:#e0f2fe;font-size:.75rem;font-weight:900;backdrop-filter:blur(10px);opacity:0;transform:translateY(6px);transition:.2s}
+.gallery-card:hover .open-label{opacity:1;transform:translateY(0)}
+.gallery-card-body{padding:1rem 1rem 1.15rem}
+.card-meta{display:flex;gap:.5rem;align-items:center;margin-bottom:.65rem}
+.card-meta span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:900;color:#bfdbfe;border:1px solid rgba(147,197,253,.24);background:rgba(37,99,235,.13);border-radius:999px;padding:.32rem .55rem}
+.gallery-card h2{font-size:1.05rem;line-height:1.25;margin:.1rem 0 .48rem;letter-spacing:-.02em}
+.gallery-card p{margin:0;color:var(--muted);line-height:1.58;font-size:.92rem}
+.disclosure-box{border:1px solid rgba(52,211,153,.26);background:rgba(6,78,59,.16);border-radius:24px;padding:1.2rem;margin:0 0 2rem;color:#d1fae5}
+.disclosure-box strong{color:#fff}
+.footer{padding:0 0 2.2rem;color:var(--muted);font-size:.9rem;text-align:center}
+@media(max-width:980px){.stats{grid-template-columns:repeat(2,1fr)}.feature-grid{grid-template-columns:repeat(2,1fr)}.feature-grid .featured-card:nth-child(n){grid-column:span 1}}
+@media(max-width:700px){.header{align-items:flex-start;flex-direction:column;position:relative}.hero{padding:1.45rem;border-radius:24px}.stats{grid-template-columns:1fr}.feature-grid,.grid{grid-template-columns:1fr}.image-wrap img,.featured-card .image-wrap img{height:210px}.nav-pills{justify-content:flex-start}}
+</style>
+</head>
+<body>
+<header class="container header">
+  <a class="back" href="../index.html">← Back to Portfolio</a>
+  <nav class="nav-pills" aria-label="Gallery quick stats"><span class="pill">14 proof screenshots</span><span class="pill">HoF + VDP + Bounty</span></nav>
+</header>
+<main class="container">
+  <section class="hero">
+    <p class="eyebrow">Responsible Disclosure Proof Gallery</p>
+    <h1>Recognitions that prove real-world security impact.</h1>
+    <p>A curated evidence page for Hall of Fame listings, responsible disclosure acknowledgments, validated reports, and high-impact bug bounty results. The main portfolio stays clean, while this page gives recruiters and security teams a proper proof gallery.</p>
+    <div class="hero-actions">
+      <a class="btn" href="#featured">View featured proof</a>
+      <a class="btn secondary" href="#all-proof">View all screenshots</a>
+    </div>
+    <div class="note"><strong>Safe sharing note:</strong> Public Hall of Fame screenshots are fine to show. Private report screenshots should stay minimized and must not expose private program scope, internal URLs, exploit details, secrets, tokens, or sensitive comments.</div>
+  </section>
+
+  <section class="stats" aria-label="Proof summary">
+    <div class="stat"><strong>20+</strong><span>Programs tested</span></div>
+    <div class="stat"><strong>Critical</strong><span>Swiss Federal finding</span></div>
+    <div class="stat"><strong>5+</strong><span>Public recognitions</span></div>
+    <div class="stat"><strong>VDP</strong><span>Government + university proof</span></div>
+  </section>
+
+  <section id="featured">
+    <div class="section-head"><div><p class="eyebrow">Featured Evidence</p><h2>Strongest recognition proofs</h2><p>These screenshots are the best to show first because they combine brand trust, public recognition, and validated security impact.</p></div></div>
+    <div class="feature-grid">
+      <article class="gallery-card featured-card" data-category="private--paid-findings">
+        <a class="image-wrap" href="images/swiss-bugbounty-findings-list.png" target="_blank" rel="noopener" aria-label="Open Swiss Bug Bounty — High Impact Findings">
+          <img src="images/swiss-bugbounty-findings-list.png" alt="Swiss Bug Bounty — High Impact Findings screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Private / Paid Findings</span></div>
+          <h2>Swiss Bug Bounty — High Impact Findings</h2>
+          <p>Private program finding summary showing critical and high-impact paid results.</p>
+        </div>
+      </article>
+      <article class="gallery-card featured-card" data-category="public-hall-of-fame">
+        <a class="image-wrap" href="images/drexel-university-hall-of-fame.png" target="_blank" rel="noopener" aria-label="Open Drexel University — Hall of Fame">
+          <img src="images/drexel-university-hall-of-fame.png" alt="Drexel University — Hall of Fame screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Public Hall of Fame</span></div>
+          <h2>Drexel University — Hall of Fame</h2>
+          <p>Public Hall of Fame recognition showing Yaswanth Kalendra Kukkala listed under 2025.</p>
+        </div>
+      </article>
+      <article class="gallery-card featured-card" data-category="public-recognition">
+        <a class="image-wrap" href="images/sap-security-credits.png" target="_blank" rel="noopener" aria-label="Open SAP — Security Credits">
+          <img src="images/sap-security-credits.png" alt="SAP — Security Credits screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Public Recognition</span></div>
+          <h2>SAP — Security Credits</h2>
+          <p>Public SAP Security Credits listing with Yaswanth Kalendra recognized in September 2025.</p>
+        </div>
+      </article>
+      <article class="gallery-card featured-card" data-category="public-recognition">
+        <a class="image-wrap" href="images/accenture-responsible-disclosure.png" target="_blank" rel="noopener" aria-label="Open Accenture — Responsible Disclosure">
+          <img src="images/accenture-responsible-disclosure.png" alt="Accenture — Responsible Disclosure screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Public Recognition</span></div>
+          <h2>Accenture — Responsible Disclosure</h2>
+          <p>Accenture responsible disclosure acknowledgments listing the researcher profile.</p>
+        </div>
+      </article>
+      <article class="gallery-card featured-card" data-category="public-hall-of-fame">
+        <a class="image-wrap" href="images/aldi-it-security-hall-of-fame.png" target="_blank" rel="noopener" aria-label="Open ALDI — IT Security Hall of Fame">
+          <img src="images/aldi-it-security-hall-of-fame.png" alt="ALDI — IT Security Hall of Fame screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Public Hall of Fame</span></div>
+          <h2>ALDI — IT Security Hall of Fame</h2>
+          <p>Public Hall of Fame entry for a valid information disclosure finding.</p>
+        </div>
+      </article></div>
+  </section>
+
+  <section id="all-proof">
+    <div class="section-head"><div><p class="eyebrow">Complete Gallery</p><h2>All recognition screenshots</h2><p>Full proof gallery including public Hall of Fame pages, acknowledgments, validated findings, bounty report summaries, and remediation confirmations.</p></div></div>
+    <div class="grid">
+      <article class="gallery-card" data-category="private--paid-findings">
+        <a class="image-wrap" href="images/swiss-bugbounty-findings-list.png" target="_blank" rel="noopener" aria-label="Open Swiss Bug Bounty — High Impact Findings">
+          <img src="images/swiss-bugbounty-findings-list.png" alt="Swiss Bug Bounty — High Impact Findings screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Private / Paid Findings</span></div>
+          <h2>Swiss Bug Bounty — High Impact Findings</h2>
+          <p>Private program finding summary showing critical and high-impact paid results.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="public-hall-of-fame">
+        <a class="image-wrap" href="images/drexel-university-hall-of-fame.png" target="_blank" rel="noopener" aria-label="Open Drexel University — Hall of Fame">
+          <img src="images/drexel-university-hall-of-fame.png" alt="Drexel University — Hall of Fame screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Public Hall of Fame</span></div>
+          <h2>Drexel University — Hall of Fame</h2>
+          <p>Public Hall of Fame recognition showing Yaswanth Kalendra Kukkala listed under 2025.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="public-recognition">
+        <a class="image-wrap" href="images/sap-security-credits.png" target="_blank" rel="noopener" aria-label="Open SAP — Security Credits">
+          <img src="images/sap-security-credits.png" alt="SAP — Security Credits screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Public Recognition</span></div>
+          <h2>SAP — Security Credits</h2>
+          <p>Public SAP Security Credits listing with Yaswanth Kalendra recognized in September 2025.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="public-recognition">
+        <a class="image-wrap" href="images/accenture-responsible-disclosure.png" target="_blank" rel="noopener" aria-label="Open Accenture — Responsible Disclosure">
+          <img src="images/accenture-responsible-disclosure.png" alt="Accenture — Responsible Disclosure screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Public Recognition</span></div>
+          <h2>Accenture — Responsible Disclosure</h2>
+          <p>Accenture responsible disclosure acknowledgments listing the researcher profile.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="public-hall-of-fame">
+        <a class="image-wrap" href="images/aldi-it-security-hall-of-fame.png" target="_blank" rel="noopener" aria-label="Open ALDI — IT Security Hall of Fame">
+          <img src="images/aldi-it-security-hall-of-fame.png" alt="ALDI — IT Security Hall of Fame screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Public Hall of Fame</span></div>
+          <h2>ALDI — IT Security Hall of Fame</h2>
+          <p>Public Hall of Fame entry for a valid information disclosure finding.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="government-vdp">
+        <a class="image-wrap" href="images/anne-arundel-government-vdp.png" target="_blank" rel="noopener" aria-label="Open Anne Arundel County Government VDP">
+          <img src="images/anne-arundel-government-vdp.png" alt="Anne Arundel County Government VDP screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Government VDP</span></div>
+          <h2>Anne Arundel County Government VDP</h2>
+          <p>Validated medium-severity information disclosure report under a government VDP.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="acknowledgment-email">
+        <a class="image-wrap" href="images/stanford-remediation-acknowledgment.png" target="_blank" rel="noopener" aria-label="Open Stanford — Remediation Acknowledgment">
+          <img src="images/stanford-remediation-acknowledgment.png" alt="Stanford — Remediation Acknowledgment screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Acknowledgment Email</span></div>
+          <h2>Stanford — Remediation Acknowledgment</h2>
+          <p>Email acknowledgment confirming the reported machine was remediated following recommendations.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="acknowledgment-email">
+        <a class="image-wrap" href="images/hager-group-hall-of-fame-confirmation.png" target="_blank" rel="noopener" aria-label="Open Hager Group — Hall of Fame Confirmation">
+          <img src="images/hager-group-hall-of-fame-confirmation.png" alt="Hager Group — Hall of Fame Confirmation screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Acknowledgment Email</span></div>
+          <h2>Hager Group — Hall of Fame Confirmation</h2>
+          <p>Email confirming the resolved vulnerability case will be published in the Hall of Fame.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="validated-finding">
+        <a class="image-wrap" href="images/axway-valid-finding-confirmation.png" target="_blank" rel="noopener" aria-label="Open Axway — Valid Finding Confirmation">
+          <img src="images/axway-valid-finding-confirmation.png" alt="Axway — Valid Finding Confirmation screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Validated Finding</span></div>
+          <h2>Axway — Valid Finding Confirmation</h2>
+          <p>Vendor confirmation that the finding was valid and raised to system owners for remediation.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="bug-bounty-report">
+        <a class="image-wrap" href="images/automattic-open-redirect-bounty.png" target="_blank" rel="noopener" aria-label="Open Automattic — Open Redirect Report">
+          <img src="images/automattic-open-redirect-bounty.png" alt="Automattic — Open Redirect Report screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Bug Bounty Report</span></div>
+          <h2>Automattic — Open Redirect Report</h2>
+          <p>Resolved private report with bounty evidence for an open redirect finding.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="bug-bounty-report">
+        <a class="image-wrap" href="images/caesars-digital-info-disclosure-cve.png" target="_blank" rel="noopener" aria-label="Open Caesars Digital — Telerik UI for ASP.NET AJAX Encryption Keys Disclosure">
+          <img src="images/caesars-digital-info-disclosure-cve.png" alt="Caesars Digital Telerik UI for ASP.NET AJAX Encryption Keys Disclosure proof" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Bug Bounty Report</span></div>
+          <h2>Caesars Digital — Telerik UI Encryption Keys Disclosure</h2>
+          <p>Resolved report for a vulnerable Telerik UI for ASP.NET AJAX component, mapped to CVE-2017-9248, demonstrating encryption key disclosure and sensitive information exposure.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="bug-bounty-report">
+        <a class="image-wrap" href="images/tools-for-humanity-client-side-security-1.png" target="_blank" rel="noopener" aria-label="Open Tools for Humanity — Client-Side Security Finding">
+          <img src="images/tools-for-humanity-client-side-security-1.png" alt="Tools for Humanity — Client-Side Security Finding screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Bug Bounty Report</span></div>
+          <h2>Tools for Humanity — Client-Side Security Finding</h2>
+          <p>Resolved report showing client-side enforcement of server-side security weakness.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="bug-bounty-report">
+        <a class="image-wrap" href="images/tools-for-humanity-client-side-security-2.png" target="_blank" rel="noopener" aria-label="Open Tools for Humanity — Follow-up Finding">
+          <img src="images/tools-for-humanity-client-side-security-2.png" alt="Tools for Humanity — Follow-up Finding screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Bug Bounty Report</span></div>
+          <h2>Tools for Humanity — Follow-up Finding</h2>
+          <p>Resolved/disclosure-pending report from the same target category with bounty evidence.</p>
+        </div>
+      </article>
+      <article class="gallery-card" data-category="disclosed-report">
+        <a class="image-wrap" href="images/radancy-disclosed-report.png" target="_blank" rel="noopener" aria-label="Open Radancy — Disclosed Report">
+          <img src="images/radancy-disclosed-report.png" alt="Radancy — Disclosed Report screenshot" loading="lazy">
+          <span class="open-label">Open proof</span>
+        </a>
+        <div class="gallery-card-body">
+          <div class="card-meta"><span>Disclosed Report</span></div>
+          <h2>Radancy — Disclosed Report</h2>
+          <p>Resolved and disclosed report evidence from HackerOne/Bugcrowd-style workflow.</p>
+        </div>
+      </article></div>
+  </section>
+
+  <div class="disclosure-box"><strong>Publishing recommendation:</strong> Keep this gallery as a separate page. In the main portfolio, show only recognition cards and link to this page. For private reports, use cropped/redacted images or replace raw details with a clean summary card.</div>
+</main>
+<footer class="container footer">© Yaswanth Kalendra Kukkala — Responsible disclosure recognition and proof gallery.</footer>
+</body>
+</html>
