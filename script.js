@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const getPreferredTheme = () => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark" || savedTheme === "light") return savedTheme;
-    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    return "dark";
   };
 
   const updateToggleUI = (theme) => {
