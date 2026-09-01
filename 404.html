@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#07111f">
+  <meta name="robots" content="noindex">
+  <title>Page Not Found | Yaswanth Kalendra</title>
+  <link rel="icon" href="/kalendra/assets/yk-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/kalendra/style.css?v=20">
+  <script>
+    (() => {
+      try {
+        const stored = localStorage.getItem('portfolio-theme');
+        const systemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        document.documentElement.dataset.theme = stored || (systemLight ? 'light' : 'dark');
+      } catch (_) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    })();
+  </script>
+</head>
+<body>
+  <main class="error-page">
+    <section class="error-panel" aria-labelledby="error-title">
+      <img class="brand-mark" src="/kalendra/assets/yk-mark.svg" width="54" height="54" alt="">
+      <span class="error-code">404</span>
+      <p class="eyebrow">Route not found</p>
+      <h1 id="error-title">This page is outside the mapped attack surface.</h1>
+      <p>The requested location does not exist or may have moved. Return to the portfolio or open the recognition archive.</p>
+      <div class="error-actions">
+        <a class="button" href="/kalendra/">Return to portfolio</a>
+        <a class="button button-secondary" href="/kalendra/photo-gallery/">Recognition gallery</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

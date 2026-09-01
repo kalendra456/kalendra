@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kalendra456.github.io/kalendra/sitemap.xml

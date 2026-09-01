@@ -1,4 +1,68 @@
-Yaswanth kalendra
+# Yaswanth Kalendra — Cybersecurity Portfolio
 
+A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, focused on application security, offensive research, vulnerability validation, and SOC engineering.
 
-https://kalendra456.github.io/kalendra/
+**Live site:** https://kalendra456.github.io/kalendra/
+
+## What this site communicates
+
+- Application and API security expertise, including authorization and business-logic testing
+- Independent bug bounty and responsible-disclosure impact
+- Hands-on SOC, monitoring, logging, and incident-workflow projects
+- Public recognition evidence without exposing sensitive report contents
+- A clear professional path for recruiters, engineering leaders, and security teams to make contact
+
+## Design and engineering
+
+- Semantic HTML with accessible landmarks and keyboard navigation
+- Responsive layout for desktop, tablet, and mobile
+- Dark and light themes with saved user preference
+- No frontend framework, third-party font, analytics tracker, or runtime dependency
+- CSS-only security interface visuals to reduce page weight
+- Progressive reveal effects that respect `prefers-reduced-motion`
+- SEO metadata, Open Graph data, structured data, sitemap, manifest, and a custom 404 page
+- Dedicated recognition gallery with safer public descriptions
+
+## Repository structure
+
+```text
+.
+├── index.html                 # Main portfolio
+├── style.css                  # Shared design system
+├── script.js                  # Theme, navigation, accessibility, and UI behavior
+├── photo-gallery/
+│   ├── index.html             # Recognition proof archive
+│   └── images/                # Existing proof screenshots
+├── assets/
+│   ├── yk-mark.svg            # Portfolio identity mark
+│   └── recognitions/          # Main-page recognition previews
+├── docs/                      # Selected project documentation
+├── 404.html                   # GitHub Pages fallback
+├── site.webmanifest           # Installable-site metadata
+├── robots.txt
+└── sitemap.xml
+```
+
+## Local preview
+
+The site requires no build step. From the repository root, run:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then open `http://localhost:8000`.
+
+## Deployment
+
+The repository is deployed through GitHub Pages. Updates to the configured production branch trigger the existing Pages workflow.
+
+## Responsible disclosure and privacy
+
+The public portfolio intentionally excludes private report contents, credentials, customer-identifying details, internal assets, and unreleased vulnerability information. Public screenshots should be reviewed before each update to ensure no sensitive data is exposed.
+
+## Contact
+
+- Email: `yaswanthkukkala123@gmail.com`
+- LinkedIn: https://www.linkedin.com/in/yaswanth-kalendra-kukkala-37b7701a0/
+- GitHub: https://github.com/kalendra456

@@ -1,388 +1,650 @@
-<!DOCTYPE html>
-
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Yaswanth Kalendra | Application Security Researcher &amp; SOC Engineer</title>
-<meta content="Portfolio of Yaswanth Kalendra — Application Security Researcher, Bug Bounty Hunter, and SOC Engineer with 4+ years of vulnerability research, SAST/DAST, Wazuh/Zabbix/Grafana projects, and high-impact responsible disclosures." name="description"/>
-<link as="style" href="style.css?v=16" rel="preload"/>
-<link href="style.css?v=16" rel="stylesheet"/>
-<link as="script" href="script.js?v=16" rel="preload"/>
-<link href="assets/cyber.png" rel="icon"/>
-<meta content="#0b1220" name="theme-color">
-<!-- Open Graph -->
-<meta content="Yaswanth Kalendra — Cybersecurity Portfolio" property="og:title"/>
-<meta content="Application security researcher • Bug bounty hunter • SAST/DAST • SOC engineering • Wazuh, Zabbix, Grafana • High-impact responsible disclosure." property="og:description"/>
-<meta content="website" property="og:type"/>
-<!-- Structured Data -->
-<script type="application/ld+json">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#07111f">
+  <meta name="robots" content="index, follow">
+
+  <title>Yaswanth Kalendra | Application Security Researcher</title>
+  <meta name="description" content="Portfolio of Yaswanth Kalendra, an application security researcher and cybersecurity analyst focused on web and API security, business-logic testing, vulnerability validation, and SOC engineering.">
+  <link rel="canonical" href="https://kalendra456.github.io/kalendra/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kalendra456.github.io/kalendra/">
+  <meta property="og:title" content="Yaswanth Kalendra | Application Security Researcher">
+  <meta property="og:description" content="Application security, bug bounty research, vulnerability validation, and SOC engineering backed by real-world findings and public recognition.">
+  <meta property="og:image" content="https://kalendra456.github.io/kalendra/assets/email-background.jpg">
+  <meta property="og:image:alt" content="Yaswanth Kalendra cybersecurity portfolio">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Yaswanth Kalendra | Application Security Researcher">
+  <meta name="twitter:description" content="Application security, offensive research, and SOC engineering portfolio.">
+  <meta name="twitter:image" content="https://kalendra456.github.io/kalendra/assets/email-background.jpg">
+
+  <link rel="icon" href="assets/yk-mark.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preload" href="style.css?v=20" as="style">
+  <link rel="stylesheet" href="style.css?v=20">
+
+  <script>
+    (() => {
+      document.documentElement.classList.add('js');
+      try {
+        const stored = localStorage.getItem('portfolio-theme');
+        const systemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        document.documentElement.dataset.theme = stored || (systemLight ? 'light' : 'dark');
+      } catch (_) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    })();
+  </script>
+
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Yaswanth Kalendra",
-    "jobTitle": "Security Researcher",
+    "name": "Yaswanth Kalendra Kukkala",
+    "alternateName": "Yaswanth Kalendra",
     "url": "https://kalendra456.github.io/kalendra/",
+    "image": "https://kalendra456.github.io/kalendra/assets/cyber.png",
+    "jobTitle": "Application Security Researcher",
     "email": "mailto:yaswanthkukkala123@gmail.com",
     "sameAs": [
+      "https://github.com/kalendra456",
       "https://www.linkedin.com/in/yaswanth-kalendra-kukkala-37b7701a0/"
     ],
     "knowsAbout": [
+      "Application Security",
+      "Web Application Security",
+      "API Security",
+      "Business Logic Testing",
       "Penetration Testing",
       "Bug Bounty",
-      "SOC",
+      "SAST",
+      "DAST",
+      "SOC Engineering",
       "Wazuh",
       "Zabbix",
-      "Linux",
-      "Web Security",
-      "API Security",
-      "Network Security",
-      "Automation"
+      "Grafana",
+      "Linux"
     ]
   }
   </script>
-</meta></head>
-<body class="dark">
-<a class="skip" href="#main">Skip to content</a>
-<header class="site-header container" role="banner">
-<a aria-label="Home" class="brand" href="#top">
-<img alt="" height="28" loading="eager" src="assets/cyber.png" width="28"/>
-<span>Yaswanth Kalendra</span>
-</a>
-<nav aria-label="Primary" class="nav">
-<button aria-label="Toggle theme" class="btn ghost" id="themeToggle">🌗</button>
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#experience">Experience</a>
-<a href="#projects">Projects</a>
-<a href="#recognition">Recognition</a>
-<a class="btn" href="#contact">Contact</a>
-</nav>
-</header>
-<main id="main">
-<!-- HERO -->
-<section aria-label="Intro" class="hero container" id="top">
-<div class="hero-text">
-<p class="hero-kicker">Application Security • Bug Bounty • SOC Engineering</p>
-<h1>Finding real attack paths. <span class="accent">Building stronger defenses.</span></h1>
-<p class="lead">
-          I’m <strong>Yaswanth Kalendra</strong>, an offensive-focused cybersecurity professional with <strong>4+ years</strong> of vulnerability research across web apps, APIs, and enterprise environments.
-          My work combines <strong>manual exploitation</strong>, <strong>SAST/DAST</strong>, and practical <strong>SOC engineering</strong> with Wazuh, Zabbix, Grafana, GLPI, and Linux.
-          Recognized through Hall of Fame acknowledgments, validated disclosures, and a critical Swiss Federal program finding.
-        </p>
-<div class="cta">
-<a class="btn" href="#projects">View Work</a>
-<a class="btn ghost" href="#contact">Contact Me</a>
-</div>
-<ul class="quick-stats" role="list">
-<li><strong>20+ </strong>programs tested</li>
-<li><strong>4+ yrs</strong> vulnerability research</li>
-<li><strong>~$10k</strong> single critical bounty</li>
-<li><strong>CEH</strong> certified</li>
-</ul>
-<div class="trust-row" aria-label="Portfolio highlights">
-<span>Hall of Fame Recognitions</span>
-<span>SAST + DAST</span>
-<span>Wazuh / Zabbix / Grafana</span>
-<span>OSCP + CCSE in progress</span>
-</div>
-</div>
-<div class="hero-art">
-<img alt="Cybersecurity dashboard" loading="eager" src="assets/email-background.png"/>
-</div>
-</section>
-<!-- ABOUT -->
-<section aria-labelledby="about-title" class="section container" id="about">
-<h2 id="about-title">About</h2>
-<p>
-        I work at the intersection of <strong>application security, bug bounty research, and SOC operations</strong>. My strength is not only finding vulnerabilities, but proving real-world impact, reducing false positives, and translating findings into clear remediation steps.
-      </p>
-<p>
-        I’m focused on <strong>Product Security / Application Security / VAPT</strong> roles where I can perform deep manual testing, review code, improve security monitoring, and help teams fix issues before they become incidents.
-      </p>
-<div class="highlights">
-<div class="card">
-<h3>Focus Areas</h3>
-<ul>
-<li>Web &amp; API security testing (IDOR, access control, auth/session flaws, business logic)</li>
-<li>Vulnerability validation &amp; triage (risk rating, exploitability, false-positive reduction)</li>
-<li>Secure reporting: clear PoCs, impact, and developer-ready remediation guidance</li>
-<li>SOC &amp; monitoring fundamentals (Wazuh, Zabbix, Grafana) to identify detection gaps</li>
-</ul>
-</div>
-<div class="card">
-<h3>Currently</h3>
-<ul>
-<li>Completed <strong>CEH</strong>; currently pursuing <strong>OSCP</strong> and <strong>Certified Cloud Security Engineer (CCSE)</strong> to strengthen offensive security and cloud security depth</li>
-<li>Improving automation for recon, asset discovery, and validation workflows</li>
-<li>Building cloud &amp; CI/CD security foundations (containers, dependency risk, security testing in pipelines)</li>
-</ul>
-</div>
-</div>
-</section>
-<!-- SKILLS -->
-<section class="section container" id="skills">
-<h2>Skills</h2>
-<div class="skills-grid">
-<div class="skill card">
-<h3>Application Security</h3>
-<p>Manual web/API testing for IDOR/BOLA, auth flaws, business logic, injections, XSS, file upload issues, and access-control bypasses.</p>
-</div>
-<div class="skill card">
-<h3>SAST + DAST</h3>
-<p>Source-code review combined with dynamic exploitation, Burp Suite workflows, scanner validation, PoC creation, and risk-based reporting.</p>
-</div>
-<div class="skill card">
-<h3>SOC Engineering</h3>
-<p>Wazuh, Zabbix, Grafana, GLPI, OpenSearch, syslog pipelines, alert tuning, incident ticketing, and compliance-oriented monitoring.</p>
-</div>
-<div class="skill card">
-<h3>Infrastructure Security</h3>
-<p>Linux, Docker, firewall/VPN basics, Sophos XGS, SNMP monitoring, network troubleshooting, and enterprise availability monitoring.</p>
-</div>
-</div>
-</section>
-<!-- EXPERIENCE -->
-<section class="section container" id="experience">
-<h2>Experience</h2>
-<div class="timeline">
-<article class="item featured-experience">
-<header>
-<h3>Independent Security Researcher / Bug Bounty Hunter</h3>
-<span class="meta">2022 — Present · Remote · Web, API, SAST &amp; DAST</span>
-</header>
-<ul>
-<li>Performed advanced security testing across <strong>20+ bug bounty and responsible disclosure programs</strong>, identifying high-impact vulnerabilities in authentication, authorization, and business-logic workflows.</li>
-<li>Conducted <strong>SAST</strong> through source code review and <strong>DAST</strong> through real-world attack simulations, combining code-level reasoning with exploit-driven validation.</li>
-<li>Identified a <strong>critical vulnerability in a Swiss Federal program</strong>, resulting in an approximately <strong>$10,000 bounty for a single finding</strong> and demonstrating strong expertise in authentication, trust systems, and exploit impact analysis.</li>
-<li>Specialized in manual testing for <strong>IDOR/BOLA</strong>, injection flaws, XSS, privilege escalation paths, file upload issues, and complex business-logic vulnerabilities.</li>
-<li>Produced professional vulnerability reports with clear reproduction steps, technical impact, business risk, evidence, and developer-ready remediation guidance.</li>
-</ul>
-</article>
-<article class="item">
-<header>
-<h3>Tatva Networks — Cybersecurity Analyst</h3>
-<span class="meta">2025 — Present · India</span>
-</header>
-<ul>
-<li>Supported SOC engineering and monitoring deployments using Wazuh, Zabbix, and Grafana dashboards.</li>
-<li>Worked on large-scale network security operations including firewall rule reviews, VPN, NAT, and segmentation.</li>
-<li>Performed vulnerability assessment support and assisted remediation by translating findings into actionable fixes.</li>
-<li>Improved security visibility by tuning alerts and ensuring infrastructure stability for security tooling.</li>
-</ul>
-</article>
-</div>
-<div aria-label="Bug bounty impact highlights" class="achievement-strip">
-<div class="mini-card">
-<strong>20+ Programs</strong>
-<span>Private bug bounty and responsible disclosure testing across web, API, and enterprise platforms.</span>
-</div>
-<div class="mini-card">
-<strong>Critical Swiss Federal Finding</strong>
-<span>Single high-impact authentication/trust-system vulnerability rewarded at approximately $10,000.</span>
-</div>
-<div class="mini-card">
-<strong>SAST + DAST</strong>
-<span>Source-code review combined with dynamic exploitation and manual validation workflows.</span>
-</div>
-</div>
-</section>
-<!-- PROJECTS -->
-<section class="section container" id="projects">
-<h2>Projects</h2>
-<p class="section-lead">
-        Practical cybersecurity projects showing deployment skill, troubleshooting depth, automation mindset, and SOC/demo readiness.
-      </p>
-<div class="project-feature card">
-<div>
-<p class="eyebrow">Flagship SOC Lab</p>
-<h3>Wazuh 5 Beta SOC Lab — ISO 27001 Validation</h3>
-<p>Deployed an isolated Wazuh 5 beta environment to test ISO 27001/regulatory compliance features without affecting the stable SOC setup.</p>
-<div class="project-outcomes">
-<span>Docker single-node stack</span>
-<span>Windows + Linux agents</span>
-<span>Certificate and health fixes</span>
-</div>
-<ul class="tags"><li>Wazuh 5</li><li>Docker</li><li>ISO 27001</li><li>Compliance</li></ul>
-<a class="btn small" href="docs/Wazuh_5_Beta2_ISO27001_Test_Lab_Documentation(2).docx">View Documentation</a>
-</div>
-</div>
-<div class="cards-grid projects-grid">
-<article class="card proj">
-<p class="eyebrow">SOC Dashboard</p>
-<h3>Wazuh + Grafana + Zabbix Dashboard</h3>
-<p>Combined Wazuh security events with Zabbix infrastructure metrics in Grafana for host-wise SOC visibility.</p>
-<div class="project-outcomes"><span>OpenSearch datasource</span><span>Agent-wise Lucene queries</span></div>
-<ul class="tags"><li>Grafana</li><li>Zabbix</li><li>Wazuh</li><li>OpenSearch</li></ul>
-<a class="btn small" href="docs/Wazuh_5_Grafana_Zabbix_SOC_Dashboard_Documentation(1).docx">View Documentation</a>
-</article>
-<article class="card proj">
-<p class="eyebrow">Log Pipeline</p>
-<h3>Firewall Syslog to Wazuh 5</h3>
-<p>Built a working firewall log ingestion pipeline from collector host to Wazuh Engine, Indexer, and Dashboard Discover.</p>
-<div class="project-outcomes"><span>System-activity data stream</span><span>Engine connector fixes</span></div>
-<ul class="tags"><li>Syslog</li><li>Firewall</li><li>Wazuh</li><li>Linux</li></ul>
-<a class="btn small" href="docs/Wazuh5 Firewall Syslog Integration Documentation.docx">View Documentation</a>
-</article>
-<article class="card proj">
-<p class="eyebrow">SOC Automation</p>
-<h3>Wazuh → GLPI Incident Ticketing</h3>
-<p>Automated high-value Wazuh alerts into GLPI incident tickets using a custom integration script with deduplication.</p>
-<div class="project-outcomes"><span>ITSM workflow</span><span>Noise-controlled ticketing</span></div>
-<ul class="tags"><li>Wazuh</li><li>GLPI</li><li>ITSM</li><li>Automation</li></ul>
-<a class="btn small" href="docs/Wazuh_GLPI_SOC_Integration_Documentation(1).docx">View Documentation</a>
-</article>
-<article class="card proj">
-<p class="eyebrow">Enterprise Monitoring</p>
-<h3>High Court Network Monitoring</h3>
-<p>Supported real client monitoring for switches, access points, servers, and network availability using Zabbix and Grafana.</p>
-<div class="project-outcomes"><span>SNMP monitoring</span><span>Network troubleshooting</span></div>
-<ul class="tags"><li>Zabbix</li><li>SNMP</li><li>Grafana</li><li>Network Ops</li></ul>
-<a aria-disabled="true" class="btn small">Internal Project</a>
-</article>
-<article class="card proj">
-<p class="eyebrow">Offensive Security</p>
-<h3>Recon &amp; Vulnerability Validation</h3>
-<p>Repeatable bug bounty workflows for asset discovery, HTTP probing, template checks, and manual exploit validation.</p>
-<div class="project-outcomes"><span>IDOR/Auth focus</span><span>Impact-based triage</span></div>
-<ul class="tags"><li>Bug Bounty</li><li>Recon</li><li>Burp Suite</li><li>Nuclei</li></ul>
-<a aria-disabled="true" class="btn small">Private</a>
-</article>
-</div>
-</section>
-<!-- RECOGNITION -->
-<section class="section container" id="recognition">
-<h2>Recognitions &amp; Proof</h2>
-<p class="section-lead">
-        Verified responsible-disclosure results across global enterprises, universities, government programs, and private bug bounty engagements.
-      </p>
-<div class="recognition-hero card">
-<div>
-<p class="eyebrow">Bug Bounty Impact</p>
-<h3>Public acknowledgments + paid private findings</h3>
-<p>Recognized for reporting valid vulnerabilities across authentication, authorization, information disclosure, misconfiguration, and application-security workflows.</p>
-</div>
-<div class="recognition-stats" aria-label="Recognition metrics">
-<div><strong>20+</strong><span>Programs Tested</span></div>
-<div><strong>Critical</strong><span>Swiss Federal Finding</span></div>
-<div><strong>HoF</strong><span>Multiple Recognitions</span></div>
-</div>
-</div>
-<div class="recognition-grid">
-<article class="card recognition-card primary-recognition">
-<span class="badge">Critical Impact</span>
-<h3>Swiss Federal / eIAM Program</h3>
-<p>Critical authentication/trust-system vulnerability accepted in a Swiss Federal program with a high-value single finding reward.</p>
-<ul class="clean-list"><li>Broken authentication / trust workflow impact</li><li>~$10,000 single bounty achievement</li></ul>
-</article>
-<article class="card recognition-card">
-<span class="badge">Hall of Fame</span>
-<h3>Drexel University</h3>
-<p>Listed in the Bug Bounty Hall of Fame after a validated vulnerability submission and formal recognition.</p>
-</article>
-<article class="card recognition-card">
-<span class="badge">Security Credits</span>
-<h3>SAP</h3>
-<p>Recognized in SAP Security Credits for responsible vulnerability disclosure.</p>
-</article>
-<article class="card recognition-card">
-<span class="badge">Enterprise HoF</span>
-<h3>Accenture</h3>
-<p>Included in Accenture responsible disclosure acknowledgments.</p>
-</article>
-<article class="card recognition-card">
-<span class="badge">Hall of Fame</span>
-<h3>ALDI</h3>
-<p>Listed in ALDI IT Security Hall of Fame for a valid information disclosure finding.</p>
-</article>
-<article class="card recognition-card">
-<span class="badge">Validated Reports</span>
-<h3>More Acknowledgments</h3>
-<p>Additional validated reports and acknowledgments from Drexel, Anne Arundel County Government VDP, Stanford, Axway, Hager Group, and private programs.</p>
-</article>
-</div>
-<div class="proof-gallery card compact-proof-gallery">
-<div class="proof-gallery-top">
-<div class="proof-copy">
-<p class="eyebrow">Proof Gallery</p>
-<h3>Recognition proof gallery</h3>
-<p>A dedicated evidence page with Hall of Fame listings, acknowledgments, validated reports, and bug bounty proof — kept separate so the main portfolio stays clean and recruiter-friendly.</p>
-<a class="btn" href="photo-gallery/">Open Recognition Proof Gallery</a>
-</div>
-<div class="proof-mini-stats" aria-label="Proof gallery summary">
-<span><strong>14</strong> Proof screenshots</span>
-<span><strong>5+</strong> Public recognitions</span>
-<span><strong>VDP</strong> + bounty proof</span>
-</div>
-</div>
-<div class="proof-preview-row upgraded-proof-preview">
-<figure><img src="assets/recognitions/drexel-hof.jpg" alt="Drexel University Hall of Fame recognition screenshot" loading="lazy"><figcaption><span>Hall of Fame</span>Drexel University</figcaption></figure>
-<figure><img src="assets/recognitions/sap-credits.jpg" alt="SAP security credits recognition screenshot" loading="lazy"><figcaption><span>Security Credits</span>SAP</figcaption></figure>
-<figure><img src="assets/recognitions/accenture-hof.jpg" alt="Accenture responsible disclosure acknowledgment screenshot" loading="lazy"><figcaption><span>Enterprise HoF</span>Accenture</figcaption></figure>
-<figure><img src="assets/recognitions/aldi-hof.jpg" alt="ALDI IT Security Hall of Fame screenshot" loading="lazy"><figcaption><span>Hall of Fame</span>ALDI</figcaption></figure>
-</div>
-</div>
-<div class="cards-grid certification-grid">
-<div class="card">
-<h3>Certifications</h3>
-<ul>
-<li><strong>Certified Ethical Hacker (CEH)</strong> — Completed</li>
-<li><strong>OSCP</strong> — In progress / hands-on offensive security preparation</li>
-<li><strong>Certified Cloud Security Engineer (CCSE)</strong> — In progress</li>
-<li>Practical stack experience: <strong>Wazuh</strong>, <strong>Zabbix</strong>, <strong>Grafana</strong>, <strong>Sophos XGS</strong>, <strong>GLPI</strong>, <strong>Docker</strong>, <strong>Linux</strong></li>
-</ul>
-</div>
-<div class="card">
-<h3>Safe Disclosure Note</h3>
-<p>Detailed private report contents, internal assets, and sensitive program information are not displayed publicly. Full proof can be shared privately when appropriate.</p>
-<ul class="tags"><li>Responsible Disclosure</li><li>Private Reports Protected</li><li>Recruiter Friendly</li></ul>
-</div>
-</div>
-</section>
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<section class="section container callout-section" aria-label="Career focus">
-<div class="callout card">
-<div>
-<p class="eyebrow">Career Focus</p>
-<h2>Application Security, VAPT, Product Security, and SOC Engineering</h2>
-<p>I bring a practical attacker mindset, real bug bounty impact, and hands-on SIEM/monitoring implementation experience — useful for teams that need both finding vulnerabilities and improving detection/remediation workflows.</p>
-</div>
-<a class="btn" href="#contact">Let’s Connect</a>
-</div>
-</section>
-<!-- CONTACT -->
-<section class="section container" id="contact">
-<h2>Contact</h2>
-<div class="contact-grid">
-<div>
-<p>For collaborations, pentests, or responsible disclosure:</p>
-<ul class="contact-list">
-<li>Email: <a href="mailto:yaswanthkukkala123@gmail.com">yaswanthkukkala123@gmail.com</a></li>
-<li>LinkedIn: <a href="https://www.linkedin.com/in/yaswanth-kalendra-kukkala-37b7701a0/" target="_blank">yaswanth-kalendra</a></li>
-</ul>
-</div>
-<form class="contact-form" name="contact" netlify="">
-<input name="form-name" type="hidden" value="contact"/>
-<label>
-<span>Your Name</span>
-<input name="name" required=""/>
-</label>
-<label>
-<span>Email</span>
-<input name="email" required="" type="email"/>
-</label>
-<label>
-<span>Message</span>
-<textarea name="message" required="" rows="5"></textarea>
-</label>
-<button class="btn" type="submit">Send</button>
-</form>
-</div>
-</section>
-</main>
-<footer class="site-footer container">
-<p>© <span id="year"></span> Yaswanth Kalendra • Built with HTML/CSS/JS</p>
-</footer>
-<script defer="" src="script.js?v=16"></script>
+  <div class="site-backdrop" aria-hidden="true">
+    <span class="orb orb-one"></span>
+    <span class="orb orb-two"></span>
+    <span class="grid-plane"></span>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="Yaswanth Kalendra — home">
+        <img class="brand-mark" src="assets/yk-mark.svg" width="42" height="42" alt="">
+        <span class="brand-copy">
+          <strong>Yaswanth Kalendra</strong>
+          <span>Application Security</span>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#expertise">Expertise</a>
+        <a href="#experience">Experience</a>
+        <a href="#work">Selected work</a>
+        <a href="#recognition">Recognition</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-button theme-toggle" id="themeToggle" type="button" aria-label="Switch color theme" aria-pressed="false">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.41M17.66 6.34l1.41-1.41"></path></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5 8.5 8.5 0 1 0 20.5 14.4Z"></path></svg>
+        </button>
+        <a class="button button-small header-cta" href="#contact">Let’s connect</a>
+        <button class="icon-button menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileNav">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav shell" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="#expertise">Expertise</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Selected work</a>
+      <a href="#recognition">Recognition</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero shell" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy" data-reveal>
+        <div class="availability-chip">
+          <span class="status-dot" aria-hidden="true"></span>
+          Open to Application Security, Product Security &amp; VAPT roles
+        </div>
+
+        <p class="eyebrow">Application Security · Offensive Research · Detection Engineering</p>
+        <h1 id="hero-title">I uncover the attack path <span>before it becomes an incident.</span></h1>
+        <p class="hero-lead">
+          I’m <strong>Yaswanth Kalendra</strong>, an application security researcher and cybersecurity analyst combining deep manual web/API testing, source-code reasoning, exploit validation, and practical SOC engineering.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button" href="#work">
+            Explore selected work
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+          <a class="button button-secondary" href="photo-gallery/">
+            View recognition proof
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M10 14 19 5M19 13v6H5V5h6"></path></svg>
+          </a>
+        </div>
+
+        <div class="hero-links" aria-label="Professional profiles">
+          <a href="mailto:yaswanthkukkala123@gmail.com">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 7l8 6 8-6"></path></svg>
+            Email
+          </a>
+          <a href="https://www.linkedin.com/in/yaswanth-kalendra-kukkala-37b7701a0/" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9v9M6 6.5v.01M10 18v-5c0-2.5 4-3 4 0v5M10 9v9M3 3h18v18H3z"></path></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/kalendra456" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.82a9.5 9.5 0 0 1 2.5.34c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.77c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"></path></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual" data-reveal>
+        <div class="security-console" aria-label="Security operating profile">
+          <div class="console-bar">
+            <div class="console-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span>security-profile.yml</span>
+            <span class="console-state"><i></i> verified</span>
+          </div>
+
+          <div class="console-body">
+            <div class="console-heading">
+              <div>
+                <p>Operating profile</p>
+                <h2>Attack-path validation</h2>
+              </div>
+              <span class="risk-badge">Impact first</span>
+            </div>
+
+            <div class="profile-row">
+              <span class="row-label">Primary focus</span>
+              <strong>Web, API &amp; business logic</strong>
+            </div>
+            <div class="profile-row">
+              <span class="row-label">Testing mode</span>
+              <strong>Manual + SAST + DAST</strong>
+            </div>
+            <div class="profile-row">
+              <span class="row-label">Defensive depth</span>
+              <strong>SIEM, monitoring &amp; response</strong>
+            </div>
+
+            <div class="signal-panel">
+              <div class="signal-title">
+                <span>Validation workflow</span>
+                <span>04 stages</span>
+              </div>
+              <div class="signal-line"><i style="--level: 94%"></i><span>Discover</span></div>
+              <div class="signal-line"><i style="--level: 88%"></i><span>Exploit</span></div>
+              <div class="signal-line"><i style="--level: 91%"></i><span>Prove impact</span></div>
+              <div class="signal-line"><i style="--level: 96%"></i><span>Communicate</span></div>
+            </div>
+
+            <div class="console-footer">
+              <span><i></i> Responsible disclosure</span>
+              <span>Evidence-driven reporting</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics shell" aria-label="Professional impact" data-reveal>
+      <article>
+        <strong>20<span>+</span></strong>
+        <p>Programs tested across private bounty and responsible disclosure</p>
+      </article>
+      <article>
+        <strong>4<span>+</span></strong>
+        <p>Years of independent vulnerability research</p>
+      </article>
+      <article>
+        <strong>~$10K</strong>
+        <p>Single critical finding reward in a Swiss Federal program</p>
+      </article>
+      <article>
+        <strong>CEH</strong>
+        <p>Certified; OSCP and cloud-security learning in progress</p>
+      </article>
+    </section>
+
+    <section class="trust-strip shell" aria-label="Recognition highlights" data-reveal>
+      <p>Recognition and validated disclosure experience</p>
+      <div>
+        <span>Swiss Federal</span>
+        <span>SAP</span>
+        <span>Accenture</span>
+        <span>ALDI</span>
+        <span>Drexel University</span>
+      </div>
+    </section>
+
+    <section class="section shell" id="expertise">
+      <div class="section-heading" data-reveal>
+        <div>
+          <p class="eyebrow">Core expertise</p>
+          <h2>Security work that connects technical findings to business risk.</h2>
+        </div>
+        <p>
+          My strongest work sits between offensive testing and operational security: uncovering exploitable behavior, validating it beyond scanner output, and giving engineering or operations teams a clear path to remediation.
+        </p>
+      </div>
+
+      <div class="expertise-grid">
+        <article class="expertise-card card" data-reveal>
+          <span class="card-index">01</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-3Z"></path><path d="m9 12 2 2 4-5"></path></svg>
+          </div>
+          <h3>Application Security</h3>
+          <p>Manual assessment of authentication, authorization, session handling, injection surfaces, file workflows, and complex application behavior.</p>
+          <ul class="compact-list">
+            <li>Web application penetration testing</li>
+            <li>Access-control and auth testing</li>
+            <li>Secure remediation guidance</li>
+          </ul>
+        </article>
+
+        <article class="expertise-card card" data-reveal>
+          <span class="card-index">02</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9 4 12l4 3M16 9l4 3-4 3M14 5l-4 14"></path></svg>
+          </div>
+          <h3>API &amp; Business Logic</h3>
+          <p>Authorization-focused API testing for BOLA/IDOR, object ownership, workflow abuse, trust-boundary failures, and privilege escalation.</p>
+          <ul class="compact-list">
+            <li>REST and JSON workflow analysis</li>
+            <li>Multi-step abuse-case validation</li>
+            <li>Impact-oriented proof of concept</li>
+          </ul>
+        </article>
+
+        <article class="expertise-card card" data-reveal>
+          <span class="card-index">03</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM8 8h8M8 12h5M8 16h7"></path></svg>
+          </div>
+          <h3>Security Validation</h3>
+          <p>Source review, dynamic testing, scanner triage, reproduction, severity analysis, and developer-ready reporting with reliable evidence.</p>
+          <ul class="compact-list">
+            <li>SAST + DAST correlation</li>
+            <li>False-positive reduction</li>
+            <li>Clear technical reporting</li>
+          </ul>
+        </article>
+
+        <article class="expertise-card card" data-reveal>
+          <span class="card-index">04</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9M10 18V5M16 18v-7M22 18H2"></path><path d="m3 7 6-3 6 5 6-6"></path></svg>
+          </div>
+          <h3>SOC &amp; Detection Engineering</h3>
+          <p>Hands-on monitoring, log ingestion, dashboarding, alert tuning, ticket automation, and infrastructure visibility using practical open-source stacks.</p>
+          <ul class="compact-list">
+            <li>Wazuh, Zabbix and Grafana</li>
+            <li>Syslog and OpenSearch pipelines</li>
+            <li>Incident workflow automation</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section methodology-section">
+      <div class="shell methodology-layout">
+        <div class="methodology-copy" data-reveal>
+          <p class="eyebrow">How I work</p>
+          <h2>Evidence before severity. Impact before noise.</h2>
+          <p>
+            A professional security assessment is more than a list of scanner findings. I focus on reproducibility, exploitability, realistic attack paths, and remediation that engineering teams can act on.
+          </p>
+          <a class="text-link" href="#work">See this approach in practice <span aria-hidden="true">→</span></a>
+        </div>
+
+        <ol class="methodology-steps">
+          <li data-reveal>
+            <span>01</span>
+            <div><h3>Map the surface</h3><p>Understand assets, identities, trust boundaries, data flows, and high-value workflows.</p></div>
+          </li>
+          <li data-reveal>
+            <span>02</span>
+            <div><h3>Build abuse cases</h3><p>Test how controls behave across roles, objects, state transitions, and chained actions.</p></div>
+          </li>
+          <li data-reveal>
+            <span>03</span>
+            <div><h3>Validate real impact</h3><p>Reproduce safely, remove false positives, and demonstrate the practical consequence.</p></div>
+          </li>
+          <li data-reveal>
+            <span>04</span>
+            <div><h3>Make remediation usable</h3><p>Deliver concise evidence, risk context, root cause, and developer-ready corrective guidance.</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section shell" id="experience">
+      <div class="section-heading compact-heading" data-reveal>
+        <div>
+          <p class="eyebrow">Experience</p>
+          <h2>Offensive depth with operational security context.</h2>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item featured" data-reveal>
+          <div class="timeline-marker" aria-hidden="true"><span></span></div>
+          <div class="timeline-meta">
+            <span>2022 — Present</span>
+            <span>Independent · Remote</span>
+          </div>
+          <div class="timeline-content">
+            <div class="role-heading">
+              <div>
+                <p class="eyebrow">Offensive security</p>
+                <h3>Independent Security Researcher &amp; Bug Bounty Hunter</h3>
+              </div>
+              <span class="role-badge">Primary track</span>
+            </div>
+            <p>Advanced web, API, and source-assisted security testing across private bug bounty and responsible disclosure programs.</p>
+            <ul class="experience-points">
+              <li>Identified high-impact weaknesses in authentication, authorization, trust workflows, information disclosure, and business logic.</li>
+              <li>Combined source-code analysis with dynamic exploitation to validate issues beyond automated scanner output.</li>
+              <li>Reported a critical vulnerability in a Swiss Federal program that resulted in an approximately $10,000 single-finding reward.</li>
+              <li>Produced structured reports with reproduction steps, impact evidence, risk context, root cause, and remediation guidance.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="timeline-item" data-reveal>
+          <div class="timeline-marker" aria-hidden="true"><span></span></div>
+          <div class="timeline-meta">
+            <span>2025 — Present</span>
+            <span>India</span>
+          </div>
+          <div class="timeline-content">
+            <div class="role-heading">
+              <div>
+                <p class="eyebrow">Cybersecurity operations</p>
+                <h3>Tatva Networks · Cybersecurity Analyst</h3>
+              </div>
+            </div>
+            <p>Hands-on SOC, monitoring, network-security, and customer-environment support across enterprise infrastructure.</p>
+            <ul class="experience-points">
+              <li>Supported monitoring deployments and dashboards using Wazuh, Zabbix, Grafana, and OpenSearch.</li>
+              <li>Worked with firewall rules, VPN, NAT, SNMP, syslog, network troubleshooting, and availability monitoring.</li>
+              <li>Helped translate technical findings and operational issues into actionable remediation and stable implementations.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="work">
+      <div class="section-heading" data-reveal>
+        <div>
+          <p class="eyebrow">Selected work</p>
+          <h2>Projects built around measurable security outcomes.</h2>
+        </div>
+        <p>Selected implementation work demonstrates deployment skill, troubleshooting depth, documentation quality, and the ability to turn security tooling into useful operational workflows.</p>
+      </div>
+
+      <article class="case-study case-study-featured" data-reveal>
+        <div class="case-copy">
+          <div class="case-topline">
+            <span class="case-number">Case study 01</span>
+            <span class="case-status"><i></i> Documentation available</span>
+          </div>
+          <p class="eyebrow">Flagship SOC lab</p>
+          <h3>Wazuh 5 Beta SOC Lab for ISO 27001 validation</h3>
+          <p>Deployed an isolated beta environment to evaluate compliance capabilities without introducing risk to the stable SOC stack.</p>
+          <div class="outcome-grid">
+            <div><strong>Environment</strong><span>Docker single-node stack</span></div>
+            <div><strong>Coverage</strong><span>Windows + Linux agents</span></div>
+            <div><strong>Resolution</strong><span>Certificates, health and ingestion</span></div>
+          </div>
+          <div class="tag-list" aria-label="Technologies used">
+            <span>Wazuh 5</span><span>Docker</span><span>ISO 27001</span><span>Linux</span>
+          </div>
+          <a class="button button-secondary" href="docs/Wazuh_5_Beta2_ISO27001_Test_Lab_Documentation(2).docx" download>
+            Download case documentation
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"></path></svg>
+          </a>
+        </div>
+        <div class="case-visual" aria-hidden="true">
+          <div class="dashboard-window">
+            <div class="dashboard-bar"><span></span><span></span><span></span><b>Security compliance overview</b></div>
+            <div class="dashboard-body">
+              <div class="dash-sidebar"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="dash-main">
+                <div class="dash-kpis"><span><b>96%</b><small>Agent health</small></span><span><b>24</b><small>Controls mapped</small></span><span><b>0</b><small>Critical faults</small></span></div>
+                <div class="dash-chart"><span style="--h:32%"></span><span style="--h:54%"></span><span style="--h:46%"></span><span style="--h:78%"></span><span style="--h:68%"></span><span style="--h:88%"></span><span style="--h:74%"></span><span style="--h:92%"></span></div>
+                <div class="dash-events"><span></span><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div class="case-grid">
+        <article class="case-card card" data-reveal>
+          <div class="case-card-head"><span>02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9M10 18V5M16 18v-7M22 18H2"></path></svg></div>
+          <p class="eyebrow">Unified visibility</p>
+          <h3>Wazuh + Grafana + Zabbix dashboard</h3>
+          <p>Correlated security events and infrastructure health into a host-focused SOC dashboard using OpenSearch-backed data.</p>
+          <div class="case-result"><strong>Outcome</strong><span>Faster host-level investigation across security and availability signals.</span></div>
+          <div class="tag-list"><span>Grafana</span><span>Zabbix</span><span>OpenSearch</span></div>
+          <a class="text-link" href="docs/Wazuh_5_Grafana_Zabbix_SOC_Dashboard_Documentation(1).docx" download>Download documentation <span aria-hidden="true">↓</span></a>
+        </article>
+
+        <article class="case-card card" data-reveal>
+          <div class="case-card-head"><span>03</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v5H5zM5 15h14v5H5zM8 9v6M16 9v6"></path></svg></div>
+          <p class="eyebrow">Log engineering</p>
+          <h3>Firewall syslog ingestion into Wazuh 5</h3>
+          <p>Built and troubleshot the collector-to-engine-to-indexer pipeline, making firewall events searchable in the dashboard.</p>
+          <div class="case-result"><strong>Outcome</strong><span>Reliable network-event visibility with corrected connector and data-stream behavior.</span></div>
+          <div class="tag-list"><span>Syslog</span><span>Wazuh</span><span>Firewall</span></div>
+          <a class="text-link" href="docs/Wazuh5%20Firewall%20Syslog%20Integration%20Documentation.docx" download>Download documentation <span aria-hidden="true">↓</span></a>
+        </article>
+
+        <article class="case-card card" data-reveal>
+          <div class="case-card-head"><span>04</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v12H7l-3 3zM8 9h8M8 13h5"></path></svg></div>
+          <p class="eyebrow">SOC automation</p>
+          <h3>Wazuh to GLPI incident ticketing</h3>
+          <p>Converted high-value security alerts into deduplicated GLPI incidents through a custom integration workflow.</p>
+          <div class="case-result"><strong>Outcome</strong><span>Actionable alert-to-ticket flow with reduced duplication and operational noise.</span></div>
+          <div class="tag-list"><span>Wazuh</span><span>GLPI</span><span>ITSM</span></div>
+          <a class="text-link" href="docs/Wazuh_GLPI_SOC_Integration_Documentation(1).docx" download>Download documentation <span aria-hidden="true">↓</span></a>
+        </article>
+
+        <article class="case-card card" data-reveal>
+          <div class="case-card-head"><span>05</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M5.6 5.6l2.8 2.8M3 12h4M5.6 18.4l2.8-2.8M12 17v4M18.4 18.4l-2.8-2.8M17 12h4M18.4 5.6l-2.8 2.8"></path><circle cx="12" cy="12" r="4"></circle></svg></div>
+          <p class="eyebrow">Enterprise monitoring</p>
+          <h3>Large-scale network visibility</h3>
+          <p>Supported real-world monitoring and troubleshooting across switches, access points, servers, and network availability.</p>
+          <div class="case-result"><strong>Outcome</strong><span>Improved infrastructure visibility through SNMP monitoring, dashboards, and incident troubleshooting.</span></div>
+          <div class="tag-list"><span>SNMP</span><span>Zabbix</span><span>Grafana</span></div>
+          <span class="private-label">Internal client project</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section recognition-section" id="recognition">
+      <div class="shell">
+        <div class="section-heading" data-reveal>
+          <div>
+            <p class="eyebrow">Recognition &amp; proof</p>
+            <h2>Real findings. Independent validation. Responsible disclosure.</h2>
+          </div>
+          <p>Public acknowledgments and selected proof demonstrate validated security work while private report details and sensitive assets remain protected.</p>
+        </div>
+
+        <div class="recognition-layout">
+          <article class="recognition-summary" data-reveal>
+            <span class="summary-label">Security research impact</span>
+            <h3>Recognized across enterprise, government, university, and private bounty programs.</h3>
+            <p>Findings have covered authentication and trust workflows, authorization, information disclosure, misconfiguration, client/server control boundaries, and business logic.</p>
+
+            <div class="recognition-numbers">
+              <div><strong>Critical</strong><span>Swiss Federal program finding</span></div>
+              <div><strong>5+</strong><span>Public recognition records</span></div>
+              <div><strong>20+</strong><span>Programs assessed</span></div>
+            </div>
+
+            <a class="button" href="photo-gallery/">
+              Open full proof gallery
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M10 14 19 5M19 13v6H5V5h6"></path></svg>
+            </a>
+          </article>
+
+          <div class="proof-grid" data-reveal>
+            <a class="proof-card" href="photo-gallery/" aria-label="View Drexel University Hall of Fame proof">
+              <img src="assets/recognitions/drexel-hof.jpg" alt="Drexel University Hall of Fame recognition" loading="lazy" width="640" height="400">
+              <span><small>Hall of Fame</small><strong>Drexel University</strong></span>
+            </a>
+            <a class="proof-card" href="photo-gallery/" aria-label="View SAP Security Credits proof">
+              <img src="assets/recognitions/sap-credits.jpg" alt="SAP Security Credits recognition" loading="lazy" width="640" height="400">
+              <span><small>Security Credits</small><strong>SAP</strong></span>
+            </a>
+            <a class="proof-card" href="photo-gallery/" aria-label="View Accenture responsible disclosure proof">
+              <img src="assets/recognitions/accenture-hof.jpg" alt="Accenture responsible disclosure recognition" loading="lazy" width="640" height="400">
+              <span><small>Responsible Disclosure</small><strong>Accenture</strong></span>
+            </a>
+            <a class="proof-card" href="photo-gallery/" aria-label="View ALDI Hall of Fame proof">
+              <img src="assets/recognitions/aldi-hof.jpg" alt="ALDI IT Security Hall of Fame recognition" loading="lazy" width="640" height="400">
+              <span><small>Hall of Fame</small><strong>ALDI</strong></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="disclosure-note" data-reveal>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-3Z"></path><path d="M9 12h6M12 9v6"></path></svg>
+          <div>
+            <strong>Responsible disclosure by design</strong>
+            <p>Private reports, internal assets, credentials, customer details, and unreleased vulnerability information are intentionally excluded. Additional evidence can be discussed privately when appropriate.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="capabilities">
+      <div class="section-heading" data-reveal>
+        <div>
+          <p class="eyebrow">Technical capabilities</p>
+          <h2>A focused stack for offensive testing and security operations.</h2>
+        </div>
+      </div>
+
+      <div class="capability-grid">
+        <article class="capability-group card" data-reveal>
+          <p class="eyebrow">Applications &amp; APIs</p>
+          <h3>Testing disciplines</h3>
+          <div class="skill-cloud"><span>Web Pentesting</span><span>API Security</span><span>IDOR / BOLA</span><span>Authentication</span><span>Authorization</span><span>Business Logic</span><span>XSS</span><span>Injection</span><span>File Upload</span><span>Session Security</span></div>
+        </article>
+        <article class="capability-group card" data-reveal>
+          <p class="eyebrow">Offensive workflow</p>
+          <h3>Validation tooling</h3>
+          <div class="skill-cloud"><span>Burp Suite</span><span>Nmap</span><span>Nuclei</span><span>Linux</span><span>Python</span><span>Bash</span><span>SAST</span><span>DAST</span><span>Code Review</span><span>PoC Development</span></div>
+        </article>
+        <article class="capability-group card" data-reveal>
+          <p class="eyebrow">Detection &amp; visibility</p>
+          <h3>SOC platforms</h3>
+          <div class="skill-cloud"><span>Wazuh</span><span>Zabbix</span><span>Grafana</span><span>OpenSearch</span><span>GLPI</span><span>Syslog</span><span>SNMP</span><span>Alert Tuning</span><span>Dashboards</span></div>
+        </article>
+        <article class="capability-group card" data-reveal>
+          <p class="eyebrow">Infrastructure</p>
+          <h3>Security operations</h3>
+          <div class="skill-cloud"><span>Docker</span><span>Sophos XGS</span><span>Firewall Rules</span><span>VPN</span><span>NAT</span><span>Network Monitoring</span><span>Hardening</span><span>Troubleshooting</span></div>
+        </article>
+      </div>
+
+      <div class="credentials-panel" data-reveal>
+        <div>
+          <p class="eyebrow">Credentials &amp; continuous learning</p>
+          <h3>Certified Ethical Hacker (CEH)</h3>
+          <p>Continuing hands-on offensive-security development through OSCP preparation and cloud-security study.</p>
+        </div>
+        <div class="credential-list">
+          <span><i class="complete"></i><strong>CEH</strong><small>Completed</small></span>
+          <span><i></i><strong>OSCP</strong><small>In progress</small></span>
+          <span><i></i><strong>CCSE</strong><small>In progress</small></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="shell contact-panel" data-reveal>
+        <div class="contact-copy">
+          <p class="eyebrow">Start a conversation</p>
+          <h2>Looking for practical application-security depth?</h2>
+          <p>I’m interested in Application Security, Product Security, VAPT, penetration-testing, and security-engineering opportunities where strong validation and clear reporting matter.</p>
+          <div class="contact-actions">
+            <a class="button" href="mailto:yaswanthkukkala123@gmail.com?subject=Application%20Security%20Opportunity">
+              Email Yaswanth
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 7l8 6 8-6"></path></svg>
+            </a>
+            <button class="button button-secondary copy-email" id="copyEmail" type="button" data-email="yaswanthkukkala123@gmail.com">
+              Copy email address
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h11v11H8zM5 16H4V5h11v1"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <p>Professional profiles</p>
+          <a href="mailto:yaswanthkukkala123@gmail.com">
+            <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 7l8 6 8-6"></path></svg></span>
+            <span><small>Email</small><strong>yaswanthkukkala123@gmail.com</strong></span>
+            <svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/yaswanth-kalendra-kukkala-37b7701a0/" target="_blank" rel="noopener noreferrer">
+            <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9v9M6 6.5v.01M10 18v-5c0-2.5 4-3 4 0v5M10 9v9M3 3h18v18H3z"></path></svg></span>
+            <span><small>LinkedIn</small><strong>Yaswanth Kalendra Kukkala</strong></span>
+            <svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M10 14 19 5M19 13v6H5V5h6"></path></svg>
+          </a>
+          <a href="https://github.com/kalendra456" target="_blank" rel="noopener noreferrer">
+            <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.82a9.5 9.5 0 0 1 2.5.34c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.77c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"></path></svg></span>
+            <span><small>GitHub</small><strong>@kalendra456</strong></span>
+            <svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M10 14 19 5M19 13v6H5V5h6"></path></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <a class="brand footer-brand" href="#top" aria-label="Back to top">
+        <img class="brand-mark" src="assets/yk-mark.svg" width="38" height="38" alt="">
+        <span class="brand-copy"><strong>Yaswanth Kalendra</strong><span>Security through evidence</span></span>
+      </a>
+      <p>© <span id="year"></span> Yaswanth Kalendra. Built with semantic HTML, modern CSS, and vanilla JavaScript.</p>
+      <a class="back-to-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <script src="script.js?v=20" defer></script>
 </body>
 </html>
