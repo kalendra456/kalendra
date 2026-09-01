@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Yaswanth Kalendra security mark</title>
+  <desc id="desc">A geometric shield monogram representing application security.</desc>
+  <defs>
+    <linearGradient id="bg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#102641"/>
+      <stop offset="1" stop-color="#07111f"/>
+    </linearGradient>
+    <linearGradient id="line" x1="15" y1="13" x2="51" y2="51" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#78A9FF"/>
+      <stop offset="1" stop-color="#52D7C5"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="62" height="62" rx="17" fill="url(#bg)" stroke="#30506F" stroke-opacity=".8"/>
+  <path d="M32 11 49 17v12c0 11.3-6.9 19.4-17 24-10.1-4.6-17-12.7-17-24V17l17-6Z" fill="#52D7C5" fill-opacity=".06" stroke="url(#line)" stroke-width="2.2"/>
+  <path d="m22 22 10 10 10-10M32 32v11M39 29l7 7M39 36l7-7" fill="none" stroke="url(#line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="32" cy="43" r="2" fill="#52D7C5"/>
+</svg>
