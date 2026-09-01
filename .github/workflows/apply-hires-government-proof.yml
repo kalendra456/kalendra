@@ -4,7 +4,7 @@ on:
   push:
     branches: ["hires-government-proof"]
     paths:
-      - ".hires-proof-payload/READY"
+      - ".hires-final-payload/READY"
 
 permissions:
   contents: write
@@ -29,14 +29,14 @@ jobs:
           import hashlib
           import struct
 
-          payload = Path('.hires-proof-payload')
+          payload = Path('.hires-final-payload')
           parts = sorted(payload.glob('part-*'))
           if not parts:
               raise SystemExit('No high-resolution image payload found')
 
           encoded = ''.join(part.read_text(encoding='ascii') for part in parts)
           image_bytes = base64.b85decode(encoded)
-          expected_sha256 = '1e04b1a5c8aac62a1294f4556ca5fdd5ba6f2a0dfae5b541e03e00b4a75679c1'
+          expected_sha256 = '86e35b395601624ca0fae8b3978c93d10b2b7e03f16350302679adcda812fd5b'
           digest = hashlib.sha256(image_bytes).hexdigest()
           if digest != expected_sha256:
               raise SystemExit(f'Unexpected image SHA-256: {digest}')
@@ -79,7 +79,7 @@ jobs:
           page.write_text(text, encoding='utf-8')
           PY
 
-          rm -rf .hires-proof .hires-proof-payload
+          rm -rf .hires-proof .hires-proof-payload .hires-final-payload
           rm -f .github/workflows/apply-hires-government-proof.yml
 
       - name: Commit high-resolution replacement
