@@ -1,0 +1,75 @@
+name: Apply private government proof update
+
+on:
+  push:
+    branches: ["gov-proof-final"]
+    paths:
+      - ".transfer/READY"
+
+permissions:
+  contents: write
+
+jobs:
+  apply-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out update branch
+        uses: actions/checkout@v4
+        with:
+          ref: gov-proof-final
+          fetch-depth: 0
+
+      - name: Validate image and apply public wording
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          staged = Path('.transfer/anonymized-proof.png')
+          target = Path('photo-gallery/images/swiss-bugbounty-findings-list.png')
+
+          if not staged.exists():
+              raise SystemExit('Staged replacement image is missing')
+          data = staged.read_bytes()
+          if not data.startswith(b'\x89PNG\r\n\x1a\n'):
+              raise SystemExit('Staged replacement is not a valid PNG file')
+          if len(data) < 10_000:
+              raise SystemExit('Staged replacement PNG is unexpectedly small')
+
+          target.parent.mkdir(parents=True, exist_ok=True)
+          target.write_bytes(data)
+
+          replacements = {
+              'Swiss Federal program': 'private government program',
+              'Swiss Federal': 'Private Government Program',
+              'Swiss Bug Bounty': 'Government Private Program',
+          }
+
+          for filename in ('index.html', 'photo-gallery/index.html'):
+              path = Path(filename)
+              text = path.read_text(encoding='utf-8')
+              original = text
+              for old, new in replacements.items():
+                  text = text.replace(old, new)
+              if text == original:
+                  raise SystemExit(f'No requested wording was found in {filename}')
+              path.write_text(text, encoding='utf-8')
+
+          # Ensure public-facing HTML no longer identifies the private program.
+          combined = Path('index.html').read_text(encoding='utf-8') + Path('photo-gallery/index.html').read_text(encoding='utf-8')
+          for forbidden in ('Swiss Federal', 'Swiss Bug Bounty'):
+              if forbidden in combined:
+                  raise SystemExit(f'Unredacted wording remains: {forbidden}')
+          PY
+
+          rm -rf .transfer
+          rm -f .github/workflows/apply-private-government-proof.yml
+
+      - name: Commit final update
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Anonymize government program proof"
+          git push origin HEAD:gov-proof-final
