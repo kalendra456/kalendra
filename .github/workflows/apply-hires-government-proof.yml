@@ -4,7 +4,7 @@ on:
   push:
     branches: ["hires-government-proof"]
     paths:
-      - ".hires-proof/READY"
+      - ".hires-proof-payload/READY"
 
 permissions:
   contents: write
@@ -19,64 +19,43 @@ jobs:
           ref: hires-government-proof
           fetch-depth: 0
 
-      - name: Install image support
-        run: python3 -m pip install --quiet pillow
-
-      - name: Restore full-resolution anonymized image
+      - name: Restore high-resolution anonymized image
         shell: bash
         run: |
+          set -euo pipefail
           python3 - <<'PY'
           from pathlib import Path
-          from urllib.request import urlopen
-          from PIL import Image, ImageDraw, ImageFont
           import base64
           import hashlib
+          import struct
 
-          commit = 'e5cd6eebde51eeb40d4fba29c7b78148c662dd60'
-          base = f'https://raw.githubusercontent.com/kalendra456/kalendra/{commit}/.private-program-update-v2'
-          encoded_parts = []
-          for index in range(9):
-              url = f'{base}/part-{index:02d}'
-              with urlopen(url, timeout=60) as response:
-                  encoded_parts.append(response.read().decode('ascii'))
+          payload = Path('.hires-proof-payload')
+          parts = sorted(payload.glob('part-*'))
+          if not parts:
+              raise SystemExit('No high-resolution image payload found')
 
-          image_bytes = base64.b85decode(''.join(encoded_parts))
+          encoded = ''.join(part.read_text(encoding='ascii') for part in parts)
+          image_bytes = base64.b85decode(encoded)
+          expected_sha256 = '1e04b1a5c8aac62a1294f4556ca5fdd5ba6f2a0dfae5b541e03e00b4a75679c1'
           digest = hashlib.sha256(image_bytes).hexdigest()
-          expected = 'c59c064ef7ddc56597dfef32d65327be7150effcbdd9b6254eba1b78032bedc6'
-          if digest != expected:
-              raise SystemExit(f'Unexpected source image SHA-256: {digest}')
+          if digest != expected_sha256:
+              raise SystemExit(f'Unexpected image SHA-256: {digest}')
 
-          temporary = Path('/tmp/high-resolution-source.png')
-          temporary.write_bytes(image_bytes)
-          image = Image.open(temporary).convert('RGB')
-          if image.size != (1746, 901):
-              raise SystemExit(f'Unexpected source dimensions: {image.size}')
-
-          # Keep the original full-resolution pixels and add only a clear
-          # disclosure label so the anonymized public copy is not mistaken
-          # for an untouched platform screenshot.
-          draw = ImageDraw.Draw(image, 'RGBA')
-          font_dir = Path('/usr/share/fonts/truetype/dejavu')
-          title_font = ImageFont.truetype(str(font_dir / 'DejaVuSans-Bold.ttf'), 15)
-          detail_font = ImageFont.truetype(str(font_dir / 'DejaVuSans.ttf'), 12)
-          box = (1060, 118, 1692, 174)
-          draw.rounded_rectangle(box, radius=10, fill=(5, 18, 29, 238), outline=(49, 190, 188, 220), width=2)
-          draw.text((1078, 128), 'ANONYMIZED PUBLIC COPY', font=title_font, fill=(103, 228, 221, 255))
-          draw.text(
-              (1078, 151),
-              'Organization and engagement identifiers were replaced for confidentiality.',
-              font=detail_font,
-              fill=(207, 222, 230, 245),
-          )
+          if image_bytes[:8] != b'\x89PNG\r\n\x1a\n':
+              raise SystemExit('Decoded payload is not a PNG')
+          width, height = struct.unpack('>II', image_bytes[16:24])
+          if (width, height) != (1746, 901):
+              raise SystemExit(f'Unexpected image dimensions: {(width, height)}')
 
           destination = Path('photo-gallery/images/swiss-bugbounty-findings-list.png')
-          destination.parent.mkdir(parents=True, exist_ok=True)
-          image.save(destination, format='PNG', optimize=True, compress_level=6)
-          if Image.open(destination).size != (1746, 901):
-              raise SystemExit('Saved image dimensions changed unexpectedly')
+          destination.write_bytes(image_bytes)
 
           page = Path('photo-gallery/index.html')
           text = page.read_text(encoding='utf-8')
+          text = text.replace(
+              'images/swiss-bugbounty-findings-list.png?v=private-redacted-2026"',
+              'images/swiss-bugbounty-findings-list.png?v=hires-redacted-20260901"',
+          )
           text = text.replace(
               'images/swiss-bugbounty-findings-list.png"',
               'images/swiss-bugbounty-findings-list.png?v=hires-redacted-20260901"',
@@ -100,7 +79,7 @@ jobs:
           page.write_text(text, encoding='utf-8')
           PY
 
-          rm -rf .hires-proof
+          rm -rf .hires-proof .hires-proof-payload
           rm -f .github/workflows/apply-hires-government-proof.yml
 
       - name: Commit high-resolution replacement
@@ -109,5 +88,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Replace government proof with high-resolution copy"
+          git commit -m "Replace government proof with high-resolution image"
           git push origin HEAD:hires-government-proof
