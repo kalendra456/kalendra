@@ -1,0 +1,102 @@
+
+/* Pointer interaction layer v21 */
+.cursor-aura,
+.cursor-dot {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-120px, -120px, 0) translate(-50%, -50%);
+  will-change: transform, opacity;
+}
+
+.cursor-aura {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 18%, transparent) 0%, color-mix(in srgb, var(--blue) 8%, transparent) 34%, transparent 70%);
+  filter: blur(4px);
+  transition: width 240ms var(--ease), height 240ms var(--ease), opacity 180ms var(--ease), filter 240ms var(--ease);
+}
+
+.cursor-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 14%, transparent), 0 0 24px color-mix(in srgb, var(--accent) 55%, transparent);
+  transition: width 180ms var(--ease), height 180ms var(--ease), opacity 140ms var(--ease), background 180ms var(--ease);
+}
+
+.pointer-effects-enabled .cursor-aura.is-visible,
+.pointer-effects-enabled .cursor-dot.is-visible {
+  opacity: 1;
+}
+
+.pointer-effects-enabled .cursor-aura.is-interactive {
+  width: 116px;
+  height: 116px;
+  filter: blur(2px);
+}
+
+.pointer-effects-enabled .cursor-dot.is-interactive {
+  width: 11px;
+  height: 11px;
+  background: var(--blue);
+}
+
+.pointer-tilt {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 180ms var(--ease), border-color 320ms var(--ease), box-shadow 320ms var(--ease);
+}
+
+.pointer-spotlight {
+  position: absolute;
+  z-index: 4;
+  inset: -1px;
+  overflow: hidden;
+  border-radius: inherit;
+  background: radial-gradient(360px circle at var(--spot-x, 50%) var(--spot-y, 50%), color-mix(in srgb, var(--accent) 14%, transparent), color-mix(in srgb, var(--blue) 6%, transparent) 34%, transparent 67%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms var(--ease);
+}
+
+.pointer-tilt.is-pointer-active .pointer-spotlight {
+  opacity: 1;
+}
+
+.pointer-tilt.is-pointer-active {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--border));
+  box-shadow: 0 26px 70px color-mix(in srgb, var(--bg-deep) 76%, transparent), 0 0 0 1px color-mix(in srgb, var(--accent) 9%, transparent);
+}
+
+.pointer-tilt .gallery-image img,
+.pointer-tilt > img {
+  will-change: transform;
+}
+
+.pointer-magnetic {
+  will-change: translate;
+  transition: translate 180ms var(--ease), transform var(--transition), box-shadow var(--transition), filter var(--transition), border-color var(--transition), background var(--transition);
+}
+
+@media (pointer: coarse), (hover: none), (prefers-reduced-motion: reduce) {
+  .cursor-aura,
+  .cursor-dot,
+  .pointer-spotlight {
+    display: none !important;
+  }
+
+  .pointer-tilt {
+    transform: none !important;
+  }
+
+  .pointer-magnetic {
+    translate: none !important;
+  }
+}
