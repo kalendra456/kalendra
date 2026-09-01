@@ -1,0 +1,99 @@
+name: Apply private government proof update
+
+on:
+  push:
+    branches: ["private-government-proof-update"]
+    paths:
+      - ".private-program-update/READY"
+
+permissions:
+  contents: write
+
+jobs:
+  apply-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out update branch
+        uses: actions/checkout@v4
+        with:
+          ref: private-government-proof-update
+          fetch-depth: 0
+
+      - name: Replace proof image and anonymize public wording
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64
+          import hashlib
+          import shutil
+          import struct
+
+          payload_dir = Path('.private-program-update')
+          parts = sorted(payload_dir.glob('part-*'))
+          if not parts:
+              raise SystemExit('No image payload parts found')
+
+          encoded = ''.join(part.read_text(encoding='ascii') for part in parts)
+          image_bytes = base64.b64decode(encoded, validate=True)
+
+          expected_sha256 = 'fe3bf606d70fec0bb970050a7eb60f56a7e8a6657ee4ce049916d9d25c1d1bfc'
+          actual_sha256 = hashlib.sha256(image_bytes).hexdigest()
+          if actual_sha256 != expected_sha256:
+              raise SystemExit(f'Image checksum mismatch: {actual_sha256}')
+
+          if image_bytes[:8] != b'\x89PNG\r\n\x1a\n':
+              raise SystemExit('Replacement is not a valid PNG')
+          width, height = struct.unpack('>II', image_bytes[16:24])
+          if (width, height) != (800, 413):
+              raise SystemExit(f'Unexpected PNG dimensions: {width}x{height}')
+
+          image_path = Path('photo-gallery/images/swiss-bugbounty-findings-list.png')
+          image_path.parent.mkdir(parents=True, exist_ok=True)
+          image_path.write_bytes(image_bytes)
+
+          replacements = [
+              ('Single critical finding reward in a Swiss Federal program', 'Single critical finding reward in a Government Private Program'),
+              ('Swiss Federal program finding', 'Government Private Program finding'),
+              ('Swiss Federal program', 'Government Private Program'),
+              ('Swiss Federal / eIAM Program', 'Government Private Program'),
+              ('Swiss public-sector program', 'Government Private Program'),
+              ('Swiss Federal', 'Government Private Program'),
+              ('Open Swiss Bug Bounty high-impact findings proof', 'Open Government Private Program high-impact findings proof'),
+              ('Swiss Bug Bounty high-impact findings summary', 'Government Private Program high-impact findings summary'),
+              ('Swiss Bug Bounty · High-impact findings', 'Government Private Program · High-impact findings'),
+              ('Swiss Bug Bounty — High Impact Findings', 'Government Private Program — High-Impact Findings'),
+              ('Swiss Bug Bounty', 'Government Private Program'),
+          ]
+
+          targets = [Path('index.html'), Path('photo-gallery/index.html'), Path('README.md')]
+          for path in targets:
+              if not path.exists():
+                  continue
+              text = path.read_text(encoding='utf-8')
+              for old, new in replacements:
+                  text = text.replace(old, new)
+              path.write_text(text, encoding='utf-8')
+
+          for path in targets[:2]:
+              text = path.read_text(encoding='utf-8')
+              residual = [term for term in ('Swiss Federal', 'Swiss Bug Bounty', 'Swiss public-sector') if term in text]
+              if residual:
+                  raise SystemExit(f'Residual public identity remains in {path}: {residual}')
+              if 'Government Private Program' not in text:
+                  raise SystemExit(f'Expected private-program wording missing from {path}')
+
+          shutil.rmtree('.private-program-update', ignore_errors=True)
+          shutil.rmtree('.private-program-update-v2', ignore_errors=True)
+          Path('.github/workflows/apply-private-government-proof.yml').unlink(missing_ok=True)
+          Path('.github/workflows/apply-private-government-proof-v2.yml').unlink(missing_ok=True)
+          PY
+
+      - name: Commit final website update
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Anonymize government program proof"
+          git push origin HEAD:private-government-proof-update
