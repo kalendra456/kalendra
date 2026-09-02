@@ -1,11 +1,40 @@
 (() => {
   'use strict';
 
-  const triggers = [...document.querySelectorAll('[data-lightbox]')];
-  if (!triggers.length) return;
+  const allTriggers = [...document.querySelectorAll('[data-lightbox]')];
+  if (!allTriggers.length) return;
 
   const body = document.body;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const triggerIndexes = new WeakMap();
+  const sourceIndexes = new Map();
+  const items = [];
+
+  const getSource = (trigger) => {
+    const triggerImage = trigger.querySelector('img');
+    const source = trigger.dataset.lightboxSrc || trigger.getAttribute('href') || triggerImage?.currentSrc || triggerImage?.src || '';
+    if (!source) return '';
+    try {
+      return new URL(source, document.baseURI).href;
+    } catch (_) {
+      return source;
+    }
+  };
+
+  allTriggers.forEach((trigger) => {
+    const source = getSource(trigger);
+    if (!source) return;
+
+    let index = sourceIndexes.get(source);
+    if (typeof index !== 'number') {
+      index = items.length;
+      sourceIndexes.set(source, index);
+      items.push(trigger);
+    }
+    triggerIndexes.set(trigger, index);
+  });
+
+  if (!items.length) return;
 
   const modal = document.createElement('div');
   modal.className = 'proof-lightbox';
@@ -45,7 +74,6 @@
   const count = modal.querySelector('.proof-lightbox-count');
   const previousButton = modal.querySelector('.proof-lightbox-previous');
   const nextButton = modal.querySelector('.proof-lightbox-next');
-  const closeButton = modal.querySelector('.proof-lightbox-close');
 
   let activeIndex = 0;
   let returnFocus = null;
@@ -59,7 +87,7 @@
     const triggerImage = trigger.querySelector('img');
 
     return {
-      src: trigger.dataset.lightboxSrc || trigger.getAttribute('href') || triggerImage?.currentSrc || triggerImage?.src || '',
+      src: getSource(trigger),
       title: normalizeText(trigger.dataset.lightboxTitle || cardTitle?.textContent || triggerImage?.alt || 'Recognition evidence'),
       description: normalizeText(trigger.dataset.lightboxDescription || cardDescription?.textContent || triggerImage?.alt || 'Selected public evidence of responsible security research.'),
       alt: normalizeText(triggerImage?.alt || trigger.dataset.lightboxTitle || cardTitle?.textContent || 'Recognition evidence')
@@ -67,13 +95,13 @@
   };
 
   const preloadAdjacent = () => {
-    if (triggers.length < 2) return;
+    if (items.length < 2) return;
     const indexes = [
-      (activeIndex - 1 + triggers.length) % triggers.length,
-      (activeIndex + 1) % triggers.length
+      (activeIndex - 1 + items.length) % items.length,
+      (activeIndex + 1) % items.length
     ];
     indexes.forEach((index) => {
-      const source = getDetails(triggers[index]).src;
+      const source = getDetails(items[index]).src;
       if (!source) return;
       const preload = new Image();
       preload.src = source;
@@ -81,7 +109,7 @@
   };
 
   const render = () => {
-    const details = getDetails(triggers[activeIndex]);
+    const details = getDetails(items[activeIndex]);
     if (!details.src) return;
 
     image.classList.add('is-loading');
@@ -89,9 +117,9 @@
     image.alt = details.alt;
     title.textContent = details.title;
     description.textContent = details.description;
-    count.textContent = `${activeIndex + 1} / ${triggers.length}`;
+    count.textContent = `${activeIndex + 1} / ${items.length}`;
 
-    const multiple = triggers.length > 1;
+    const multiple = items.length > 1;
     previousButton.hidden = !multiple;
     nextButton.hidden = !multiple;
     preloadAdjacent();
@@ -116,18 +144,23 @@
   };
 
   const move = (direction) => {
-    activeIndex = (activeIndex + direction + triggers.length) % triggers.length;
-    if (!reduceMotion) image.animate?.(
-      [
-        { opacity: .35, transform: `translateX(${direction * 8}px) scale(.995)` },
-        { opacity: 1, transform: 'translateX(0) scale(1)' }
-      ],
-      { duration: 190, easing: 'cubic-bezier(.2,.75,.25,1)' }
-    );
+    activeIndex = (activeIndex + direction + items.length) % items.length;
+    if (!reduceMotion) {
+      image.animate?.(
+        [
+          { opacity: .35, transform: `translateX(${direction * 8}px) scale(.995)` },
+          { opacity: 1, transform: 'translateX(0) scale(1)' }
+        ],
+        { duration: 190, easing: 'cubic-bezier(.2,.75,.25,1)' }
+      );
+    }
     render();
   };
 
-  triggers.forEach((trigger, index) => {
+  allTriggers.forEach((trigger) => {
+    const index = triggerIndexes.get(trigger);
+    if (typeof index !== 'number') return;
+
     trigger.addEventListener('click', (event) => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
@@ -138,7 +171,7 @@
   image.addEventListener('load', () => image.classList.remove('is-loading'));
   image.addEventListener('error', () => {
     image.classList.remove('is-loading');
-    description.textContent = 'This proof image could not be loaded in the viewer. Open the link in a new tab to inspect the original asset.';
+    description.textContent = 'This proof image could not be loaded in the viewer. The original image link remains available through the browser context menu.';
   });
 
   previousButton.addEventListener('click', () => move(-1));
@@ -154,13 +187,13 @@
       return;
     }
 
-    if (event.key === 'ArrowLeft' && triggers.length > 1) {
+    if (event.key === 'ArrowLeft' && items.length > 1) {
       event.preventDefault();
       move(-1);
       return;
     }
 
-    if (event.key === 'ArrowRight' && triggers.length > 1) {
+    if (event.key === 'ArrowRight' && items.length > 1) {
       event.preventDefault();
       move(1);
       return;
@@ -169,6 +202,7 @@
     if (event.key !== 'Tab') return;
     const focusable = [...dialog.querySelectorAll('button:not([hidden]), a[href], [tabindex]:not([tabindex="-1"])')]
       .filter((element) => !element.hasAttribute('disabled'));
+
     if (!focusable.length) {
       event.preventDefault();
       dialog.focus();
@@ -177,7 +211,7 @@
 
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === dialog)) {
       event.preventDefault();
       last.focus();
     } else if (!event.shiftKey && document.activeElement === last) {
