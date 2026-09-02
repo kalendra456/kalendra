@@ -381,7 +381,7 @@
 
   const counterGroups = document.querySelectorAll('.metrics, .gallery-stats, .recognition-numbers');
 
-  if (!reduceMotion && counterGroups.length) {
+  if (!reduceMotion && counterGroups.length && 'IntersectionObserver' in window) {
     const prepareCounter = (element) => {
       const original = element.textContent.trim();
       const match = original.match(/^(.*?)(\d+(?:\.\d+)?)(.*)$/);
