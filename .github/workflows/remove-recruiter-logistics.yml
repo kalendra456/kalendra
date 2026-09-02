@@ -53,38 +53,22 @@ jobs:
           end = css.index(css_end, start)
           css = css[:start] + css[end:]
 
-          desktop_responsive = '''  .recruiter-bar {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
-
-          .recruiter-bar > div:nth-child(3) {
-            border-top: 1px solid var(--border);
-            border-left: 0;
-          }
-
-          .recruiter-bar > div:nth-child(4) {
-            border-top: 1px solid var(--border);
-          }
-
-          '''.replace('          ', '')
-
-          mobile_responsive = '''  .recruiter-bar {
-            grid-template-columns: 1fr;
-          }
-
-          .recruiter-bar > div + div,
-          .recruiter-bar > div:nth-child(3),
-          .recruiter-bar > div:nth-child(4) {
-            border-top: 1px solid var(--border);
-            border-left: 0;
-          }
-
-          '''.replace('          ', '')
-
-          if desktop_responsive not in css or mobile_responsive not in css:
-              raise SystemExit('Responsive recruiter logistics styles were not found')
-          css = css.replace(desktop_responsive, '', 1)
-          css = css.replace(mobile_responsive, '', 1)
+          # Remove every remaining responsive rule whose selector starts with
+          # .recruiter-bar. This safely handles both single- and multi-line selectors.
+          cleaned_lines = []
+          skipping_rule = False
+          for line in css.splitlines(keepends=True):
+              if not skipping_rule and line.lstrip().startswith('.recruiter-bar'):
+                  skipping_rule = True
+                  continue
+              if skipping_rule:
+                  if line.strip() == '}':
+                      skipping_rule = False
+                  continue
+              cleaned_lines.append(line)
+          if skipping_rule:
+              raise SystemExit('Unclosed recruiter logistics CSS rule encountered')
+          css = ''.join(cleaned_lines)
 
           old_readme = '- Recruiter logistics bar, emphasized credential statuses, and prominent PDF resume actions'
           new_readme = '- Emphasized credential statuses and prominent PDF resume actions'
