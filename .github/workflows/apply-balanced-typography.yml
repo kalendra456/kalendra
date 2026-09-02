@@ -1,0 +1,190 @@
+name: Apply balanced typography scale
+
+on:
+  push:
+    branches: ["balanced-typography-scale"]
+    paths:
+      - ".typography-update/READY"
+
+permissions:
+  contents: write
+
+jobs:
+  apply-typography:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out typography branch
+        uses: actions/checkout@v4
+        with:
+          ref: balanced-typography-scale
+          fetch-depth: 0
+
+      - name: Integrate and validate typography scale
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          replacements = {
+              Path('index.html'): (
+                  '  <link rel="stylesheet" href="polish.css?v=1">',
+                  '  <link rel="stylesheet" href="polish.css?v=1">\n  <link rel="stylesheet" href="typography.css?v=1">',
+                  'typography.css?v=1',
+              ),
+              Path('photo-gallery/index.html'): (
+                  '  <link rel="stylesheet" href="../polish.css?v=1">',
+                  '  <link rel="stylesheet" href="../polish.css?v=1">\n  <link rel="stylesheet" href="../typography.css?v=1">',
+                  '../typography.css?v=1',
+              ),
+              Path('case-studies/index.html'): (
+                  '  <link rel="stylesheet" href="../polish.css?v=1">',
+                  '  <link rel="stylesheet" href="../polish.css?v=1">\n  <link rel="stylesheet" href="../typography.css?v=1">',
+                  '../typography.css?v=1',
+              ),
+              Path('404.html'): (
+                  '  <link rel="stylesheet" href="/kalendra/style.css?v=23">',
+                  '  <link rel="stylesheet" href="/kalendra/style.css?v=23">\n  <link rel="stylesheet" href="/kalendra/typography.css?v=1">',
+                  '/kalendra/typography.css?v=1',
+              ),
+          }
+
+          class LinkParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.stylesheets = []
+
+              def handle_starttag(self, tag, attrs):
+                  if tag != 'link':
+                      return
+                  values = dict(attrs)
+                  if values.get('rel') == 'stylesheet' and values.get('href'):
+                      self.stylesheets.append(values['href'])
+
+          for path, (anchor, replacement, expected_href) in replacements.items():
+              text = path.read_text(encoding='utf-8')
+              if expected_href in text:
+                  raise SystemExit(f'Typography stylesheet already linked in {path}')
+              if anchor not in text:
+                  raise SystemExit(f'Stylesheet insertion anchor missing in {path}')
+              text = text.replace(anchor, replacement, 1)
+              path.write_text(text, encoding='utf-8')
+
+              parser = LinkParser()
+              parser.feed(text)
+              if parser.stylesheets.count(expected_href) != 1:
+                  raise SystemExit(f'Unexpected typography stylesheet count in {path}')
+              if parser.stylesheets[-1] != expected_href:
+                  raise SystemExit(f'Typography stylesheet must load last in {path}')
+
+          css_path = Path('typography.css')
+          css = css_path.read_text(encoding='utf-8')
+
+          required_rules = (
+              '--type-display:',
+              '--type-section:',
+              '.hero h1',
+              '.section-heading h2',
+              '.methodology-copy h2',
+              '.case-study h3',
+              '.recognition-summary h3',
+              '.contact-copy h2',
+              '.gallery-hero h1',
+              '.technical-hero h1',
+              '.technical-case h2',
+              '.error-panel h1',
+              '@media (max-width: 680px)',
+          )
+          for rule in required_rules:
+              if rule not in css:
+                  raise SystemExit(f'Required typography rule missing: {rule}')
+
+          # Lightweight CSS structure check that ignores comments and quoted strings.
+          depth = 0
+          i = 0
+          quote = None
+          while i < len(css):
+              char = css[i]
+              nxt = css[i + 1] if i + 1 < len(css) else ''
+              if quote:
+                  if char == '\\':
+                      i += 2
+                      continue
+                  if char == quote:
+                      quote = None
+              elif char in ('"', "'"):
+                  quote = char
+              elif char == '/' and nxt == '*':
+                  end = css.find('*/', i + 2)
+                  if end < 0:
+                      raise SystemExit('Unterminated CSS comment')
+                  i = end + 2
+                  continue
+              elif char == '{':
+                  depth += 1
+              elif char == '}':
+                  depth -= 1
+                  if depth < 0:
+                      raise SystemExit('Unexpected closing CSS brace')
+              i += 1
+          if quote or depth != 0:
+              raise SystemExit(f'CSS structure check failed: quote={quote!r}, depth={depth}')
+
+          # Preserve the content and disclosure boundaries while changing only presentation.
+          index = Path('index.html').read_text(encoding='utf-8')
+          for heading in (
+              'I validate attack paths, prove business impact,',
+              'Application-security testing engineered for exploitability, risk clarity, and verified closure.',
+              'Offensive security as the primary track; defensive engineering as operational leverage.',
+              'Sanitized engagement summaries focused on exploitability, decision quality, and business impact.',
+              'Validated offensive-security impact, supported by verifiable evidence.',
+              'Security operations experience that strengthens offensive judgment.',
+              'An offensive-first stack with assessment governance and defensive context.',
+              'Need someone who can test deeply, communicate clearly, and own the finding lifecycle?',
+          ):
+              if heading not in index:
+                  raise SystemExit(f'Portfolio heading was unexpectedly changed: {heading}')
+
+          public_text = '\n'.join(
+              path.read_text(encoding='utf-8')
+              for path in (Path('index.html'), Path('photo-gallery/index.html'), Path('case-studies/index.html'))
+          )
+          for forbidden in ('3958760', 'WorldIDSource', 'WorldIDSatellite', '16,777,216', 'CVSS 9.2', '$25K'):
+              if forbidden in public_text:
+                  raise SystemExit(f'Active private-report detail detected: {forbidden}')
+
+          readme_path = Path('README.md')
+          readme = readme_path.read_text(encoding='utf-8')
+          design_anchor = '- Responsive layout for desktop, tablet, and mobile'
+          design_replacement = design_anchor + '\n- Balanced responsive typography with restrained enterprise-scale headings'
+          if 'Balanced responsive typography' not in readme:
+              if design_anchor not in readme:
+                  raise SystemExit('README design anchor missing')
+              readme = readme.replace(design_anchor, design_replacement, 1)
+
+          structure_anchor = '├── polish.css                 # Recruiter-focused functional polish'
+          structure_replacement = structure_anchor + '\n├── typography.css             # Balanced responsive type hierarchy'
+          if 'typography.css             # Balanced responsive type hierarchy' not in readme:
+              if structure_anchor not in readme:
+                  raise SystemExit('README structure anchor missing')
+              readme = readme.replace(structure_anchor, structure_replacement, 1)
+          readme_path.write_text(readme, encoding='utf-8')
+          PY
+
+          git diff --check
+          node --check script.js
+          node --check lightbox.js
+
+          rm -rf .typography-update
+          rm -f .github/workflows/apply-balanced-typography.yml
+
+      - name: Commit typography refinement
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Balance portfolio typography scale"
+          git push origin HEAD:balanced-typography-scale
