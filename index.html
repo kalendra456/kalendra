@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="style.css?v=23">
   <link rel="stylesheet" href="polish.css?v=1">
   <link rel="stylesheet" href="typography.css?v=1">
+  <link rel="stylesheet" href="streamline.css?v=1">
 
   <script>
     (() => {
@@ -280,7 +281,7 @@
     </p>
   </div>
 
-  <div class="expertise-grid">
+  <div class="expertise-grid expertise-grid-streamlined">
     <article class="expertise-card card" data-reveal>
       <span class="card-index">01</span>
       <div class="card-icon">
@@ -336,12 +337,10 @@
         <li>SOAR-aligned orchestration and incident workflow</li>
       </ul>
     </article>
-  </div>
 
-<article class="protocol-research-card card" data-reveal>
-  <div class="protocol-research-copy">
-    <div class="protocol-research-heading">
-      <div class="card-icon protocol-icon">
+    <article class="expertise-card expertise-card-protocol card" data-reveal>
+      <span class="card-index">05</span>
+      <div class="card-icon">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 6h5l2 3h7M5 18h5l2-3h7"></path>
           <circle cx="4" cy="6" r="2"></circle>
@@ -351,29 +350,17 @@
           <path d="M10 6v12M14 9v6"></path>
         </svg>
       </div>
-      <div>
-        <p class="eyebrow">Advanced research area</p>
-        <h3>Complex Logic &amp; Protocol Security</h3>
-      </div>
-    </div>
-    <p>
-      Source-assisted validation of state-machine transitions, cross-system trust boundaries, resource-exhaustion vectors, and atomic workflows. I evaluate failure modes that can materially affect protocol availability, state integrity, authorization, and downstream execution.
-    </p>
-    <p class="protocol-research-note">
-      This capability is presented at a methodology level; active private findings and target-identifying details remain excluded until disclosure is authorized.
-    </p>
+      <p class="eyebrow expertise-card-kicker">Advanced research capability</p>
+      <h3>Complex Logic &amp; Protocol Security</h3>
+      <p>Source-assisted validation of state-machine transitions, cross-system trust boundaries, resource constraints, and atomic workflows that can affect availability, state integrity, authorization, and downstream execution.</p>
+      <ul class="compact-list">
+        <li>State-machine, invariant and atomic-workflow analysis</li>
+        <li>Cross-system trust and resource-boundary testing</li>
+        <li>Availability, integrity and recovery-path validation</li>
+      </ul>
+      <span class="expertise-disclosure">Presented at methodology level; active private findings and target-identifying details remain excluded until disclosure is authorized.</span>
+    </article>
   </div>
-  <div class="protocol-capabilities" aria-label="Complex logic and protocol security capabilities">
-    <span>Protocol Logic</span>
-    <span>State Integrity</span>
-    <span>Smart Contract Review</span>
-    <span>Resource Boundaries</span>
-    <span>Invariant Analysis</span>
-    <span>Atomic Workflows</span>
-    <span>Availability Testing</span>
-    <span>Cross-System Trust</span>
-  </div>
-</article>
 </section>
 
     <section class="section methodology-section">
@@ -519,46 +506,52 @@
     </div>
   </article>
 
-  <div class="case-grid">
-    <article class="case-card card" data-reveal>
-      <div class="case-card-head"><span>02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9 4 12l4 3M16 9l4 3-4 3M14 5l-4 14"></path></svg></div>
-      <p class="eyebrow">Authorization testing</p>
-      <h3>API object-ownership and privilege-boundary validation</h3>
-      <p>Tested role, tenant, object, and state-transition boundaries through controlled request mutation and multi-user negative controls.</p>
-      <div class="case-result"><strong>Delivery value</strong><span>Clear BOLA/IDOR and privilege-path evidence with reproducible role/object matrices and remediation guidance.</span></div>
-      <div class="tag-list"><span>API Security</span><span>BOLA / IDOR</span><span>Access Control</span></div>
-      <span class="private-label">Sanitized research summary</span>
-    </article>
+  <div class="offensive-methodology card" data-reveal>
+    <div class="offensive-methodology-header">
+      <div>
+        <p class="eyebrow">Methodology highlights</p>
+        <h3>Four repeatable controls behind the featured engagement.</h3>
+      </div>
+      <p>Condensed into one scan-friendly panel so the confirmed critical case remains the visual anchor while assessment breadth stays clear.</p>
+    </div>
 
-    <article class="case-card card" data-reveal>
-      <div class="case-card-head"><span>03</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM8 8h8M8 12h5M8 16h7"></path></svg></div>
-      <p class="eyebrow">Source-assisted AppSec</p>
-      <h3>Code-to-runtime security validation</h3>
-      <p>Correlated source paths, configuration, trust decisions, and runtime behavior to prioritize exploitability over theoretical scanner output.</p>
-      <div class="case-result"><strong>Delivery value</strong><span>Reduced false positives, identified root cause, and produced testable corrective controls for engineering teams.</span></div>
-      <div class="tag-list"><span>Code Review</span><span>SAST + DAST</span><span>Root Cause</span></div>
-      <span class="private-label">Sanitized research summary</span>
-    </article>
+    <div class="offensive-methodology-grid">
+      <article class="offensive-methodology-item">
+        <span class="offensive-methodology-index">02</span>
+        <div>
+          <strong>Authorization boundaries</strong>
+          <p>Test role, tenant, object, and state-transition controls through request mutation and multi-user negative controls.</p>
+          <small>API Security · BOLA / IDOR · Access Control</small>
+        </div>
+      </article>
 
-    <article class="case-card card" data-reveal>
-      <div class="case-card-head"><span>04</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v12H7l-3 3zM8 9h8M8 13h5"></path></svg></div>
-      <p class="eyebrow">Finding governance</p>
-      <h3>Triage, severity calibration and remediation workflow</h3>
-      <p>Reproduced findings, challenged unsupported severity, deduplicated evidence, documented business impact, and defined retest criteria.</p>
-      <div class="case-result"><strong>Delivery value</strong><span>A controlled finding lifecycle that supports engineering decisions, auditability, remediation ownership, and closure.</span></div>
-      <div class="tag-list"><span>Triage</span><span>Severity</span><span>Reporting</span><span>Retest</span></div>
-      <span class="private-label">Consulting delivery capability</span>
-    </article>
+      <article class="offensive-methodology-item">
+        <span class="offensive-methodology-index">03</span>
+        <div>
+          <strong>Code-to-runtime validation</strong>
+          <p>Correlate source paths, configuration, trust decisions, and runtime behavior to confirm exploitability and root cause.</p>
+          <small>Code Review · SAST + DAST · Root Cause</small>
+        </div>
+      </article>
 
-    <article class="case-card card" data-reveal>
-      <div class="case-card-head"><span>05</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-3Z"></path></svg></div>
-      <p class="eyebrow">Attack-surface strategy</p>
-      <h3>Risk-based web application assessment planning</h3>
-      <p>Mapped authentication, session, upload, injection, integration, and business-process surfaces before prioritizing manual test coverage.</p>
-      <div class="case-result"><strong>Delivery value</strong><span>Focused testing around high-value workflows and control boundaries instead of undirected checklist execution.</span></div>
-      <div class="tag-list"><span>Burp Suite</span><span>Threat Modeling</span><span>Web Security</span></div>
-      <span class="private-label">Repeatable assessment workflow</span>
-    </article>
+      <article class="offensive-methodology-item">
+        <span class="offensive-methodology-index">04</span>
+        <div>
+          <strong>Finding governance</strong>
+          <p>Reproduce, deduplicate, calibrate severity, explain business impact, and define remediation and retest criteria.</p>
+          <small>Triage · Severity · Reporting · Retest</small>
+        </div>
+      </article>
+
+      <article class="offensive-methodology-item">
+        <span class="offensive-methodology-index">05</span>
+        <div>
+          <strong>Risk-based assessment planning</strong>
+          <p>Prioritize authentication, session, upload, integration, and business-process surfaces around high-value control boundaries.</p>
+          <small>Burp Suite · Threat Modeling · Web Security</small>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -626,70 +619,45 @@
       <p class="eyebrow">Defensive depth</p>
       <h2>Security operations experience that strengthens offensive judgment.</h2>
     </div>
-    <p>Defensive engineering remains a deliberate secondary advantage: hands-on SIEM/XDR, endpoint telemetry, network monitoring, alert tuning, and SOAR-aligned workflow automation improve understanding of production controls, detection gaps, incident handling, and implementation constraints—making offensive findings more realistic and remediation guidance more actionable.</p>
+    <p>Three grouped workstreams summarize hands-on SIEM/XDR, endpoint telemetry, observability, network-security logging, and SOAR-aligned automation. Detailed browser-viewable case studies and technical documents remain available without allowing supporting SOC work to compete with the offensive-security narrative.</p>
   </div>
 
-  <div class="case-grid">
+  <div class="case-grid defensive-case-grid">
     <article class="case-card card" data-reveal>
-      <div class="case-card-head"><span>01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-3Z"></path></svg></div>
-      <p class="eyebrow">SIEM / XDR validation lab</p>
-      <h3>Wazuh 5 Beta SOC Lab for ISO 27001</h3>
-      <p>Deployed an isolated Wazuh SIEM/XDR beta environment to evaluate endpoint telemetry, compliance, and detection capabilities without introducing risk to the stable SOC stack.</p>
-      <div class="case-result"><strong>Outcome</strong><span>Validated certificates, agent health, endpoint-telemetry ingestion, and Windows/Linux host coverage in a controlled test environment.</span></div>
-      <div class="tag-list"><span>Wazuh 5</span><span>SIEM / XDR</span><span>Endpoint Telemetry</span><span>Docker</span><span>ISO 27001</span></div>
+      <div class="case-card-head"><span>01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-3Z"></path><path d="M5 4h14v5H5zM8 9v6"></path></svg></div>
+      <p class="eyebrow">SIEM / XDR validation &amp; log engineering</p>
+      <h3>Wazuh 5 SIEM &amp; Log Pipeline</h3>
+      <p>Combined isolated Wazuh 5 validation, endpoint-agent coverage, ISO 27001 testing, and firewall syslog ingestion into an OpenSearch-backed investigation pipeline.</p>
+      <div class="case-result"><strong>Outcome</strong><span>Validated certificates, agent health, Windows/Linux telemetry, connector behavior, data streams, and searchable network-security events.</span></div>
+      <div class="tag-list"><span>Wazuh 5</span><span>SIEM / XDR</span><span>Endpoint Telemetry</span><span>Syslog</span><span>OpenSearch</span><span>ISO 27001</span></div>
       <div class="case-actions">
-        <a class="text-link" href="case-studies/#wazuh-iso27001">View case study <span aria-hidden="true">→</span></a>
-        <a class="text-link" href="docs/Wazuh_5_Beta2_ISO27001_Test_Lab_Documentation(2).docx" download>Download DOCX <span aria-hidden="true">↓</span></a>
+        <a class="text-link" href="case-studies/#wazuh-iso27001">View SIEM lab <span aria-hidden="true">→</span></a>
+        <a class="text-link" href="case-studies/#firewall-syslog">View log pipeline <span aria-hidden="true">→</span></a>
       </div>
     </article>
 
     <article class="case-card card" data-reveal>
-      <div class="case-card-head"><span>02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9M10 18V5M16 18v-7M22 18H2"></path></svg></div>
-      <p class="eyebrow">SIEM analytics &amp; unified visibility</p>
-      <h3>Wazuh + Grafana + Zabbix dashboard</h3>
-      <p>Correlated SIEM alerts, endpoint telemetry, and infrastructure health into a host-focused SOC dashboard using OpenSearch-backed data.</p>
-      <div class="case-result"><strong>Outcome</strong><span>Faster host-level investigation across security, endpoint, and availability signals.</span></div>
-      <div class="tag-list"><span>SIEM Analytics</span><span>Endpoint Telemetry</span><span>Grafana</span><span>Zabbix</span><span>OpenSearch</span></div>
+      <div class="case-card-head"><span>02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9M10 18V5M16 18v-7M22 18H2"></path><path d="m3 7 6-3 6 5 6-6"></path></svg></div>
+      <p class="eyebrow">Unified observability &amp; network monitoring</p>
+      <h3>Unified SOC Observability</h3>
+      <p>Correlated Wazuh and OpenSearch security data with Grafana, Zabbix, SNMP, and infrastructure-health signals across endpoints, switches, access points, servers, and firewall paths.</p>
+      <div class="case-result"><strong>Outcome</strong><span>Faster host and infrastructure investigation across security, endpoint, availability, and network telemetry.</span></div>
+      <div class="tag-list"><span>SIEM Analytics</span><span>Grafana</span><span>Zabbix</span><span>SNMP</span><span>Network Monitoring</span></div>
       <div class="case-actions">
-        <a class="text-link" href="case-studies/#unified-soc-dashboard">View case study <span aria-hidden="true">→</span></a>
-        <a class="text-link" href="docs/Wazuh_5_Grafana_Zabbix_SOC_Dashboard_Documentation(1).docx" download>Download DOCX <span aria-hidden="true">↓</span></a>
+        <a class="text-link" href="case-studies/#unified-soc-dashboard">View observability case <span aria-hidden="true">→</span></a>
       </div>
     </article>
 
     <article class="case-card card" data-reveal>
-      <div class="case-card-head"><span>03</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v5H5zM5 15h14v5H5zM8 9v6M16 9v6"></path></svg></div>
-      <p class="eyebrow">SIEM ingestion &amp; log engineering</p>
-      <h3>Firewall syslog ingestion into Wazuh 5</h3>
-      <p>Built and troubleshot the firewall-to-collector-to-Wazuh-SIEM-to-indexer pipeline, making network-security telemetry searchable and usable for investigation.</p>
-      <div class="case-result"><strong>Outcome</strong><span>Reliable network-event visibility with corrected connector, ingestion, and data-stream behavior.</span></div>
-      <div class="tag-list"><span>SIEM</span><span>Syslog</span><span>Wazuh</span><span>Firewall</span><span>OpenSearch</span></div>
-      <div class="case-actions">
-        <a class="text-link" href="case-studies/#firewall-syslog">View case study <span aria-hidden="true">→</span></a>
-        <a class="text-link" href="docs/Wazuh5%20Firewall%20Syslog%20Integration%20Documentation.docx" download>Download DOCX <span aria-hidden="true">↓</span></a>
-      </div>
-    </article>
-
-    <article class="case-card card" data-reveal>
-      <div class="case-card-head"><span>04</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v12H7l-3 3zM8 9h8M8 13h5"></path></svg></div>
+      <div class="case-card-head"><span>03</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v12H7l-3 3zM8 9h8M8 13h5"></path></svg></div>
       <p class="eyebrow">SOAR-aligned workflow automation</p>
-      <h3>Wazuh-to-GLPI incident orchestration</h3>
-      <p>Built a SOAR-aligned workflow that converted high-value Wazuh alerts into deduplicated GLPI incidents with controlled ticket creation and incident context.</p>
-      <div class="case-result"><strong>Outcome</strong><span>Automated alert-to-incident triage, reduced duplicate tickets and operational noise, and improved response-workflow consistency.</span></div>
+      <h3>Incident Workflow Automation</h3>
+      <p>Converted selected Wazuh alerts into controlled, deduplicated GLPI incidents with preserved security context and a repeatable path from detection to assigned operational work.</p>
+      <div class="case-result"><strong>Outcome</strong><span>Reduced duplicate tickets and operational noise while improving incident traceability, triage consistency, and response ownership.</span></div>
       <div class="tag-list"><span>Wazuh</span><span>SOAR-aligned</span><span>GLPI</span><span>Alert Deduplication</span><span>ITSM</span></div>
       <div class="case-actions">
-        <a class="text-link" href="case-studies/#wazuh-glpi">View case study <span aria-hidden="true">→</span></a>
-        <a class="text-link" href="docs/Wazuh_GLPI_SOC_Integration_Documentation(1).docx" download>Download DOCX <span aria-hidden="true">↓</span></a>
+        <a class="text-link" href="case-studies/#wazuh-glpi">View automation case <span aria-hidden="true">→</span></a>
       </div>
-    </article>
-
-    <article class="case-card card" data-reveal>
-      <div class="case-card-head"><span>05</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M5.6 5.6l2.8 2.8M3 12h4M5.6 18.4l2.8-2.8M12 17v4M18.4 18.4l-2.8-2.8M17 12h4M18.4 5.6l-2.8 2.8"></path><circle cx="12" cy="12" r="4"></circle></svg></div>
-      <p class="eyebrow">Enterprise monitoring</p>
-      <h3>Large-scale network visibility</h3>
-      <p>Supported monitoring and troubleshooting across switches, access points, servers, firewall paths, and network availability.</p>
-      <div class="case-result"><strong>Outcome</strong><span>Improved infrastructure visibility through SNMP monitoring, dashboards, and disciplined incident troubleshooting.</span></div>
-      <div class="tag-list"><span>SNMP</span><span>Zabbix</span><span>Grafana</span></div>
-      <span class="private-label">Internal client project</span>
     </article>
   </div>
 </section>
