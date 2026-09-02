@@ -1,0 +1,722 @@
+name: Apply offensive-first portfolio positioning
+
+on:
+  push:
+    branches: ["offensive-first-positioning"]
+    paths:
+      - ".offensive-positioning/READY"
+
+permissions:
+  contents: write
+
+jobs:
+  reposition-portfolio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out positioning branch
+        uses: actions/checkout@v4
+        with:
+          ref: offensive-first-positioning
+          fetch-depth: 0
+
+      - name: Prioritize offensive security while retaining defensive depth
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from textwrap import dedent
+
+          index_path = Path('index.html')
+          gallery_path = Path('photo-gallery/index.html')
+          readme_path = Path('README.md')
+
+          index = index_path.read_text(encoding='utf-8')
+
+          def replace_required(text: str, old: str, new: str, label: str) -> str:
+              if old not in text:
+                  raise SystemExit(f'Missing expected content for {label}')
+              return text.replace(old, new, 1)
+
+          def replace_block(text: str, start_marker: str, next_marker: str, replacement: str, label: str) -> str:
+              start = text.find(start_marker)
+              if start < 0:
+                  raise SystemExit(f'Missing start marker for {label}')
+              end = text.find(next_marker, start)
+              if end < 0:
+                  raise SystemExit(f'Missing end marker for {label}')
+              return text[:start] + replacement.rstrip() + '\n\n    ' + text[end:]
+
+          # Search, recruiter, and structured-data positioning.
+          index = replace_required(index, '<title>Yaswanth Kalendra | Application Security Researcher</title>', '<title>Yaswanth Kalendra | Offensive Security, VAPT &amp; Application Security</title>', 'page title')
+          index = replace_required(
+              index,
+              '<meta name="description" content="Portfolio of Yaswanth Kalendra, an application security researcher and cybersecurity analyst focused on web and API security, business-logic testing, vulnerability validation, and SOC engineering.">',
+              '<meta name="description" content="Offensive-security portfolio of Yaswanth Kalendra, focused on VAPT, web and API penetration testing, application-security validation, exploitability analysis, remediation, and retesting—with practical SOC and detection-engineering context.">',
+              'meta description',
+          )
+          index = replace_required(index, '<meta property="og:title" content="Yaswanth Kalendra | Application Security Researcher">', '<meta property="og:title" content="Yaswanth Kalendra | Offensive Security, VAPT &amp; Application Security">', 'Open Graph title')
+          index = replace_required(index, '<meta property="og:description" content="Application security, bug bounty research, vulnerability validation, and SOC engineering backed by real-world findings and public recognition.">', '<meta property="og:description" content="Offensive security, VAPT, application-security research, exploit validation, and end-to-end finding ownership backed by real-world results and defensive engineering context.">', 'Open Graph description')
+          index = replace_required(index, '<meta name="twitter:title" content="Yaswanth Kalendra | Application Security Researcher">', '<meta name="twitter:title" content="Yaswanth Kalendra | Offensive Security &amp; Application Security">', 'Twitter title')
+          index = replace_required(index, '<meta name="twitter:description" content="Application security, offensive research, and SOC engineering portfolio.">', '<meta name="twitter:description" content="VAPT, web and API penetration testing, application-security validation, and SOC-informed offensive security.">', 'Twitter description')
+          index = replace_required(index, '"jobTitle": "Application Security Researcher"', '"jobTitle": "Offensive Security and Application Security Practitioner"', 'structured job title')
+
+          old_knows = dedent('''
+              "knowsAbout": [
+                "Application Security",
+                "Web Application Security",
+                "API Security",
+                "Business Logic Testing",
+                "Penetration Testing",
+                "Bug Bounty",
+                "SAST",
+                "DAST",
+                "SOC Engineering",
+                "Wazuh",
+                "Zabbix",
+                "Grafana",
+                "Linux"
+              ]
+          ''').strip()
+          new_knows = dedent('''
+              "knowsAbout": [
+                "Offensive Security",
+                "Vulnerability Assessment and Penetration Testing",
+                "Application Security",
+                "Web Application Penetration Testing",
+                "API Security",
+                "Authentication and Authorization Testing",
+                "Business Logic Testing",
+                "Threat Modeling",
+                "Source Code Review",
+                "SAST",
+                "DAST",
+                "Exploit Validation",
+                "Severity Calibration",
+                "Remediation Validation",
+                "Security Consulting",
+                "SOC Engineering",
+                "Detection Engineering",
+                "Linux"
+              ]
+          ''').strip()
+          index = replace_required(index, old_knows, new_knows, 'structured expertise list')
+
+          # Brand and navigation now lead with the target discipline.
+          index = index.replace('<span>Application Security</span>', '<span>Offensive Security · AppSec</span>', 1)
+          index = index.replace('<a href="#work">Selected work</a>', '<a href="#work">Offensive work</a>')
+          index = index.replace('<a class="button button-small header-cta" href="#contact">Let’s connect</a>', '<a class="button button-small header-cta" href="#contact">Discuss a role</a>', 1)
+
+          hero = dedent('''
+              <section class="hero shell" id="top" aria-labelledby="hero-title">
+                <div class="hero-copy" data-reveal>
+                  <div class="availability-chip">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    Open to VAPT, Penetration Testing &amp; Application Security roles
+                  </div>
+
+                  <p class="eyebrow">VAPT · Web &amp; API Penetration Testing · Application Security</p>
+                  <h1 id="hero-title">I validate attack paths, prove business impact, <span>and drive findings to closure.</span></h1>
+                  <p class="hero-lead">
+                    I’m <strong>Yaswanth Kalendra</strong>, an offensive-security and application-security practitioner with 4+ years of independent web/API research. I can own an assessment workstream from scoping and threat hypotheses through manual exploitation, severity calibration, remediation guidance, and retesting. Hands-on SOC and detection-engineering experience adds operational context without diluting the offensive focus.
+                  </p>
+
+                  <div class="hero-actions">
+                    <a class="button" href="#work">
+                      Review offensive work
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                    </a>
+                    <a class="button button-secondary" href="photo-gallery/">
+                      View validation evidence
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M10 14 19 5M19 13v6H5V5h6"></path></svg>
+                    </a>
+                  </div>
+
+                  <div class="hero-links" aria-label="Professional profiles">
+                    <a href="mailto:yaswanthkukkala123@gmail.com">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 7l8 6 8-6"></path></svg>
+                      Email
+                    </a>
+                    <a href="https://www.linkedin.com/in/yaswanth-kalendra-kukkala-37b7701a0/" target="_blank" rel="noopener noreferrer">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9v9M6 6.5v.01M10 18v-5c0-2.5 4-3 4 0v5M10 9v9M3 3h18v18H3z"></path></svg>
+                      LinkedIn
+                    </a>
+                    <a href="https://github.com/kalendra456" target="_blank" rel="noopener noreferrer">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.82a9.5 9.5 0 0 1 2.5.34c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.77c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"></path></svg>
+                      GitHub
+                    </a>
+                  </div>
+                </div>
+
+                <div class="hero-visual" data-reveal>
+                  <div class="security-console" aria-label="Offensive security delivery profile">
+                    <div class="console-bar">
+                      <div class="console-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                      <span>assessment-control.yml</span>
+                      <span class="console-state"><i></i> delivery ready</span>
+                    </div>
+
+                    <div class="console-body">
+                      <div class="console-heading">
+                        <div>
+                          <p>Operating profile</p>
+                          <h2>Offensive security delivery</h2>
+                        </div>
+                        <span class="risk-badge">Consulting mindset</span>
+                      </div>
+
+                      <div class="profile-row">
+                        <span class="row-label">Primary focus</span>
+                        <strong>Web, API &amp; application security</strong>
+                      </div>
+                      <div class="profile-row">
+                        <span class="row-label">Assessment depth</span>
+                        <strong>Manual + source-assisted validation</strong>
+                      </div>
+                      <div class="profile-row">
+                        <span class="row-label">Delivery ownership</span>
+                        <strong>Scope → report → remediation → retest</strong>
+                      </div>
+                      <div class="profile-row">
+                        <span class="row-label">Defensive context</span>
+                        <strong>SIEM, detection &amp; response aware</strong>
+                      </div>
+
+                      <div class="signal-panel">
+                        <div class="signal-title">
+                          <span>Assessment lifecycle</span>
+                          <span>04 control gates</span>
+                        </div>
+                        <div class="signal-line"><i style="--level: 94%"></i><span>Scope &amp; model</span></div>
+                        <div class="signal-line"><i style="--level: 90%"></i><span>Exploit &amp; chain</span></div>
+                        <div class="signal-line"><i style="--level: 92%"></i><span>Calibrate risk</span></div>
+                        <div class="signal-line"><i style="--level: 96%"></i><span>Remediate &amp; retest</span></div>
+                      </div>
+
+                      <div class="console-footer">
+                        <span><i></i> Controlled engagement</span>
+                        <span>Stakeholder-ready reporting</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+          ''').strip()
+          index = replace_block(index, '<section class="hero shell" id="top" aria-labelledby="hero-title">', '<section class="metrics shell"', hero, 'hero')
+
+          impact = dedent('''
+              <section class="metrics shell" aria-label="Professional impact" data-reveal>
+                <article>
+                  <strong>20<span>+</span></strong>
+                  <p>Security programs assessed across private bounty and responsible disclosure</p>
+                </article>
+                <article>
+                  <strong>4<span>+</span></strong>
+                  <p>Years of independent offensive-security and application-security research</p>
+                </article>
+                <article>
+                  <strong>~$10K</strong>
+                  <p>Single critical finding reward in a Government Private Program</p>
+                </article>
+                <article>
+                  <strong>End-to-end</strong>
+                  <p>Assessment ownership from scope and exploitation through remediation and retest</p>
+                </article>
+              </section>
+
+              <section class="trust-strip shell" aria-label="Recognition highlights" data-reveal>
+                <p>Validated offensive research and responsible-disclosure experience</p>
+                <div>
+                  <span>Government Private Program</span>
+                  <span>SAP</span>
+                  <span>Accenture</span>
+                  <span>ALDI</span>
+                  <span>Drexel University</span>
+                </div>
+              </section>
+          ''').strip()
+          index = replace_block(index, '<section class="metrics shell"', '<section class="section shell" id="expertise">', impact, 'impact metrics')
+
+          expertise = dedent('''
+              <section class="section shell" id="expertise">
+                <div class="section-heading" data-reveal>
+                  <div>
+                    <p class="eyebrow">Core offensive expertise</p>
+                    <h2>Application-security testing engineered for exploitability, risk clarity, and verified closure.</h2>
+                  </div>
+                  <p>
+                    My primary track is offensive security: manual web/API penetration testing, authentication and authorization analysis, business-logic abuse, source-assisted validation, and remediation retesting. Defensive engineering remains a supporting advantage that improves control awareness, logging expectations, and operational risk judgment.
+                  </p>
+                </div>
+
+                <div class="expertise-grid">
+                  <article class="expertise-card card" data-reveal>
+                    <span class="card-index">01</span>
+                    <div class="card-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-3Z"></path><path d="m9 12 2 2 4-5"></path></svg>
+                    </div>
+                    <h3>Web Application Penetration Testing</h3>
+                    <p>Manual assessment of authentication, authorization, session management, input handling, file workflows, and application-specific abuse cases beyond standard checklists.</p>
+                    <ul class="compact-list">
+                      <li>Authentication, session and SSO testing</li>
+                      <li>Injection, upload and client/server boundaries</li>
+                      <li>Chained exploit and impact validation</li>
+                    </ul>
+                  </article>
+
+                  <article class="expertise-card card" data-reveal>
+                    <span class="card-index">02</span>
+                    <div class="card-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9 4 12l4 3M16 9l4 3-4 3M14 5l-4 14"></path></svg>
+                    </div>
+                    <h3>API Security &amp; Authorization</h3>
+                    <p>Authorization-focused assessment of REST and JSON workflows across users, roles, tenants, objects, state transitions, and high-value business actions.</p>
+                    <ul class="compact-list">
+                      <li>BOLA / IDOR and object-ownership testing</li>
+                      <li>Role, tenant and privilege-boundary matrices</li>
+                      <li>Multi-step business-logic abuse validation</li>
+                    </ul>
+                  </article>
+
+                  <article class="expertise-card card" data-reveal>
+                    <span class="card-index">03</span>
+                    <div class="card-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM8 8h8M8 12h5M8 16h7"></path></svg>
+                    </div>
+                    <h3>Application Security Validation</h3>
+                    <p>Source-code reasoning, SAST/DAST correlation, scanner triage, negative controls, reproducible PoCs, severity calibration, and developer-ready remediation guidance.</p>
+                    <ul class="compact-list">
+                      <li>Source-to-sink and trust-boundary analysis</li>
+                      <li>False-positive reduction and root-cause review</li>
+                      <li>Remediation verification and retesting</li>
+                    </ul>
+                  </article>
+
+                  <article class="expertise-card card" data-reveal>
+                    <span class="card-index">04</span>
+                    <div class="card-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9M10 18V5M16 18v-7M22 18H2"></path><path d="m3 7 6-3 6 5 6-6"></path></svg>
+                    </div>
+                    <h3>Detection-Informed Security Engineering</h3>
+                    <p>Practical SOC, monitoring, logging, and incident-workflow experience used to evaluate whether preventive controls, telemetry, and response paths support real attack scenarios.</p>
+                    <ul class="compact-list">
+                      <li>SIEM, logging and control observability</li>
+                      <li>Detection and incident-workflow context</li>
+                      <li>Infrastructure and network-security awareness</li>
+                    </ul>
+                  </article>
+                </div>
+              </section>
+          ''').strip()
+          index = replace_block(index, '<section class="section shell" id="expertise">', '<section class="section methodology-section">', expertise, 'expertise section')
+
+          methodology = dedent('''
+              <section class="section methodology-section">
+                <div class="shell methodology-layout">
+                  <div class="methodology-copy" data-reveal>
+                    <p class="eyebrow">Consulting delivery model</p>
+                    <h2>A controlled assessment lifecycle—from rules of engagement to verified closure.</h2>
+                    <p>
+                      I treat an assessment as a managed security workstream, not a scanner export: scope control, attack-surface prioritization, evidence integrity, severity governance, stakeholder communication, remediation coordination, and explicit retest criteria.
+                    </p>
+                    <a class="text-link" href="#work">Review sanitized engagement outcomes <span aria-hidden="true">→</span></a>
+                  </div>
+
+                  <ol class="methodology-steps">
+                    <li data-reveal>
+                      <span>01</span>
+                      <div><h3>Control scope and rules of engagement</h3><p>Define assets, identities, test windows, constraints, evidence handling, escalation paths, and success criteria before testing begins.</p></div>
+                    </li>
+                    <li data-reveal>
+                      <span>02</span>
+                      <div><h3>Model the attack surface</h3><p>Map trust boundaries, roles, objects, data flows, state transitions, and high-value workflows to create focused threat hypotheses.</p></div>
+                    </li>
+                    <li data-reveal>
+                      <span>03</span>
+                      <div><h3>Validate and chain exploitation</h3><p>Use manual testing, source-assisted reasoning, negative controls, and safe PoCs to prove exploitability and realistic attack paths.</p></div>
+                    </li>
+                    <li data-reveal>
+                      <span>04</span>
+                      <div><h3>Govern findings and risk decisions</h3><p>Deduplicate evidence, calibrate severity, explain business impact, identify root cause, and communicate clearly with technical and non-technical stakeholders.</p></div>
+                    </li>
+                    <li data-reveal>
+                      <span>05</span>
+                      <div><h3>Drive remediation and retest</h3><p>Translate findings into corrective controls, validate the fix, test for bypasses and regressions, and close the issue against defined evidence.</p></div>
+                    </li>
+                  </ol>
+                </div>
+              </section>
+          ''').strip()
+          index = replace_block(index, '<section class="section methodology-section">', '<section class="section shell" id="experience">', methodology, 'methodology section')
+
+          experience = dedent('''
+              <section class="section shell" id="experience">
+                <div class="section-heading compact-heading" data-reveal>
+                  <div>
+                    <p class="eyebrow">Experience</p>
+                    <h2>Offensive security as the primary track; defensive engineering as operational leverage.</h2>
+                  </div>
+                </div>
+
+                <div class="timeline">
+                  <article class="timeline-item featured" data-reveal>
+                    <div class="timeline-marker" aria-hidden="true"><span></span></div>
+                    <div class="timeline-meta">
+                      <span>2022 — Present</span>
+                      <span>Independent · Remote</span>
+                    </div>
+                    <div class="timeline-content">
+                      <div class="role-heading">
+                        <div>
+                          <p class="eyebrow">Offensive security · Application security</p>
+                          <h3>Independent Application Security Researcher &amp; Penetration Tester</h3>
+                        </div>
+                        <span class="role-badge">Primary offensive track</span>
+                      </div>
+                      <p>Research-led web, API, and source-assisted assessments across 20+ private bug-bounty and responsible-disclosure programs, with an emphasis on manual validation and controlled finding delivery.</p>
+                      <ul class="experience-points">
+                        <li>Assessed authentication, authorization, sessions, object ownership, trust workflows, information exposure, file handling, and business logic across complex application flows.</li>
+                        <li>Built role, object, and state-transition test matrices to identify BOLA/IDOR, privilege-boundary, and workflow-abuse conditions that automated tools commonly miss.</li>
+                        <li>Correlated source-code reasoning, SAST signals, DAST behavior, and negative controls to separate exploitable weaknesses from false positives.</li>
+                        <li>Independently calibrated impact and severity, produced reproducible PoCs, documented root cause, and delivered remediation and retest guidance.</li>
+                        <li>Reported a critical vulnerability in a Government Private Program that resulted in an approximately $10,000 single-finding reward.</li>
+                      </ul>
+                    </div>
+                  </article>
+
+                  <article class="timeline-item" data-reveal>
+                    <div class="timeline-marker" aria-hidden="true"><span></span></div>
+                    <div class="timeline-meta">
+                      <span>2025 — Present</span>
+                      <span>India</span>
+                    </div>
+                    <div class="timeline-content">
+                      <div class="role-heading">
+                        <div>
+                          <p class="eyebrow">Security operations · Network security</p>
+                          <h3>Tatva Networks · Cybersecurity Analyst</h3>
+                        </div>
+                        <span class="role-badge">Operational context</span>
+                      </div>
+                      <p>Enterprise-facing SOC, monitoring, network-security, and customer-environment work that strengthens understanding of production controls, telemetry, incident handling, and implementation constraints.</p>
+                      <ul class="experience-points">
+                        <li>Supported Wazuh, Zabbix, Grafana, and OpenSearch deployments for security monitoring, infrastructure visibility, and investigation workflows.</li>
+                        <li>Worked with firewall rules, VPN, NAT, SNMP, syslog, segmentation, network troubleshooting, and availability controls across customer environments.</li>
+                        <li>Translated technical issues into controlled implementation steps, remediation actions, operational documentation, and stakeholder-ready status updates.</li>
+                      </ul>
+                    </div>
+                  </article>
+                </div>
+              </section>
+          ''').strip()
+          index = replace_block(index, '<section class="section shell" id="experience">', '<section class="section shell" id="work">', experience, 'experience section')
+
+          offensive_work = dedent('''
+              <section class="section shell" id="work">
+                <div class="section-heading" data-reveal>
+                  <div>
+                    <p class="eyebrow">Selected offensive security work</p>
+                    <h2>Sanitized engagement summaries focused on exploitability, decision quality, and business impact.</h2>
+                  </div>
+                  <p>Private report content and target-identifying details remain restricted. These summaries show the assessment approach, control ownership, and reporting discipline relevant to VAPT, penetration-testing, and application-security teams.</p>
+                </div>
+
+                <article class="case-study case-study-featured" data-reveal>
+                  <div class="case-copy">
+                    <div class="case-topline">
+                      <span class="case-number">Offensive case 01</span>
+                      <span class="case-status"><i></i> Validated &amp; rewarded</span>
+                    </div>
+                    <p class="eyebrow">Critical identity and trust-flow research</p>
+                    <h3>Authentication control failure in a Government Private Program</h3>
+                    <p>Mapped identity transitions and trust decisions across a complex authentication workflow, designed negative-control tests, and demonstrated an exploitable control failure with clear impact evidence while preserving responsible-disclosure boundaries.</p>
+                    <div class="outcome-grid">
+                      <div><strong>Focus</strong><span>Identity, trust &amp; authorization</span></div>
+                      <div><strong>Approach</strong><span>Manual workflow and protocol analysis</span></div>
+                      <div><strong>Delivery</strong><span>PoC, impact, root cause and remediation</span></div>
+                      <div><strong>Result</strong><span>Critical · approximately $10K reward</span></div>
+                    </div>
+                    <div class="tag-list" aria-label="Assessment disciplines">
+                      <span>Authentication</span><span>Business Logic</span><span>Trust Boundaries</span><span>Responsible Disclosure</span>
+                    </div>
+                    <a class="button button-secondary" href="photo-gallery/">
+                      View validation evidence
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M10 14 19 5M19 13v6H5V5h6"></path></svg>
+                    </a>
+                  </div>
+                  <div class="case-visual" aria-hidden="true">
+                    <div class="dashboard-window">
+                      <div class="dashboard-bar"><span></span><span></span><span></span><b>Assessment control board</b></div>
+                      <div class="dashboard-body">
+                        <div class="dash-sidebar"><i></i><i></i><i></i><i></i><i></i></div>
+                        <div class="dash-main">
+                          <div class="dash-kpis"><span><b>Manual</b><small>Validation</small></span><span><b>Critical</b><small>Impact</small></span><span><b>Closed</b><small>Disclosure</small></span></div>
+                          <div class="dash-chart"><span style="--h:38%"></span><span style="--h:56%"></span><span style="--h:48%"></span><span style="--h:76%"></span><span style="--h:69%"></span><span style="--h:90%"></span><span style="--h:81%"></span><span style="--h:96%"></span></div>
+                          <div class="dash-events"><span></span><span></span><span></span><span></span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <div class="case-grid">
+                  <article class="case-card card" data-reveal>
+                    <div class="case-card-head"><span>02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9 4 12l4 3M16 9l4 3-4 3M14 5l-4 14"></path></svg></div>
+                    <p class="eyebrow">Authorization testing</p>
+                    <h3>API object-ownership and privilege-boundary validation</h3>
+                    <p>Tested role, tenant, object, and state-transition boundaries through controlled request mutation and multi-user negative controls.</p>
+                    <div class="case-result"><strong>Delivery value</strong><span>Clear BOLA/IDOR and privilege-path evidence with reproducible role/object matrices and remediation guidance.</span></div>
+                    <div class="tag-list"><span>API Security</span><span>BOLA / IDOR</span><span>Access Control</span></div>
+                    <span class="private-label">Sanitized research summary</span>
+                  </article>
+
+                  <article class="case-card card" data-reveal>
+                    <div class="case-card-head"><span>03</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM8 8h8M8 12h5M8 16h7"></path></svg></div>
+                    <p class="eyebrow">Source-assisted AppSec</p>
+                    <h3>Code-to-runtime security validation</h3>
+                    <p>Correlated source paths, configuration, trust decisions, and runtime behavior to prioritize exploitability over theoretical scanner output.</p>
+                    <div class="case-result"><strong>Delivery value</strong><span>Reduced false positives, identified root cause, and produced testable corrective controls for engineering teams.</span></div>
+                    <div class="tag-list"><span>Code Review</span><span>SAST + DAST</span><span>Root Cause</span></div>
+                    <span class="private-label">Sanitized research summary</span>
+                  </article>
+
+                  <article class="case-card card" data-reveal>
+                    <div class="case-card-head"><span>04</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v12H7l-3 3zM8 9h8M8 13h5"></path></svg></div>
+                    <p class="eyebrow">Finding governance</p>
+                    <h3>Triage, severity calibration and remediation workflow</h3>
+                    <p>Reproduced findings, challenged unsupported severity, deduplicated evidence, documented business impact, and defined retest criteria.</p>
+                    <div class="case-result"><strong>Delivery value</strong><span>A controlled finding lifecycle that supports engineering decisions, auditability, remediation ownership, and closure.</span></div>
+                    <div class="tag-list"><span>Triage</span><span>Severity</span><span>Reporting</span><span>Retest</span></div>
+                    <span class="private-label">Consulting delivery capability</span>
+                  </article>
+
+                  <article class="case-card card" data-reveal>
+                    <div class="case-card-head"><span>05</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-3Z"></path></svg></div>
+                    <p class="eyebrow">Attack-surface strategy</p>
+                    <h3>Risk-based web application assessment planning</h3>
+                    <p>Mapped authentication, session, upload, injection, integration, and business-process surfaces before prioritizing manual test coverage.</p>
+                    <div class="case-result"><strong>Delivery value</strong><span>Focused testing around high-value workflows and control boundaries instead of undirected checklist execution.</span></div>
+                    <div class="tag-list"><span>Burp Suite</span><span>Threat Modeling</span><span>Web Security</span></div>
+                    <span class="private-label">Repeatable assessment workflow</span>
+                  </article>
+                </div>
+              </section>
+          ''').strip()
+          index = replace_block(index, '<section class="section shell" id="work">', '<section class="section recognition-section" id="recognition">', offensive_work, 'offensive work section')
+
+          # Strengthen recognition language without changing proof or claims.
+          index = replace_required(index, '<p class="eyebrow">Recognition &amp; proof</p>', '<p class="eyebrow">Offensive research recognition &amp; proof</p>', 'recognition eyebrow')
+          index = replace_required(index, '<h2>Real findings. Independent validation. Responsible disclosure.</h2>', '<h2>Validated offensive-security impact, supported by verifiable evidence.</h2>', 'recognition heading')
+          index = replace_required(index, '<p>Public acknowledgments and selected proof demonstrate validated security work while private report details and sensitive assets remain protected.</p>', '<p>Public acknowledgments and selected proof demonstrate independent offensive-security validation while private reports, client identifiers, and sensitive technical detail remain protected.</p>', 'recognition description')
+          index = replace_required(index, '<h3>Recognized across enterprise, government, university, and private bounty programs.</h3>', '<h3>Recognized for responsible vulnerability research across enterprise, government, university, and private programs.</h3>', 'recognition summary')
+
+          operations_and_capabilities = dedent('''
+              <section class="section shell" id="operations">
+                <div class="section-heading" data-reveal>
+                  <div>
+                    <p class="eyebrow">Defensive depth</p>
+                    <h2>Security operations experience that strengthens offensive judgment.</h2>
+                  </div>
+                  <p>Defensive engineering is retained as a deliberate secondary advantage: understanding production telemetry, change control, monitoring gaps, incident workflow, and operational constraints makes offensive findings more realistic and remediation guidance more implementable.</p>
+                </div>
+
+                <div class="case-grid">
+                  <article class="case-card card" data-reveal>
+                    <div class="case-card-head"><span>01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-3Z"></path></svg></div>
+                    <p class="eyebrow">Compliance validation lab</p>
+                    <h3>Wazuh 5 Beta SOC Lab for ISO 27001</h3>
+                    <p>Deployed an isolated beta environment to evaluate compliance and telemetry capabilities without introducing risk to the stable SOC stack.</p>
+                    <div class="case-result"><strong>Outcome</strong><span>Validated certificates, agent health, ingestion behavior, and Windows/Linux coverage in a controlled test environment.</span></div>
+                    <div class="tag-list"><span>Wazuh 5</span><span>Docker</span><span>ISO 27001</span></div>
+                    <a class="text-link" href="docs/Wazuh_5_Beta2_ISO27001_Test_Lab_Documentation(2).docx" download>Download documentation <span aria-hidden="true">↓</span></a>
+                  </article>
+
+                  <article class="case-card card" data-reveal>
+                    <div class="case-card-head"><span>02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9M10 18V5M16 18v-7M22 18H2"></path></svg></div>
+                    <p class="eyebrow">Unified visibility</p>
+                    <h3>Wazuh + Grafana + Zabbix dashboard</h3>
+                    <p>Correlated security events and infrastructure health into a host-focused SOC dashboard using OpenSearch-backed data.</p>
+                    <div class="case-result"><strong>Outcome</strong><span>Faster host-level investigation across security and availability signals.</span></div>
+                    <div class="tag-list"><span>Grafana</span><span>Zabbix</span><span>OpenSearch</span></div>
+                    <a class="text-link" href="docs/Wazuh_5_Grafana_Zabbix_SOC_Dashboard_Documentation(1).docx" download>Download documentation <span aria-hidden="true">↓</span></a>
+                  </article>
+
+                  <article class="case-card card" data-reveal>
+                    <div class="case-card-head"><span>03</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v5H5zM5 15h14v5H5zM8 9v6M16 9v6"></path></svg></div>
+                    <p class="eyebrow">Log engineering</p>
+                    <h3>Firewall syslog ingestion into Wazuh 5</h3>
+                    <p>Built and troubleshot the collector-to-engine-to-indexer pipeline, making firewall events searchable and usable for investigation.</p>
+                    <div class="case-result"><strong>Outcome</strong><span>Reliable network-event visibility with corrected connector and data-stream behavior.</span></div>
+                    <div class="tag-list"><span>Syslog</span><span>Wazuh</span><span>Firewall</span></div>
+                    <a class="text-link" href="docs/Wazuh5%20Firewall%20Syslog%20Integration%20Documentation.docx" download>Download documentation <span aria-hidden="true">↓</span></a>
+                  </article>
+
+                  <article class="case-card card" data-reveal>
+                    <div class="case-card-head"><span>04</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v12H7l-3 3zM8 9h8M8 13h5"></path></svg></div>
+                    <p class="eyebrow">Incident workflow automation</p>
+                    <h3>Wazuh to GLPI incident ticketing</h3>
+                    <p>Converted high-value security alerts into deduplicated GLPI incidents through a custom integration workflow.</p>
+                    <div class="case-result"><strong>Outcome</strong><span>Actionable alert-to-ticket flow with reduced duplication and operational noise.</span></div>
+                    <div class="tag-list"><span>Wazuh</span><span>GLPI</span><span>ITSM</span></div>
+                    <a class="text-link" href="docs/Wazuh_GLPI_SOC_Integration_Documentation(1).docx" download>Download documentation <span aria-hidden="true">↓</span></a>
+                  </article>
+
+                  <article class="case-card card" data-reveal>
+                    <div class="case-card-head"><span>05</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M5.6 5.6l2.8 2.8M3 12h4M5.6 18.4l2.8-2.8M12 17v4M18.4 18.4l-2.8-2.8M17 12h4M18.4 5.6l-2.8 2.8"></path><circle cx="12" cy="12" r="4"></circle></svg></div>
+                    <p class="eyebrow">Enterprise monitoring</p>
+                    <h3>Large-scale network visibility</h3>
+                    <p>Supported monitoring and troubleshooting across switches, access points, servers, firewall paths, and network availability.</p>
+                    <div class="case-result"><strong>Outcome</strong><span>Improved infrastructure visibility through SNMP monitoring, dashboards, and disciplined incident troubleshooting.</span></div>
+                    <div class="tag-list"><span>SNMP</span><span>Zabbix</span><span>Grafana</span></div>
+                    <span class="private-label">Internal client project</span>
+                  </article>
+                </div>
+              </section>
+
+              <section class="section shell" id="capabilities">
+                <div class="section-heading" data-reveal>
+                  <div>
+                    <p class="eyebrow">Technical and delivery capabilities</p>
+                    <h2>An offensive-first stack with assessment governance and defensive context.</h2>
+                  </div>
+                </div>
+
+                <div class="capability-grid">
+                  <article class="capability-group card" data-reveal>
+                    <p class="eyebrow">Assessment domains</p>
+                    <h3>Web, API &amp; application security</h3>
+                    <div class="skill-cloud"><span>Web Pentesting</span><span>API Security</span><span>IDOR / BOLA</span><span>Authentication</span><span>Authorization</span><span>Session Security</span><span>Business Logic</span><span>OAuth / OIDC</span><span>File Upload</span><span>Injection</span></div>
+                  </article>
+                  <article class="capability-group card" data-reveal>
+                    <p class="eyebrow">Offensive workflow</p>
+                    <h3>Exploit and validation tooling</h3>
+                    <div class="skill-cloud"><span>Burp Suite</span><span>Nmap</span><span>Nuclei</span><span>Nessus</span><span>OpenVAS</span><span>Metasploit</span><span>Linux</span><span>Python</span><span>Bash</span><span>SAST</span><span>DAST</span><span>Code Review</span><span>PoC Development</span></div>
+                  </article>
+                  <article class="capability-group card" data-reveal>
+                    <p class="eyebrow">Consulting delivery</p>
+                    <h3>Assessment and finding governance</h3>
+                    <div class="skill-cloud"><span>Scope &amp; ROE</span><span>Threat Modeling</span><span>Attack-Surface Mapping</span><span>Evidence Management</span><span>Severity Calibration</span><span>Risk Communication</span><span>Root-Cause Analysis</span><span>Remediation Guidance</span><span>Retesting</span><span>Finding Lifecycle</span><span>Stakeholder Updates</span></div>
+                  </article>
+                  <article class="capability-group card" data-reveal>
+                    <p class="eyebrow">Defensive context</p>
+                    <h3>Detection, infrastructure &amp; operations</h3>
+                    <div class="skill-cloud"><span>Wazuh</span><span>Zabbix</span><span>Grafana</span><span>OpenSearch</span><span>Syslog</span><span>SNMP</span><span>Firewall Rules</span><span>VPN</span><span>NAT</span><span>Alert Tuning</span><span>Incident Workflow</span><span>Network Monitoring</span></div>
+                  </article>
+                </div>
+
+                <div class="credentials-panel" data-reveal>
+                  <div>
+                    <p class="eyebrow">Credentials &amp; continuous development</p>
+                    <h3>CEH v13 · Certified March 2026</h3>
+                    <p>Actively building deeper hands-on offensive-security capability through OSCP preparation and PEN-200 lab practice, with CCSE study continuing in parallel.</p>
+                  </div>
+                  <div class="credential-list">
+                    <span><i class="complete"></i><strong>CEH v13</strong><small>Certified · Mar 2026</small></span>
+                    <span><i></i><strong>OSCP</strong><small>Active preparation</small></span>
+                    <span><i></i><strong>CCSE</strong><small>In progress</small></span>
+                  </div>
+                </div>
+              </section>
+          ''').strip()
+          index = replace_block(index, '<section class="section shell" id="capabilities">', '<section class="section contact-section" id="contact">', operations_and_capabilities, 'operations and capabilities sections')
+
+          index = replace_required(index, '<p class="eyebrow">Start a conversation</p>', '<p class="eyebrow">Offensive security opportunities</p>', 'contact eyebrow')
+          index = replace_required(index, '<h2>Looking for practical application-security depth?</h2>', '<h2>Need someone who can test deeply, communicate clearly, and own the finding lifecycle?</h2>', 'contact heading')
+          index = replace_required(
+              index,
+              '<p>I’m interested in Application Security, Product Security, VAPT, penetration-testing, and security-engineering opportunities where strong validation and clear reporting matter.</p>',
+              '<p>I’m targeting VAPT, Penetration Tester, Application Security, Product Security, and Offensive Security roles. I bring a consulting-oriented delivery mindset: controlled scope, disciplined evidence, realistic severity, stakeholder communication, remediation coordination, and retest ownership—supported by practical SOC and infrastructure experience.</p>',
+              'contact description',
+          )
+          index = index.replace('subject=Application%20Security%20Opportunity', 'subject=Offensive%20Security%20Opportunity', 1)
+          index = replace_required(index, '<span>Security through evidence</span>', '<span>Offensive security through evidence</span>', 'footer positioning')
+
+          # Gallery positioning remains evidence-focused but now explicitly supports offensive hiring review.
+          gallery = gallery_path.read_text(encoding='utf-8')
+          gallery_updates = [
+              ('<title>Recognition Proof Gallery | Yaswanth Kalendra</title>', '<title>Offensive Security Recognition &amp; Proof | Yaswanth Kalendra</title>'),
+              ('<meta name="description" content="Public Hall of Fame listings, responsible disclosure acknowledgments, validated findings, and selected bug bounty proof for Yaswanth Kalendra.">', '<meta name="description" content="Public evidence of Yaswanth Kalendra’s offensive-security research, validated findings, responsible-disclosure acknowledgments, Hall of Fame listings, and selected paid-program outcomes.">'),
+              ('<meta property="og:title" content="Recognition Proof Gallery | Yaswanth Kalendra">', '<meta property="og:title" content="Offensive Security Recognition &amp; Proof | Yaswanth Kalendra">'),
+              ('<span>Recognition archive</span>', '<span>Offensive security proof</span>'),
+              ('<p class="eyebrow">Responsible disclosure evidence</p>', '<p class="eyebrow">Offensive security research evidence</p>'),
+              ('<h1>Recognition backed by verifiable proof.</h1>', '<h1>Validated offensive-security impact, backed by proof.</h1>'),
+              ('<p>This curated archive separates supporting evidence from the main portfolio. It includes public Hall of Fame listings, security credits, acknowledgment messages, validated findings, and selected paid-program outcomes.</p>', '<p>This curated archive gives recruiters and security leaders a direct evidence path for public Hall of Fame listings, security credits, responsible-disclosure acknowledgments, validated findings, and selected paid-program outcomes.</p>'),
+              ('<h2>Curated for credibility and safe disclosure.</h2>', '<h2>Curated for credibility, confidentiality, and hiring review.</h2>'),
+              ('<h2>The strongest public and high-impact proof.</h2>', '<h2>High-signal evidence for offensive-security roles.</h2>'),
+          ]
+          for old, new in gallery_updates:
+              if old not in gallery:
+                  raise SystemExit(f'Missing expected gallery content: {old[:60]}')
+              gallery = gallery.replace(old, new, 1)
+
+          # Repository documentation mirrors the offensive-first hierarchy.
+          readme = readme_path.read_text(encoding='utf-8')
+          readme = replace_required(
+              readme,
+              'A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, focused on application security, offensive research, vulnerability validation, and SOC engineering.',
+              'A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, positioned first for offensive-security, VAPT, penetration-testing, and application-security roles, with SOC and defensive engineering retained as a supporting differentiator.',
+              'README summary',
+          )
+          old_bullets = dedent('''
+              - Application and API security expertise, including authorization and business-logic testing
+              - Independent bug bounty and responsible-disclosure impact
+              - Hands-on SOC, monitoring, logging, and incident-workflow projects
+              - Public recognition evidence without exposing sensitive report contents
+              - A clear professional path for recruiters, engineering leaders, and security teams to make contact
+          ''').strip()
+          new_bullets = dedent('''
+              - Offensive-first positioning for VAPT, penetration testing, application security, and product security
+              - Manual web/API exploitation, authorization testing, business-logic analysis, SAST/DAST correlation, and source-assisted validation
+              - Consulting-oriented assessment delivery: scope control, evidence governance, severity calibration, remediation guidance, and retesting
+              - Independent bug-bounty and responsible-disclosure impact backed by public recognition evidence
+              - Hands-on SOC, monitoring, logging, network-security, and incident-workflow experience as secondary operational context
+              - A clear professional path for recruiters, security leaders, engineering teams, and consulting organizations to make contact
+          ''').strip()
+          readme = replace_required(readme, old_bullets, new_bullets, 'README positioning bullets')
+
+          # Validation: offensive content must appear first, defensive evidence must remain,
+          # and leadership language must describe delivery capability rather than inflate titles.
+          required_index_phrases = (
+              'Offensive Security, VAPT &amp; Application Security',
+              'I validate attack paths, prove business impact',
+              'Consulting delivery model',
+              'Scope → report → remediation → retest',
+              'Selected offensive security work',
+              'Finding governance',
+              'Defensive depth',
+              'Wazuh 5 Beta SOC Lab for ISO 27001',
+              'Assessment and finding governance',
+              'Need someone who can test deeply, communicate clearly, and own the finding lifecycle?',
+          )
+          for phrase in required_index_phrases:
+              if phrase not in index:
+                  raise SystemExit(f'Missing required positioning phrase: {phrase}')
+
+          if index.index('Selected offensive security work') > index.index('Defensive depth'):
+              raise SystemExit('Defensive work appears before offensive work')
+          if 'Independent Security Researcher &amp; Bug Bounty Hunter' in index:
+              raise SystemExit('Old experience title remains')
+          for link in (
+              'Wazuh_5_Beta2_ISO27001_Test_Lab_Documentation(2).docx',
+              'Wazuh_GLPI_SOC_Integration_Documentation(1).docx',
+              'Wazuh5%20Firewall%20Syslog%20Integration%20Documentation.docx',
+          ):
+              if link not in index:
+                  raise SystemExit(f'Defensive documentation link was lost: {link}')
+
+          index_path.write_text(index, encoding='utf-8')
+          gallery_path.write_text(gallery, encoding='utf-8')
+          readme_path.write_text(readme, encoding='utf-8')
+          PY
+
+          rm -rf .offensive-positioning
+          rm -f .github/workflows/apply-offensive-first-positioning.yml
+
+      - name: Commit offensive-first positioning
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Prioritize offensive security positioning"
+          git push origin HEAD:offensive-first-positioning
