@@ -1,0 +1,252 @@
+/* Streamlined portfolio structure
+   Consolidates supporting content while keeping the strongest evidence visually dominant.
+*/
+
+/* Five core expertise cards in one responsive grid. */
+.expertise-grid.expertise-grid-streamlined {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.expertise-grid-streamlined > .expertise-card {
+  min-height: 315px;
+}
+
+.expertise-grid-streamlined > .expertise-card:nth-child(-n + 3) {
+  grid-column: span 2;
+}
+
+.expertise-grid-streamlined > .expertise-card:nth-child(n + 4) {
+  grid-column: span 3;
+}
+
+.expertise-card-protocol {
+  border-color: color-mix(in srgb, var(--blue) 25%, var(--border));
+  background:
+    radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--blue) 13%, transparent), transparent 17rem),
+    linear-gradient(145deg, color-mix(in srgb, var(--accent) 6%, transparent), transparent 52%),
+    linear-gradient(150deg, var(--surface-raised), var(--surface));
+}
+
+.expertise-card-protocol .card-icon {
+  border-color: color-mix(in srgb, var(--blue) 34%, var(--border));
+  background: linear-gradient(145deg, var(--accent-soft), var(--blue-soft));
+  color: color-mix(in srgb, var(--accent) 60%, var(--blue));
+}
+
+.expertise-card-kicker {
+  position: relative;
+  z-index: 1;
+  margin-bottom: .45rem;
+}
+
+.expertise-disclosure {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-top: 1rem;
+  border-top: 1px solid var(--border);
+  padding-top: .75rem;
+  color: var(--muted);
+  font-size: .72rem;
+  line-height: 1.55;
+}
+
+/* Featured evidence remains primary; supporting methods become one compact panel. */
+.offensive-methodology {
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+  border-radius: var(--radius-xl);
+  padding: clamp(1.35rem, 3vw, 2rem);
+}
+
+.offensive-methodology::before {
+  position: absolute;
+  top: -7rem;
+  right: -7rem;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--blue) 13%, transparent), transparent 68%);
+  content: "";
+  pointer-events: none;
+}
+
+.offensive-methodology > * {
+  position: relative;
+  z-index: 1;
+}
+
+.offensive-methodology-header {
+  display: grid;
+  align-items: end;
+  grid-template-columns: minmax(0, .85fr) minmax(280px, .65fr);
+  gap: clamp(1.25rem, 5vw, 4rem);
+  margin-bottom: 1.35rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.15rem;
+}
+
+.offensive-methodology-header h3 {
+  margin-bottom: 0;
+  font-size: var(--type-feature-title, clamp(1.5rem, 2vw, 2rem));
+  line-height: 1.18;
+}
+
+.offensive-methodology-header > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .86rem;
+  line-height: 1.68;
+}
+
+.offensive-methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .7rem;
+}
+
+.offensive-methodology-item {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: .8rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg-deep) 38%, transparent);
+  padding: .95rem;
+  transition: transform var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.offensive-methodology-item:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 32%, var(--border));
+  background: color-mix(in srgb, var(--surface-raised) 74%, transparent);
+}
+
+.offensive-methodology-index {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  font-weight: 850;
+}
+
+.offensive-methodology-item strong,
+.offensive-methodology-item p,
+.offensive-methodology-item small {
+  display: block;
+}
+
+.offensive-methodology-item strong {
+  margin-bottom: .35rem;
+  color: var(--text-strong);
+  font-size: .94rem;
+  line-height: 1.35;
+}
+
+.offensive-methodology-item p {
+  margin-bottom: .55rem;
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.58;
+}
+
+.offensive-methodology-item small {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: .6rem;
+  font-weight: 760;
+  letter-spacing: .025em;
+}
+
+/* Three grouped defensive workstreams instead of five competing cards. */
+.case-grid.defensive-case-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.defensive-case-grid .case-card {
+  min-height: 0;
+  padding: clamp(1.3rem, 2.4vw, 1.7rem);
+}
+
+.defensive-case-grid .case-card-head {
+  margin-bottom: 1.25rem;
+}
+
+.defensive-case-grid .case-card > p:not(.eyebrow) {
+  font-size: .84rem;
+  line-height: 1.65;
+}
+
+.defensive-case-grid .case-result {
+  margin-top: 1.15rem;
+}
+
+.defensive-case-grid .tag-list {
+  margin: 1rem 0 .85rem;
+}
+
+.defensive-case-grid .case-actions {
+  margin-top: auto;
+  padding-top: .2rem;
+}
+
+.defensive-case-grid .case-actions .text-link {
+  min-height: 36px;
+  padding: .5rem .62rem;
+  font-size: .7rem;
+}
+
+@media (max-width: 1080px) {
+  .expertise-grid.expertise-grid-streamlined {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .expertise-grid-streamlined > .expertise-card:nth-child(n) {
+    grid-column: span 1;
+  }
+
+  .expertise-grid-streamlined > .expertise-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .case-grid.defensive-case-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .defensive-case-grid > .case-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .expertise-grid.expertise-grid-streamlined,
+  .case-grid.defensive-case-grid,
+  .offensive-methodology-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .expertise-grid-streamlined > .expertise-card:last-child,
+  .defensive-case-grid > .case-card:last-child {
+    grid-column: auto;
+  }
+
+  .offensive-methodology-header {
+    grid-template-columns: 1fr;
+    gap: .75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offensive-methodology-item {
+    transition: none;
+  }
+}
