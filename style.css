@@ -1018,6 +1018,150 @@ html[data-theme="light"] .sun-icon {
   content: "";
 }
 
+
+/* Advanced research: complex logic and protocol security */
+.protocol-research-card {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  align-items: center;
+  grid-template-columns: minmax(0, 1.22fr) minmax(300px, .78fr);
+  gap: clamp(1.6rem, 5vw, 4rem);
+  margin-top: 1rem;
+  border-color: color-mix(in srgb, var(--blue) 24%, var(--border));
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 92% 10%, color-mix(in srgb, var(--blue) 17%, transparent), transparent 24rem),
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent), transparent 42%),
+    linear-gradient(150deg, var(--surface-raised), var(--surface));
+  padding: clamp(1.6rem, 4vw, 2.5rem);
+  box-shadow: var(--shadow-md);
+  transition: transform 320ms var(--ease), border-color 320ms var(--ease), box-shadow 320ms var(--ease);
+}
+
+.protocol-research-card::before {
+  position: absolute;
+  top: 0;
+  left: -35%;
+  width: 34%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  content: "";
+  opacity: .72;
+  animation: protocolScan 7s ease-in-out infinite;
+}
+
+.protocol-research-card::after {
+  position: absolute;
+  right: -7rem;
+  bottom: -10rem;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--blue) 10%, transparent);
+  content: "";
+  filter: blur(12px);
+}
+
+.protocol-research-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--border));
+  box-shadow: var(--shadow-lg);
+}
+
+.protocol-research-copy,
+.protocol-capabilities {
+  position: relative;
+  z-index: 1;
+}
+
+.protocol-research-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.protocol-icon {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+  border-color: color-mix(in srgb, var(--blue) 30%, var(--border));
+  background: linear-gradient(145deg, var(--accent-soft), var(--blue-soft));
+  color: color-mix(in srgb, var(--accent) 65%, var(--blue));
+}
+
+.protocol-research-card h3 {
+  margin: .15rem 0 0;
+  font-size: clamp(1.75rem, 3.2vw, 2.55rem);
+}
+
+.protocol-research-copy > p:not(.protocol-research-note) {
+  max-width: 760px;
+  margin-bottom: 1rem;
+  color: var(--muted-strong);
+  font-size: .98rem;
+  line-height: 1.78;
+}
+
+.protocol-research-note {
+  max-width: 760px;
+  margin: 0;
+  border-left: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  padding-left: .85rem;
+  color: var(--muted);
+  font-size: .76rem;
+}
+
+.protocol-capabilities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+}
+
+.protocol-capabilities span {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg-deep) 48%, transparent);
+  color: var(--muted-strong);
+  padding: .65rem .75rem;
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  font-weight: 760;
+  letter-spacing: .025em;
+  transition: transform var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.protocol-capabilities span::before {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  margin-right: .55rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--blue));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 45%, transparent);
+  content: "";
+}
+
+.protocol-capabilities span:hover {
+  transform: translateX(3px);
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--border));
+  color: var(--text-strong);
+}
+
+.text-link small {
+  color: var(--muted);
+  font-size: .68rem;
+  font-weight: 650;
+}
+
+@keyframes protocolScan {
+  0%, 18% { transform: translateX(0); opacity: 0; }
+  28%, 72% { opacity: .72; }
+  82%, 100% { transform: translateX(400%); opacity: 0; }
+}
 /* Methodology */
 .methodology-section {
   position: relative;
@@ -3641,3 +3785,31 @@ html[data-theme="light"] .sun-icon {
 }
 
 .pointer-spotlight { position: absolute; z-index: 4; }
+
+
+@media (max-width: 860px) {
+  .protocol-research-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .protocol-research-heading {
+    display: block;
+  }
+
+  .protocol-research-heading .card-icon {
+    margin-bottom: 1rem;
+  }
+
+  .protocol-capabilities {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .protocol-research-card::before {
+    animation: none;
+    opacity: 0;
+  }
+}
