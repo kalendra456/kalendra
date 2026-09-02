@@ -9,7 +9,7 @@ A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, positio
 - Offensive-first positioning for VAPT, penetration testing, application security, and product security
 - Manual web/API exploitation, authorization testing, business-logic analysis, SAST/DAST correlation, and source-assisted validation
 - Consulting-oriented assessment delivery: scope control, evidence governance, severity calibration, remediation guidance, and retesting
-- Independent bug-bounty and responsible-disclosure impact backed by public recognition evidence
+- Critical-impact research framed around exploitability and business consequence, with confirmed bounty amounts used as supporting evidence rather than a capability ceiling
 - Hands-on SOC, monitoring, logging, network-security, and incident-workflow experience as secondary operational context
 - A clear professional path for recruiters, security leaders, engineering teams, and consulting organizations to make contact
 
