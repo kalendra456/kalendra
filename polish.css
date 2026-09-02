@@ -36,73 +36,6 @@
     var(--surface-soft);
 }
 
-/* Recruiter logistics */
-.recruiter-bar {
-  display: grid;
-  overflow: hidden;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-top: .5rem;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-lg);
-  background:
-    linear-gradient(110deg, color-mix(in srgb, var(--accent) 7%, transparent), transparent 44%),
-    color-mix(in srgb, var(--surface-raised) 88%, transparent);
-  box-shadow: var(--shadow-sm);
-}
-
-.recruiter-bar > div {
-  display: grid;
-  min-width: 0;
-  align-items: center;
-  grid-template-columns: 38px minmax(0, 1fr);
-  gap: .75rem;
-  padding: 1rem 1.1rem;
-}
-
-.recruiter-bar > div + div {
-  border-left: 1px solid var(--border);
-}
-
-.recruiter-bar svg {
-  width: 20px;
-  height: 20px;
-  color: var(--accent);
-}
-
-.recruiter-icon {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  place-items: center;
-  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--border));
-  border-radius: 11px;
-  background: var(--accent-soft);
-}
-
-.recruiter-bar small,
-.recruiter-bar strong {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.recruiter-bar small {
-  margin-bottom: .18rem;
-  color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: .6rem;
-  font-weight: 800;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-}
-
-.recruiter-bar strong {
-  color: var(--text-strong);
-  font-size: .78rem;
-  font-weight: 780;
-  line-height: 1.35;
-}
-
 /* Certification hierarchy */
 .credential-list > .credential-badge {
   position: relative;
@@ -568,18 +501,8 @@ body.lightbox-open {
 }
 
 @media (max-width: 1000px) {
-  .recruiter-bar {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 
-  .recruiter-bar > div:nth-child(3) {
-    border-top: 1px solid var(--border);
-    border-left: 0;
-  }
 
-  .recruiter-bar > div:nth-child(4) {
-    border-top: 1px solid var(--border);
-  }
 
   .technical-hero {
     grid-template-columns: 1fr;
@@ -591,16 +514,7 @@ body.lightbox-open {
 }
 
 @media (max-width: 680px) {
-  .recruiter-bar {
-    grid-template-columns: 1fr;
-  }
 
-  .recruiter-bar > div + div,
-  .recruiter-bar > div:nth-child(3),
-  .recruiter-bar > div:nth-child(4) {
-    border-top: 1px solid var(--border);
-    border-left: 0;
-  }
 
   .credential-list > .credential-badge {
     min-width: 0;
