@@ -87,8 +87,10 @@ jobs:
               if not path_text:
                   return current_html.resolve(), parts.fragment
 
+              resolved_to_file = False
               if path_text in {'/kalendra', '/kalendra/'}:
                   candidate = root / 'index.html'
+                  resolved_to_file = True
               elif path_text.startswith('/kalendra/'):
                   candidate = root / path_text.removeprefix('/kalendra/')
               elif path_text.startswith('/'):
@@ -96,7 +98,7 @@ jobs:
               else:
                   candidate = (current_html.parent / path_text).resolve()
 
-              if candidate.is_dir() or path_text.endswith('/'):
+              if not resolved_to_file and (candidate.is_dir() or path_text.endswith('/')):
                   candidate = candidate / 'index.html'
               return candidate.resolve(), parts.fragment
 
