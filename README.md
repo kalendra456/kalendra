@@ -17,6 +17,7 @@ A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, positio
 
 - Semantic HTML with accessible landmarks and keyboard navigation
 - Responsive layout for desktop, tablet, and mobile
+- Balanced responsive typography with restrained enterprise-scale headings
 - Dark and light themes with saved user preference
 - No frontend framework, third-party font, analytics tracker, or runtime dependency
 - CSS-only security interface visuals to reduce page weight
@@ -36,6 +37,7 @@ A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, positio
 ├── script.js                  # Theme, navigation, accessibility, and UI behavior
 ├── lightbox.js                # Accessible proof-image viewer
 ├── polish.css                 # Recruiter-focused functional polish
+├── typography.css             # Balanced responsive type hierarchy
 ├── case-studies/
 │   └── index.html             # Browser-viewable defensive engineering cases
 ├── photo-gallery/
