@@ -78,6 +78,12 @@
       "Security Consulting",
       "SOC Engineering",
       "Detection Engineering",
+      "Security Information and Event Management (SIEM)",
+      "Extended Detection and Response (XDR)",
+      "Endpoint Detection and Response (EDR) Concepts",
+      "Security Orchestration, Automation and Response (SOAR) Workflows",
+      "Security Telemetry",
+      "Incident Response Automation",
       "Linux"
     ]
   }
@@ -143,7 +149,7 @@
     <p class="eyebrow">VAPT · Web &amp; API Penetration Testing · Application Security</p>
     <h1 id="hero-title">I validate attack paths, prove business impact, <span>and drive findings to closure.</span></h1>
     <p class="hero-lead">
-      I’m <strong>Yaswanth Kalendra</strong>, an offensive-security and application-security practitioner with 4+ years of independent web/API and source-assisted research. I lead assessment workstreams from attack-surface modelling and manual exploitation through severity calibration, remediation guidance, and retesting. My research is evaluated by exploitability, state integrity, and material business impact—not by the payout ceiling of any single program. Hands-on SOC and detection-engineering experience adds operational context without diluting the offensive focus.
+      I’m <strong>Yaswanth Kalendra</strong>, an offensive-security and application-security practitioner with 4+ years of independent web/API and source-assisted research. I lead assessment workstreams from attack-surface modelling and manual exploitation through severity calibration, remediation guidance, and retesting. My research is evaluated by exploitability, state integrity, and material business impact—not by the payout ceiling of any single program. Hands-on SIEM/XDR, endpoint-telemetry, detection-engineering, and response-automation experience adds operational context without diluting the offensive focus.
     </p>
 
     <div class="hero-actions">
@@ -316,12 +322,12 @@
       <div class="card-icon">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9M10 18V5M16 18v-7M22 18H2"></path><path d="m3 7 6-3 6 5 6-6"></path></svg>
       </div>
-      <h3>Detection-Informed Security Engineering</h3>
-      <p>Practical SOC, monitoring, logging, and incident-workflow experience used to evaluate whether preventive controls, telemetry, and response paths support real attack scenarios.</p>
+      <h3>Detection-Informed Security Engineering &amp; Telemetry</h3>
+      <p>Practical SOC, SIEM/XDR, endpoint-telemetry, detection-rule, and incident-workflow experience used to assess whether preventive controls, EDR-visible signals, and response paths support realistic attack scenarios.</p>
       <ul class="compact-list">
-        <li>SIEM, logging and control observability</li>
-        <li>Detection and incident-workflow context</li>
-        <li>Infrastructure and network-security awareness</li>
+        <li>SIEM correlation, endpoint telemetry &amp; EDR context</li>
+        <li>Detection-rule validation, alert tuning &amp; investigation</li>
+        <li>SOAR-aligned orchestration and incident workflow</li>
       </ul>
     </article>
   </div>
@@ -448,9 +454,10 @@
           </div>
           <span class="role-badge">Operational context</span>
         </div>
-        <p>Enterprise-facing SOC, monitoring, network-security, and customer-environment work that strengthens understanding of production controls, telemetry, incident handling, and implementation constraints.</p>
+        <p>Enterprise-facing SOC, SIEM/XDR, endpoint-telemetry, network-security, and customer-environment work that strengthens understanding of production controls, detection coverage, incident handling, and implementation constraints.</p>
         <ul class="experience-points">
-          <li>Supported Wazuh, Zabbix, Grafana, and OpenSearch deployments for security monitoring, infrastructure visibility, and investigation workflows.</li>
+          <li>Supported Wazuh SIEM/XDR, endpoint agents, Zabbix, Grafana, and OpenSearch deployments for telemetry collection, security monitoring, infrastructure visibility, and investigation workflows.</li>
+                        <li>Built Wazuh-to-GLPI alert-to-incident automation with deduplication and controlled ticket creation, providing practical SOAR-aligned orchestration experience.</li>
           <li>Worked with firewall rules, VPN, NAT, SNMP, syslog, segmentation, network troubleshooting, and availability controls across customer environments.</li>
           <li>Translated technical issues into controlled implementation steps, remediation actions, operational documentation, and stakeholder-ready status updates.</li>
         </ul>
@@ -613,47 +620,47 @@
       <p class="eyebrow">Defensive depth</p>
       <h2>Security operations experience that strengthens offensive judgment.</h2>
     </div>
-    <p>Defensive engineering is retained as a deliberate secondary advantage: understanding production telemetry, change control, monitoring gaps, incident workflow, and operational constraints makes offensive findings more realistic and remediation guidance more implementable.</p>
+    <p>Defensive engineering remains a deliberate secondary advantage: hands-on SIEM/XDR, endpoint telemetry, network monitoring, alert tuning, and SOAR-aligned workflow automation improve understanding of production controls, detection gaps, incident handling, and implementation constraints—making offensive findings more realistic and remediation guidance more actionable.</p>
   </div>
 
   <div class="case-grid">
     <article class="case-card card" data-reveal>
       <div class="case-card-head"><span>01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-3Z"></path></svg></div>
-      <p class="eyebrow">Compliance validation lab</p>
+      <p class="eyebrow">SIEM / XDR validation lab</p>
       <h3>Wazuh 5 Beta SOC Lab for ISO 27001</h3>
-      <p>Deployed an isolated beta environment to evaluate compliance and telemetry capabilities without introducing risk to the stable SOC stack.</p>
-      <div class="case-result"><strong>Outcome</strong><span>Validated certificates, agent health, ingestion behavior, and Windows/Linux coverage in a controlled test environment.</span></div>
-      <div class="tag-list"><span>Wazuh 5</span><span>Docker</span><span>ISO 27001</span></div>
+      <p>Deployed an isolated Wazuh SIEM/XDR beta environment to evaluate endpoint telemetry, compliance, and detection capabilities without introducing risk to the stable SOC stack.</p>
+      <div class="case-result"><strong>Outcome</strong><span>Validated certificates, agent health, endpoint-telemetry ingestion, and Windows/Linux host coverage in a controlled test environment.</span></div>
+      <div class="tag-list"><span>Wazuh 5</span><span>SIEM / XDR</span><span>Endpoint Telemetry</span><span>Docker</span><span>ISO 27001</span></div>
       <a class="text-link" href="docs/Wazuh_5_Beta2_ISO27001_Test_Lab_Documentation(2).docx" download>Download technical documentation <small>(DOCX)</small> <span aria-hidden="true">↓</span></a>
     </article>
 
     <article class="case-card card" data-reveal>
       <div class="case-card-head"><span>02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9M10 18V5M16 18v-7M22 18H2"></path></svg></div>
-      <p class="eyebrow">Unified visibility</p>
+      <p class="eyebrow">SIEM analytics &amp; unified visibility</p>
       <h3>Wazuh + Grafana + Zabbix dashboard</h3>
-      <p>Correlated security events and infrastructure health into a host-focused SOC dashboard using OpenSearch-backed data.</p>
-      <div class="case-result"><strong>Outcome</strong><span>Faster host-level investigation across security and availability signals.</span></div>
-      <div class="tag-list"><span>Grafana</span><span>Zabbix</span><span>OpenSearch</span></div>
+      <p>Correlated SIEM alerts, endpoint telemetry, and infrastructure health into a host-focused SOC dashboard using OpenSearch-backed data.</p>
+      <div class="case-result"><strong>Outcome</strong><span>Faster host-level investigation across security, endpoint, and availability signals.</span></div>
+      <div class="tag-list"><span>SIEM Analytics</span><span>Endpoint Telemetry</span><span>Grafana</span><span>Zabbix</span><span>OpenSearch</span></div>
       <a class="text-link" href="docs/Wazuh_5_Grafana_Zabbix_SOC_Dashboard_Documentation(1).docx" download>Download technical documentation <small>(DOCX)</small> <span aria-hidden="true">↓</span></a>
     </article>
 
     <article class="case-card card" data-reveal>
       <div class="case-card-head"><span>03</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v5H5zM5 15h14v5H5zM8 9v6M16 9v6"></path></svg></div>
-      <p class="eyebrow">Log engineering</p>
+      <p class="eyebrow">SIEM ingestion &amp; log engineering</p>
       <h3>Firewall syslog ingestion into Wazuh 5</h3>
-      <p>Built and troubleshot the collector-to-engine-to-indexer pipeline, making firewall events searchable and usable for investigation.</p>
-      <div class="case-result"><strong>Outcome</strong><span>Reliable network-event visibility with corrected connector and data-stream behavior.</span></div>
-      <div class="tag-list"><span>Syslog</span><span>Wazuh</span><span>Firewall</span></div>
+      <p>Built and troubleshot the firewall-to-collector-to-Wazuh-SIEM-to-indexer pipeline, making network-security telemetry searchable and usable for investigation.</p>
+      <div class="case-result"><strong>Outcome</strong><span>Reliable network-event visibility with corrected connector, ingestion, and data-stream behavior.</span></div>
+      <div class="tag-list"><span>SIEM</span><span>Syslog</span><span>Wazuh</span><span>Firewall</span><span>OpenSearch</span></div>
       <a class="text-link" href="docs/Wazuh5%20Firewall%20Syslog%20Integration%20Documentation.docx" download>Download technical documentation <small>(DOCX)</small> <span aria-hidden="true">↓</span></a>
     </article>
 
     <article class="case-card card" data-reveal>
       <div class="case-card-head"><span>04</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v12H7l-3 3zM8 9h8M8 13h5"></path></svg></div>
-      <p class="eyebrow">Incident workflow automation</p>
-      <h3>Wazuh to GLPI incident ticketing</h3>
-      <p>Converted high-value security alerts into deduplicated GLPI incidents through a custom integration workflow.</p>
-      <div class="case-result"><strong>Outcome</strong><span>Actionable alert-to-ticket flow with reduced duplication and operational noise.</span></div>
-      <div class="tag-list"><span>Wazuh</span><span>GLPI</span><span>ITSM</span></div>
+      <p class="eyebrow">SOAR-aligned workflow automation</p>
+      <h3>Wazuh-to-GLPI incident orchestration</h3>
+      <p>Built a SOAR-aligned workflow that converted high-value Wazuh alerts into deduplicated GLPI incidents with controlled ticket creation and incident context.</p>
+      <div class="case-result"><strong>Outcome</strong><span>Automated alert-to-incident triage, reduced duplicate tickets and operational noise, and improved response-workflow consistency.</span></div>
+      <div class="tag-list"><span>Wazuh</span><span>SOAR-aligned</span><span>GLPI</span><span>Alert Deduplication</span><span>ITSM</span></div>
       <a class="text-link" href="docs/Wazuh_GLPI_SOC_Integration_Documentation(1).docx" download>Download technical documentation <small>(DOCX)</small> <span aria-hidden="true">↓</span></a>
     </article>
 
@@ -694,9 +701,9 @@
       <div class="skill-cloud"><span>Scope &amp; ROE</span><span>Threat Modeling</span><span>Attack-Surface Mapping</span><span>Evidence Management</span><span>Severity Calibration</span><span>Risk Communication</span><span>Root-Cause Analysis</span><span>Remediation Guidance</span><span>Retesting</span><span>Finding Lifecycle</span><span>Stakeholder Updates</span></div>
     </article>
     <article class="capability-group card" data-reveal>
-      <p class="eyebrow">Defensive context</p>
-      <h3>Detection, infrastructure &amp; operations</h3>
-      <div class="skill-cloud"><span>Wazuh</span><span>Zabbix</span><span>Grafana</span><span>OpenSearch</span><span>Syslog</span><span>SNMP</span><span>Firewall Rules</span><span>VPN</span><span>NAT</span><span>Alert Tuning</span><span>Incident Workflow</span><span>Network Monitoring</span></div>
+      <p class="eyebrow">Defensive context &amp; operations</p>
+      <h3>SIEM, endpoint detection &amp; response automation</h3>
+      <div class="skill-cloud"><span>SIEM</span><span>Wazuh</span><span>XDR</span><span>OpenSearch</span><span>Log Correlation</span><span>Syslog</span><span>Endpoint Telemetry</span><span>EDR Context</span><span>Host Monitoring</span><span>Detection Rules</span><span>Alert Tuning</span><span>Telemetry Analysis</span><span>Zabbix</span><span>Grafana</span><span>SNMP</span><span>Firewall Rules</span><span>VPN / NAT</span><span>SOAR-aligned Automation</span><span>GLPI</span><span>Alert Deduplication</span><span>Incident Response Workflows</span></div>
     </article>
   </div>
 
