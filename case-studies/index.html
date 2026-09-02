@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#07111f">
+  <meta name="robots" content="index, follow">
+
+  <title>Defensive Engineering Case Studies | Yaswanth Kalendra</title>
+  <meta name="description" content="Sanitized browser-viewable case studies covering Wazuh SIEM/XDR validation, OpenSearch-backed SOC visibility, firewall log ingestion, and SOAR-aligned incident workflow automation.">
+  <link rel="canonical" href="https://kalendra456.github.io/kalendra/case-studies/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kalendra456.github.io/kalendra/case-studies/">
+  <meta property="og:title" content="Defensive Engineering Case Studies | Yaswanth Kalendra">
+  <meta property="og:description" content="Security operations and telemetry engineering that strengthens offensive-security delivery.">
+  <meta property="og:image" content="https://kalendra456.github.io/kalendra/assets/email-background.jpg">
+
+  <link rel="icon" href="../assets/yk-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css?v=23">
+  <link rel="stylesheet" href="../polish.css?v=1">
+
+  <script>
+    (() => {
+      document.documentElement.classList.add('js');
+      try {
+        const stored = localStorage.getItem('portfolio-theme');
+        const systemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        document.documentElement.dataset.theme = stored || (systemLight ? 'light' : 'dark');
+      } catch (_) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    })();
+  </script>
+</head>
+<body class="case-study-hub-body">
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+  <a class="skip-link" href="#main-content">Skip to case studies</a>
+
+  <div class="site-backdrop" aria-hidden="true">
+    <span class="orb orb-one"></span>
+    <span class="orb orb-two"></span>
+    <span class="grid-plane"></span>
+  </div>
+
+  <header class="site-header case-study-hub-header" id="siteHeader">
+    <div class="shell header-inner">
+      <a class="brand" href="../" aria-label="Return to Yaswanth Kalendra portfolio">
+        <img class="brand-mark" src="../assets/yk-mark.svg" width="42" height="42" alt="">
+        <span class="brand-copy"><strong>Yaswanth Kalendra</strong><span>Defensive engineering evidence</span></span>
+      </a>
+
+      <div class="header-actions">
+        <a class="gallery-back" href="../"><span aria-hidden="true">←</span> Portfolio</a>
+        <button class="icon-button theme-toggle" id="themeToggle" type="button" aria-label="Switch color theme" aria-pressed="false">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.41M17.66 6.34l1.41-1.41"></path></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5 8.5 8.5 0 1 0 20.5 14.4Z"></path></svg>
+        </button>
+        <a class="button button-small header-cta" href="../assets/Yaswanth_Kalendra_Resume.pdf" download>Resume PDF</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="technical-hero shell">
+      <div class="technical-hero-copy" data-reveal>
+        <p class="eyebrow">Sanitized defensive engineering case studies</p>
+        <h1>Security operations delivery that makes offensive findings actionable.</h1>
+        <p>
+          My primary track remains Offensive Security, VAPT, and Application Security. These projects demonstrate the supporting operational depth required to understand telemetry, detection coverage, investigation workflows, implementation constraints, and how security issues move from evidence to closure.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="#technical-cases">
+            Review case studies
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </a>
+          <a class="button button-secondary resume-button" href="../assets/Yaswanth_Kalendra_Resume.pdf" download>
+            Download resume (PDF)
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <aside class="technical-overview" data-reveal aria-label="Case-study overview">
+        <p class="eyebrow">Delivery evidence</p>
+        <h2>Four operational workstreams</h2>
+        <ol class="technical-overview-list">
+          <li><span>01</span><strong>Controlled SIEM/XDR validation</strong></li>
+          <li><span>02</span><strong>Unified security and infrastructure visibility</strong></li>
+          <li><span>03</span><strong>Network-security telemetry ingestion</strong></li>
+          <li><span>04</span><strong>SOAR-aligned incident orchestration</strong></li>
+        </ol>
+      </aside>
+    </section>
+
+    <section class="section shell" id="technical-cases">
+      <div class="section-heading" data-reveal>
+        <div>
+          <p class="eyebrow">Defensive depth</p>
+          <h2>Browser-viewable summaries with downloadable technical documentation.</h2>
+        </div>
+        <p>
+          Each summary focuses on the objective, controlled delivery process, validation approach, and operational value. Customer-specific assets, credentials, internal addresses, and restricted implementation details remain excluded.
+        </p>
+      </div>
+
+      <nav class="technical-case-nav" aria-label="Case-study navigation" data-reveal>
+        <a href="#wazuh-iso27001">Wazuh ISO 27001 Lab</a>
+        <a href="#unified-soc-dashboard">Unified SOC Dashboard</a>
+        <a href="#firewall-syslog">Firewall Syslog Pipeline</a>
+        <a href="#wazuh-glpi">Wazuh–GLPI Automation</a>
+      </nav>
+
+      <div class="technical-case-list">
+        <article class="technical-case card" id="wazuh-iso27001" data-reveal>
+          <header class="technical-case-header">
+            <span class="technical-case-number">01</span>
+            <div>
+              <p class="eyebrow">SIEM / XDR validation lab</p>
+              <h2>Wazuh 5 Beta SOC Lab for ISO 27001</h2>
+              <p class="technical-case-summary">An isolated validation environment used to assess beta capabilities, endpoint telemetry, agent coverage, certificates, and compliance-oriented behavior without introducing change risk to the stable SOC stack.</p>
+            </div>
+            <div class="tag-list" aria-label="Technologies"><span>Wazuh 5</span><span>SIEM / XDR</span><span>Docker</span><span>Windows / Linux</span><span>ISO 27001</span></div>
+          </header>
+
+          <div class="technical-case-grid">
+            <section>
+              <h3>Objective</h3>
+              <p>Evaluate a new Wazuh release and its compliance and telemetry capabilities in a controlled lab before considering broader operational use.</p>
+            </section>
+            <section>
+              <h3>Delivery approach</h3>
+              <ul><li>Separated the beta environment from the stable SOC stack.</li><li>Validated certificates, agent connectivity, and ingestion behavior.</li><li>Onboarded representative Windows and Linux coverage.</li></ul>
+            </section>
+            <section>
+              <h3>Validation controls</h3>
+              <ul><li>Agent health and connectivity checks</li><li>Endpoint-telemetry ingestion verification</li><li>Compliance and platform behavior review</li></ul>
+            </section>
+            <section>
+              <h3>Operational value</h3>
+              <p>Demonstrated disciplined change containment and evidence-based validation before production adoption, improving deployment confidence and reducing avoidable operational risk.</p>
+            </section>
+          </div>
+
+          <footer class="technical-case-footer">
+            <span>Sanitized project summary · Full document remains downloadable</span>
+            <a class="button button-secondary" href="../docs/Wazuh_5_Beta2_ISO27001_Test_Lab_Documentation(2).docx" download>Download full documentation (DOCX)</a>
+          </footer>
+        </article>
+
+        <article class="technical-case card" id="unified-soc-dashboard" data-reveal>
+          <header class="technical-case-header">
+            <span class="technical-case-number">02</span>
+            <div>
+              <p class="eyebrow">SIEM analytics &amp; unified visibility</p>
+              <h2>Wazuh + Grafana + Zabbix SOC Dashboard</h2>
+              <p class="technical-case-summary">A host-focused visibility workflow that correlated security events from Wazuh and OpenSearch with infrastructure-health information from Zabbix and Grafana.</p>
+            </div>
+            <div class="tag-list" aria-label="Technologies"><span>Wazuh</span><span>OpenSearch</span><span>Grafana</span><span>Zabbix</span><span>Telemetry</span></div>
+          </header>
+
+          <div class="technical-case-grid">
+            <section>
+              <h3>Objective</h3>
+              <p>Reduce investigation friction by presenting security and availability signals in a shared operational view rather than requiring separate, disconnected checks.</p>
+            </section>
+            <section>
+              <h3>Delivery approach</h3>
+              <ul><li>Used OpenSearch-backed Wazuh data for security-event visibility.</li><li>Mapped infrastructure-health context from Zabbix into Grafana.</li><li>Organized the dashboard around host-level investigation.</li></ul>
+            </section>
+            <section>
+              <h3>Validation controls</h3>
+              <ul><li>Confirmed security-event visibility</li><li>Checked host and availability signal alignment</li><li>Reviewed dashboard usefulness for investigation workflows</li></ul>
+            </section>
+            <section>
+              <h3>Operational value</h3>
+              <p>Improved the analyst’s ability to compare endpoint, security, and infrastructure conditions during investigation and troubleshooting.</p>
+            </section>
+          </div>
+
+          <footer class="technical-case-footer">
+            <span>Sanitized project summary · Full document remains downloadable</span>
+            <a class="button button-secondary" href="../docs/Wazuh_5_Grafana_Zabbix_SOC_Dashboard_Documentation(1).docx" download>Download full documentation (DOCX)</a>
+          </footer>
+        </article>
+
+        <article class="technical-case card" id="firewall-syslog" data-reveal>
+          <header class="technical-case-header">
+            <span class="technical-case-number">03</span>
+            <div>
+              <p class="eyebrow">SIEM ingestion &amp; log engineering</p>
+              <h2>Firewall Syslog Ingestion into Wazuh 5</h2>
+              <p class="technical-case-summary">A network-security telemetry pipeline that moved firewall events through collection, Wazuh processing, and indexing so they became searchable and usable for investigation.</p>
+            </div>
+            <div class="tag-list" aria-label="Technologies"><span>Firewall</span><span>Syslog</span><span>Wazuh</span><span>OpenSearch</span><span>Log Pipeline</span></div>
+          </header>
+
+          <div class="technical-case-grid">
+            <section>
+              <h3>Objective</h3>
+              <p>Establish reliable firewall-event visibility in the SIEM and ensure the full collector-to-engine-to-indexer path behaved as expected.</p>
+            </section>
+            <section>
+              <h3>Delivery approach</h3>
+              <ul><li>Configured and reviewed the firewall-to-collector path.</li><li>Troubleshot processing and connector behavior.</li><li>Verified indexing and searchability of network events.</li></ul>
+            </section>
+            <section>
+              <h3>Validation controls</h3>
+              <ul><li>Collector receipt and event-format checks</li><li>Processing and data-stream verification</li><li>Search and investigation usability checks</li></ul>
+            </section>
+            <section>
+              <h3>Operational value</h3>
+              <p>Created dependable network-event visibility that can support investigation, rule development, and correlation with endpoint or application-security activity.</p>
+            </section>
+          </div>
+
+          <footer class="technical-case-footer">
+            <span>Sanitized project summary · Full document remains downloadable</span>
+            <a class="button button-secondary" href="../docs/Wazuh5%20Firewall%20Syslog%20Integration%20Documentation.docx" download>Download full documentation (DOCX)</a>
+          </footer>
+        </article>
+
+        <article class="technical-case card" id="wazuh-glpi" data-reveal>
+          <header class="technical-case-header">
+            <span class="technical-case-number">04</span>
+            <div>
+              <p class="eyebrow">SOAR-aligned workflow automation</p>
+              <h2>Wazuh-to-GLPI Incident Orchestration</h2>
+              <p class="technical-case-summary">A custom alert-to-incident workflow that converted selected Wazuh alerts into controlled, deduplicated GLPI tickets with usable security context.</p>
+            </div>
+            <div class="tag-list" aria-label="Technologies"><span>Wazuh</span><span>GLPI</span><span>SOAR-aligned</span><span>Deduplication</span><span>ITSM</span></div>
+          </header>
+
+          <div class="technical-case-grid">
+            <section>
+              <h3>Objective</h3>
+              <p>Move high-value alerts into an accountable incident workflow while avoiding uncontrolled ticket duplication and excessive operational noise.</p>
+            </section>
+            <section>
+              <h3>Delivery approach</h3>
+              <ul><li>Defined an alert-to-ticket integration flow.</li><li>Applied deduplication and controlled ticket-creation logic.</li><li>Preserved incident context for operational follow-up.</li></ul>
+            </section>
+            <section>
+              <h3>Validation controls</h3>
+              <ul><li>Confirmed eligible alerts created incidents</li><li>Checked duplicate-event handling</li><li>Reviewed ticket context and workflow consistency</li></ul>
+            </section>
+            <section>
+              <h3>Operational value</h3>
+              <p>Established a repeatable SOAR-aligned path from detection to assigned operational work, improving traceability and reducing manual alert handling.</p>
+            </section>
+          </div>
+
+          <footer class="technical-case-footer">
+            <span>Sanitized project summary · Full document remains downloadable</span>
+            <a class="button button-secondary" href="../docs/Wazuh_GLPI_SOC_Integration_Documentation(1).docx" download>Download full documentation (DOCX)</a>
+          </footer>
+        </article>
+      </div>
+
+      <div class="disclosure-note technical-disclosure" data-reveal>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-3Z"></path><path d="m9 12 2 2 4-5"></path></svg>
+        <div>
+          <strong>Evidence boundary</strong>
+          <p>These pages intentionally provide recruiter-friendly summaries rather than customer-specific implementation records. Sensitive assets, credentials, internal topology, and restricted operational details remain excluded.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section">
+      <div class="shell contact-panel" data-reveal>
+        <div class="contact-copy">
+          <p class="eyebrow">Offensive-first · Detection-informed</p>
+          <h2>Looking for assessment depth with operational context?</h2>
+          <p>I’m targeting VAPT, Penetration Testing, Application Security, Product Security, and Offensive Security roles where exploit validation, clear reporting, remediation coordination, and defensible closure matter.</p>
+          <div class="contact-actions">
+            <a class="button" href="mailto:yaswanthkukkala123@gmail.com?subject=Offensive%20Security%20Opportunity">Discuss a role</a>
+            <a class="button button-secondary resume-button" href="../assets/Yaswanth_Kalendra_Resume.pdf" download>Download resume (PDF)</a>
+            <a class="button button-secondary" href="../#work">Review offensive work</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <p>Recruiter summary</p>
+          <a href="../"><span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h6"></path></svg></span><span><small>Primary track</small><strong>Offensive Security · VAPT · AppSec</strong></span><svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+          <a href="../#operations"><span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9M10 18V5M16 18v-7M22 18H2"></path></svg></span><span><small>Supporting depth</small><strong>SIEM/XDR · EDR Context · SOAR-aligned</strong></span><svg class="contact-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <a class="brand footer-brand" href="../" aria-label="Return to portfolio">
+        <img class="brand-mark" src="../assets/yk-mark.svg" width="38" height="38" alt="">
+        <span class="brand-copy"><strong>Yaswanth Kalendra</strong><span>Security through evidence</span></span>
+      </a>
+      <p>Sanitized technical case studies for recruiter and security-lead review.</p>
+      <a class="back-to-top" href="#main-content">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <script src="../script.js?v=22" defer></script>
+</body>
+</html>
