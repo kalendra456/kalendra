@@ -3640,4 +3640,4 @@ html[data-theme="light"] .sun-icon {
   }
 }
 
-.pointer-spotlight { z-index: 4; }
+.pointer-spotlight { position: absolute; z-index: 4; }
