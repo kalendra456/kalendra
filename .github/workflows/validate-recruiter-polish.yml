@@ -82,16 +82,26 @@ jobs:
               parts = urlsplit(raw_reference)
               if parts.scheme or raw_reference.startswith('//'):
                   return None, parts.fragment
+
               path_text = unquote(parts.path)
               if not path_text:
                   return current_html.resolve(), parts.fragment
-              candidate = (current_html.parent / path_text).resolve()
+
+              if path_text in {'/kalendra', '/kalendra/'}:
+                  candidate = root / 'index.html'
+              elif path_text.startswith('/kalendra/'):
+                  candidate = root / path_text.removeprefix('/kalendra/')
+              elif path_text.startswith('/'):
+                  return None, parts.fragment
+              else:
+                  candidate = (current_html.parent / path_text).resolve()
+
               if candidate.is_dir() or path_text.endswith('/'):
                   candidate = candidate / 'index.html'
-              return candidate, parts.fragment
+              return candidate.resolve(), parts.fragment
 
           failures = []
-          for current_html, parser in parsed.items():
+          for current_html, parser in list(parsed.items()):
               current_path = Path(current_html)
               for attribute, reference in parser.references:
                   if reference.startswith(('mailto:', 'tel:', 'javascript:', 'data:')):
