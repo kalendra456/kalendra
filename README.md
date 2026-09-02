@@ -1,16 +1,17 @@
 # Yaswanth Kalendra — Cybersecurity Portfolio
 
-A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, focused on application security, offensive research, vulnerability validation, and SOC engineering.
+A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, positioned first for offensive-security, VAPT, penetration-testing, and application-security roles, with SOC and defensive engineering retained as a supporting differentiator.
 
 **Live site:** https://kalendra456.github.io/kalendra/
 
 ## What this site communicates
 
-- Application and API security expertise, including authorization and business-logic testing
-- Independent bug bounty and responsible-disclosure impact
-- Hands-on SOC, monitoring, logging, and incident-workflow projects
-- Public recognition evidence without exposing sensitive report contents
-- A clear professional path for recruiters, engineering leaders, and security teams to make contact
+- Offensive-first positioning for VAPT, penetration testing, application security, and product security
+- Manual web/API exploitation, authorization testing, business-logic analysis, SAST/DAST correlation, and source-assisted validation
+- Consulting-oriented assessment delivery: scope control, evidence governance, severity calibration, remediation guidance, and retesting
+- Independent bug-bounty and responsible-disclosure impact backed by public recognition evidence
+- Hands-on SOC, monitoring, logging, network-security, and incident-workflow experience as secondary operational context
+- A clear professional path for recruiters, security leaders, engineering teams, and consulting organizations to make contact
 
 ## Design and engineering
 
