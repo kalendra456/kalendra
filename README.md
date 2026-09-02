@@ -22,7 +22,7 @@ A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, positio
 - CSS-only security interface visuals to reduce page weight
 - Progressive reveal effects that respect `prefers-reduced-motion`
 - Accessible, keyboard-operable proof lightbox with no third-party dependency
-- Recruiter logistics bar, emphasized credential statuses, and prominent PDF resume actions
+- Emphasized credential statuses and prominent PDF resume actions
 - Browser-viewable defensive engineering case studies with full DOCX downloads
 - SEO metadata, Open Graph data, structured data, sitemap, manifest, and a custom 404 page
 - Dedicated recognition gallery with safer public descriptions
