@@ -1,0 +1,90 @@
+name: Refine balanced typography scale
+
+on:
+  push:
+    branches: ["balanced-typography-scale"]
+    paths:
+      - ".typography-update/REFINE"
+
+permissions:
+  contents: write
+
+jobs:
+  refine-typography:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out typography branch
+        uses: actions/checkout@v4
+        with:
+          ref: balanced-typography-scale
+          fetch-depth: 0
+
+      - name: Refine responsive scale continuity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('typography.css')
+          css = path.read_text(encoding='utf-8')
+
+          replacements = {
+              '--type-display: clamp(2.55rem, 4.25vw, 3.9rem);': '--type-display: clamp(2.45rem, 4.15vw, 3.75rem);',
+              '--type-page-title: clamp(2.35rem, 3.9vw, 3.65rem);': '--type-page-title: clamp(2.25rem, 3.75vw, 3.45rem);',
+              '--type-section: clamp(1.75rem, 2.55vw, 2.65rem);': '--type-section: clamp(1.65rem, 2.45vw, 2.5rem);',
+              '--type-section-emphasis: clamp(1.85rem, 2.8vw, 2.85rem);': '--type-section-emphasis: clamp(1.75rem, 2.65vw, 2.65rem);',
+              '--type-feature-title: clamp(1.65rem, 2.35vw, 2.25rem);': '--type-feature-title: clamp(1.55rem, 2.2vw, 2.15rem);',
+          }
+          for old, new in replacements.items():
+              if old not in css:
+                  raise SystemExit(f'Missing root typography value: {old}')
+              css = css.replace(old, new, 1)
+
+          old_tablet_root = '''@media (max-width: 920px) {
+            :root {
+              --type-display: clamp(2.45rem, 7vw, 3.45rem);
+              --type-page-title: clamp(2.25rem, 6.5vw, 3.2rem);
+              --type-section: clamp(1.7rem, 4.5vw, 2.35rem);
+              --type-section-emphasis: clamp(1.78rem, 4.8vw, 2.5rem);
+              --type-feature-title: clamp(1.55rem, 4vw, 2.05rem);
+            }
+
+          '''.replace('          ', '')
+          new_tablet_root = '@media (max-width: 920px) {\n'
+          if old_tablet_root not in css:
+              raise SystemExit('Tablet typography variable block missing')
+          css = css.replace(old_tablet_root, new_tablet_root, 1)
+
+          mobile_replacements = {
+              '--type-display: clamp(2.25rem, 10vw, 2.85rem);': '--type-display: clamp(2.15rem, 8vw, 2.45rem);',
+              '--type-page-title: clamp(2.1rem, 9vw, 2.7rem);': '--type-page-title: clamp(2rem, 7.5vw, 2.25rem);',
+              '--type-section: clamp(1.55rem, 7vw, 2rem);': '--type-section: clamp(1.5rem, 6vw, 1.65rem);',
+              '--type-section-emphasis: clamp(1.62rem, 7.4vw, 2.12rem);': '--type-section-emphasis: clamp(1.55rem, 6.3vw, 1.75rem);',
+              '--type-feature-title: clamp(1.42rem, 6.2vw, 1.85rem);': '--type-feature-title: clamp(1.4rem, 5.8vw, 1.55rem);',
+              '--type-card-title: clamp(1.08rem, 4.8vw, 1.22rem);': '--type-card-title: clamp(1.05rem, 4.6vw, 1.18rem);',
+          }
+          for old, new in mobile_replacements.items():
+              if old not in css:
+                  raise SystemExit(f'Missing mobile typography value: {old}')
+              css = css.replace(old, new, 1)
+
+          if '7vw, 3.45rem' in css or '10vw, 2.85rem' in css:
+              raise SystemExit('Discontinuous responsive typography values remain')
+
+          path.write_text(css, encoding='utf-8')
+          PY
+
+          git diff --check
+          rm -rf .typography-update
+          rm -f .github/workflows/refine-typography-scale.yml
+
+      - name: Commit refined scale
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Refine responsive typography continuity"
+          git push origin HEAD:balanced-typography-scale
