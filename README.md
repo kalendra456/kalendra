@@ -21,6 +21,9 @@ A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, positio
 - No frontend framework, third-party font, analytics tracker, or runtime dependency
 - CSS-only security interface visuals to reduce page weight
 - Progressive reveal effects that respect `prefers-reduced-motion`
+- Accessible, keyboard-operable proof lightbox with no third-party dependency
+- Recruiter logistics bar, emphasized credential statuses, and prominent PDF resume actions
+- Browser-viewable defensive engineering case studies with full DOCX downloads
 - SEO metadata, Open Graph data, structured data, sitemap, manifest, and a custom 404 page
 - Dedicated recognition gallery with safer public descriptions
 
@@ -31,11 +34,16 @@ A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, positio
 ├── index.html                 # Main portfolio
 ├── style.css                  # Shared design system
 ├── script.js                  # Theme, navigation, accessibility, and UI behavior
+├── lightbox.js                # Accessible proof-image viewer
+├── polish.css                 # Recruiter-focused functional polish
+├── case-studies/
+│   └── index.html             # Browser-viewable defensive engineering cases
 ├── photo-gallery/
 │   ├── index.html             # Recognition proof archive
 │   └── images/                # Existing proof screenshots
 ├── assets/
 │   ├── yk-mark.svg            # Portfolio identity mark
+│   ├── Yaswanth_Kalendra_Resume.pdf # ATS-friendly recruiter resume
 │   └── recognitions/          # Main-page recognition previews
 ├── docs/                      # Selected project documentation
 ├── 404.html                   # GitHub Pages fallback
