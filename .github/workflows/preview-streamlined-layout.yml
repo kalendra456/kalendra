@@ -43,77 +43,82 @@ jobs:
           const puppeteer = require('puppeteer-core');
           const path = require('path');
 
-          const chromePath = process.env.CHROME_PATH;
-          const baseUrl = 'http://127.0.0.1:8000/';
-          const output = '/tmp/streamlined-layout-preview';
+          (async () => {
+            const chromePath = process.env.CHROME_PATH;
+            const baseUrl = 'http://127.0.0.1:8000/';
+            const output = '/tmp/streamlined-layout-preview';
 
-          const browser = await puppeteer.launch({
-            executablePath: chromePath,
-            headless: true,
-            args: [
-              '--no-sandbox',
-              '--disable-setuid-sandbox',
-              '--disable-dev-shm-usage',
-              '--disable-gpu',
-              '--hide-scrollbars'
-            ]
+            const browser = await puppeteer.launch({
+              executablePath: chromePath,
+              headless: true,
+              args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
+                '--hide-scrollbars'
+              ]
+            });
+
+            async function prepare(page, viewport) {
+              await page.setViewport(viewport);
+              await page.evaluateOnNewDocument(() => {
+                localStorage.setItem('portfolio-theme', 'dark');
+              });
+              await page.goto(baseUrl, { waitUntil: 'networkidle0', timeout: 60000 });
+              await page.addStyleTag({ content: `
+                html { scroll-behavior: auto !important; }
+                *, *::before, *::after {
+                  animation-duration: 0s !important;
+                  animation-delay: 0s !important;
+                  transition-duration: 0s !important;
+                  caret-color: transparent !important;
+                }
+                [data-reveal],
+                .hero-copy > *,
+                .gallery-hero-copy > *,
+                .console-heading,
+                .profile-row,
+                .signal-panel,
+                .console-footer,
+                .metrics article {
+                  opacity: 1 !important;
+                  visibility: visible !important;
+                  transform: none !important;
+                  filter: none !important;
+                }
+              ` });
+              await page.evaluate(() => {
+                document.documentElement.classList.remove('js');
+                document.body.classList.remove('nav-open');
+                document.querySelectorAll('[data-reveal]').forEach((node) => node.classList.add('is-visible'));
+              });
+              await new Promise((resolve) => setTimeout(resolve, 250));
+            }
+
+            async function captureSection(selector, filename, viewport) {
+              const page = await browser.newPage();
+              await prepare(page, viewport);
+              const section = await page.$(selector);
+              if (!section) throw new Error(`Missing section: ${selector}`);
+              await section.screenshot({
+                path: path.join(output, filename),
+                captureBeyondViewport: true
+              });
+              await page.close();
+            }
+
+            await captureSection('#expertise', 'expertise-desktop.png', { width: 1440, height: 1200, deviceScaleFactor: 1 });
+            await captureSection('#work', 'offensive-work-desktop.png', { width: 1440, height: 1500, deviceScaleFactor: 1 });
+            await captureSection('#operations', 'defensive-workstreams-desktop.png', { width: 1440, height: 1200, deviceScaleFactor: 1 });
+            await captureSection('#expertise', 'expertise-mobile.png', { width: 390, height: 900, deviceScaleFactor: 1 });
+            await captureSection('#operations', 'defensive-workstreams-mobile.png', { width: 390, height: 900, deviceScaleFactor: 1 });
+
+            await browser.close();
+          })().catch((error) => {
+            console.error(error);
+            process.exitCode = 1;
           });
-
-          async function prepare(page, viewport) {
-            await page.setViewport(viewport);
-            await page.evaluateOnNewDocument(() => {
-              localStorage.setItem('portfolio-theme', 'dark');
-            });
-            await page.goto(baseUrl, { waitUntil: 'networkidle0', timeout: 60000 });
-            await page.addStyleTag({ content: `
-              html { scroll-behavior: auto !important; }
-              *, *::before, *::after {
-                animation-duration: 0s !important;
-                animation-delay: 0s !important;
-                transition-duration: 0s !important;
-                caret-color: transparent !important;
-              }
-              [data-reveal],
-              .hero-copy > *,
-              .gallery-hero-copy > *,
-              .console-heading,
-              .profile-row,
-              .signal-panel,
-              .console-footer,
-              .metrics article {
-                opacity: 1 !important;
-                visibility: visible !important;
-                transform: none !important;
-                filter: none !important;
-              }
-            ` });
-            await page.evaluate(() => {
-              document.documentElement.classList.remove('js');
-              document.body.classList.remove('nav-open');
-              document.querySelectorAll('[data-reveal]').forEach((node) => node.classList.add('is-visible'));
-            });
-            await new Promise((resolve) => setTimeout(resolve, 250));
-          }
-
-          async function captureSection(selector, filename, viewport) {
-            const page = await browser.newPage();
-            await prepare(page, viewport);
-            const section = await page.$(selector);
-            if (!section) throw new Error(`Missing section: ${selector}`);
-            await section.screenshot({
-              path: path.join(output, filename),
-              captureBeyondViewport: true
-            });
-            await page.close();
-          }
-
-          await captureSection('#expertise', 'expertise-desktop.png', { width: 1440, height: 1200, deviceScaleFactor: 1 });
-          await captureSection('#work', 'offensive-work-desktop.png', { width: 1440, height: 1500, deviceScaleFactor: 1 });
-          await captureSection('#operations', 'defensive-workstreams-desktop.png', { width: 1440, height: 1200, deviceScaleFactor: 1 });
-          await captureSection('#expertise', 'expertise-mobile.png', { width: 390, height: 900, deviceScaleFactor: 1 });
-          await captureSection('#operations', 'defensive-workstreams-mobile.png', { width: 390, height: 900, deviceScaleFactor: 1 });
-
-          await browser.close();
           NODE
 
           for image in /tmp/streamlined-layout-preview/*.png; do
