@@ -25,6 +25,7 @@ A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, positio
 - Accessible, keyboard-operable proof lightbox with no third-party dependency
 - Emphasized credential statuses and prominent PDF resume actions
 - Browser-viewable defensive engineering case studies with full DOCX downloads
+- Streamlined main-page flow: five integrated expertise cards, one compact offensive-methodology panel, and three grouped defensive workstreams
 - SEO metadata, Open Graph data, structured data, sitemap, manifest, and a custom 404 page
 - Dedicated recognition gallery with safer public descriptions
 
@@ -38,6 +39,7 @@ A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, positio
 ├── lightbox.js                # Accessible proof-image viewer
 ├── polish.css                 # Recruiter-focused functional polish
 ├── typography.css             # Balanced responsive type hierarchy
+├── streamline.css              # Consolidated expertise, methodology, and defensive layouts
 ├── case-studies/
 │   └── index.html             # Browser-viewable defensive engineering cases
 ├── photo-gallery/
