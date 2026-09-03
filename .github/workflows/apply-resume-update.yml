@@ -1,0 +1,49 @@
+name: Apply portfolio resume update
+
+on:
+  push:
+    branches: ["update-portfolio-resume"]
+    paths:
+      - ".resume-update/READY"
+
+permissions:
+  contents: write
+
+jobs:
+  replace-resume:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out update branch
+        uses: actions/checkout@v4
+        with:
+          ref: update-portfolio-resume
+          fetch-depth: 0
+
+      - name: Rebuild and verify latest resume PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets
+          cat .resume-update/part-* | base64 --decode > assets/Yaswanth_Kalendra_Resume.pdf
+          test "$(sha256sum assets/Yaswanth_Kalendra_Resume.pdf | awk '{print $1}')" = "17fbf2ad12252a40131aae767f85d9dec900125b6e9777969c98202e80c10b74"
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('assets/Yaswanth_Kalendra_Resume.pdf')
+          data = p.read_bytes()
+          if not data.startswith(b'%PDF-'):
+              raise SystemExit('Rebuilt file is not a PDF')
+          if len(data) != 186352:
+              raise SystemExit(f'Unexpected resume size: {len(data)}')
+          print('Verified resume PDF:', len(data), 'bytes')
+          PY
+          rm -rf .resume-update
+          rm -f .github/workflows/apply-resume-update.yml
+
+      - name: Commit final resume replacement
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Update portfolio resume PDF"
+          git push origin HEAD:update-portfolio-resume
