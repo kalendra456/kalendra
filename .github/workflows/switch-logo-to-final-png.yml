@@ -21,12 +21,13 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Replace broken SVG references with final PNG
+      - name: Replace broken SVG references with proven PNG
         run: python3 .github/scripts/switch-logo-to-final-png.py
 
-      - name: Remove temporary migration files
+      - name: Remove temporary and invalid files
         run: |
           rm -rf .logo-fix
+          rm -f assets/yk-selected-final.png
           rm -f .github/scripts/switch-logo-to-final-png.py
           rm -f .github/workflows/switch-logo-to-final-png.yml
 
@@ -35,5 +36,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Use reliable selected YK PNG across portfolio"
+          git commit -m "Restore reliable YK logo rendering across portfolio"
           git push origin HEAD:main
