@@ -1,0 +1,39 @@
+name: Switch portfolio to final PNG logo
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .logo-fix/READY
+
+permissions:
+  contents: write
+
+jobs:
+  switch-logo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Replace broken SVG references with final PNG
+        run: python3 .github/scripts/switch-logo-to-final-png.py
+
+      - name: Remove temporary migration files
+        run: |
+          rm -rf .logo-fix
+          rm -f .github/scripts/switch-logo-to-final-png.py
+          rm -f .github/workflows/switch-logo-to-final-png.yml
+
+      - name: Commit reliable logo deployment
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Use reliable selected YK PNG across portfolio"
+          git push origin HEAD:main
