@@ -1,8 +1,9 @@
 from pathlib import Path
 import hashlib
+import struct
 import subprocess
+import zlib
 
-root = Path('.')
 expected = {
     'os/index.html': 'f5d0c0cf3addac085f7f6909bf32c3e86ff7f23c',
     'os/content.js': 'fa3bc8096674e5e4ede5207af87fbf0943bd46df',
@@ -15,6 +16,32 @@ expected = {
 def git_hash(data):
     return hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
 
+def check_image(data, name):
+    assert len(data) > 1000, f'Empty image: {name}'
+    if data.startswith(b'\xff\xd8\xff'):
+        assert data.rstrip().endswith(b'\xff\xd9'), f'Incomplete JPEG: {name}'
+        print(f'JPEG evidence OK: {name}')
+        return
+    assert data.startswith(b'\x89PNG\r\n\x1a\n'), f'Unrecognized image: {name}'
+    offset, compressed, ended = 8, bytearray(), False
+    while offset < len(data):
+        assert offset + 12 <= len(data), f'Incomplete PNG chunk: {name}'
+        size = struct.unpack('>I', data[offset:offset+4])[0]
+        kind = data[offset+4:offset+8]
+        chunk = data[offset+8:offset+8+size]
+        crc = data[offset+8+size:offset+12+size]
+        assert len(chunk) == size and len(crc) == 4, f'Truncated PNG: {name}'
+        assert (zlib.crc32(kind + chunk) & 0xffffffff) == struct.unpack('>I', crc)[0], f'PNG CRC failure: {name}'
+        if kind == b'IDAT':
+            compressed.extend(chunk)
+        if kind == b'IEND':
+            ended = True
+            break
+        offset += size + 12
+    assert ended and compressed, f'Incomplete PNG: {name}'
+    assert zlib.decompress(compressed), f'Empty pixel data: {name}'
+    print(f'PNG evidence OK (existing .jpg filename): {name}')
+
 for path, checksum in expected.items():
     assert git_hash(Path(path).read_bytes()) == checksum, f'Unexpected bytes in {path}'
 for path in ('os/content.js', 'os/desktop.js'):
@@ -24,9 +51,7 @@ cases = Path('case-studies/index.html').read_text(encoding='utf-8')
 for anchor in ('wazuh-iso27001', 'firewall-syslog', 'unified-soc-dashboard', 'wazuh-glpi'):
     assert f'id="{anchor}"' in cases, f'Missing case-study anchor: {anchor}'
 for image in ('sap-credits.jpg', 'accenture-hof.jpg', 'aldi-hof.jpg', 'drexel-hof.jpg'):
-    data = (Path('assets/recognitions') / image).read_bytes()
-    assert data.startswith(b'\xff\xd8\xff'), f'Invalid JPEG evidence: {image}'
-    assert len(data) > 1000, f'Empty evidence: {image}'
+    check_image((Path('assets/recognitions') / image).read_bytes(), image)
 
 path = Path('index.html')
 original_bytes = path.read_bytes()
