@@ -5,7 +5,7 @@
   gap: .78rem;
 }
 
-.site-header .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+.site-header .brand-mark[src$="yk-circular-elite-v2.svg"] {
   display: block !important;
   width: 52px !important;
   height: 52px !important;
@@ -22,8 +22,8 @@
   transition: transform 260ms var(--ease), filter 260ms var(--ease);
 }
 
-.site-header .brand:hover .brand-mark[src$="yk-chatgpt-shared-logo.png"],
-.site-header .brand:focus-visible .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+.site-header .brand:hover .brand-mark[src$="yk-circular-elite-v2.svg"],
+.site-header .brand:focus-visible .brand-mark[src$="yk-circular-elite-v2.svg"] {
   transform: scale(1.045);
   filter:
     drop-shadow(0 12px 25px rgba(0, 0, 0, .28))
@@ -44,7 +44,7 @@
   line-height: 1.28;
 }
 
-.footer-brand .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+.footer-brand .brand-mark[src$="yk-circular-elite-v2.svg"] {
   display: block !important;
   width: 44px !important;
   height: 44px !important;
@@ -58,7 +58,7 @@
     drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 28%, transparent));
 }
 
-.error-panel .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+.error-panel .brand-mark[src$="yk-circular-elite-v2.svg"] {
   width: 68px !important;
   height: 68px !important;
   flex: 0 0 68px !important;
@@ -165,7 +165,7 @@
   aspect-ratio: 1;
   grid-column: 1;
   grid-row: 1;
-  background: url("assets/yk-chatgpt-shared-logo.png") center / 108% 108% no-repeat;
+  background: url("assets/yk-circular-elite-v2.svg") center / 100% 100% no-repeat;
   content: "";
   filter:
     drop-shadow(0 28px 54px rgba(0, 0, 0, .34))
@@ -325,7 +325,7 @@
 }
 
 @media (max-width: 700px) {
-  .site-header .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+  .site-header .brand-mark[src$="yk-circular-elite-v2.svg"] {
     width: 46px !important;
     height: 46px !important;
     flex-basis: 46px !important;
@@ -407,7 +407,7 @@
   }
 
   .signature-linkedin,
-  .site-header .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+  .site-header .brand-mark[src$="yk-circular-elite-v2.svg"] {
     transition: none;
   }
 }
