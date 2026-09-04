@@ -1,11 +1,75 @@
-/* Signature footer wordmark — portfolio identity treatment */
+/* Circular Elite identity treatment — navigation, footer and signature lockup */
+
+/* Compact brand mark: detailed enough to read, restrained enough for the header. */
+.site-header .brand {
+  gap: .78rem;
+}
+
+.site-header .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+  display: block !important;
+  width: 52px !important;
+  height: 52px !important;
+  flex: 0 0 52px !important;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 50%;
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter:
+    drop-shadow(0 10px 22px rgba(0, 0, 0, .26))
+    drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 34%, transparent));
+  transform: translateZ(0);
+  transition: transform 260ms var(--ease), filter 260ms var(--ease);
+}
+
+.site-header .brand:hover .brand-mark[src$="yk-chatgpt-shared-logo.png"],
+.site-header .brand:focus-visible .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+  transform: scale(1.045);
+  filter:
+    drop-shadow(0 12px 25px rgba(0, 0, 0, .28))
+    drop-shadow(0 0 16px color-mix(in srgb, var(--accent) 42%, transparent));
+}
+
+.site-header .brand-copy {
+  gap: .04rem;
+}
+
+.site-header .brand-copy strong {
+  font-size: .98rem;
+  line-height: 1.12;
+}
+
+.site-header .brand-copy span {
+  font-size: .69rem;
+  line-height: 1.28;
+}
+
+.footer-brand .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+  display: block !important;
+  width: 44px !important;
+  height: 44px !important;
+  flex: 0 0 44px !important;
+  object-fit: contain;
+  border-radius: 50%;
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter:
+    drop-shadow(0 8px 18px rgba(0, 0, 0, .22))
+    drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 28%, transparent));
+}
+
+.error-panel .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+  width: 68px !important;
+  height: 68px !important;
+  flex: 0 0 68px !important;
+}
 
 .signature-footer {
   position: relative;
   overflow: hidden;
   margin-top: clamp(2rem, 4vw, 3.5rem);
   border-top: 1px solid var(--border);
-  padding: clamp(1.35rem, 2.5vw, 2rem) 0 clamp(1.2rem, 2.4vw, 2.1rem);
+  padding: clamp(1.35rem, 2.5vw, 2rem) 0 clamp(1.6rem, 3vw, 2.8rem);
 }
 
 .signature-footer-meta {
@@ -71,49 +135,73 @@
   stroke: none;
 }
 
-/* Large footer brand lockup: shield on the left, stacked name on the right. */
+/*
+ * Premium desktop lockup:
+ *
+ *   [ CIRCULAR YK ]  |  YASWANTH
+ *                    |  KALENDRA
+ */
 .signature-wordmark-wrap {
   position: relative;
   display: grid;
-  width: min(100%, 1180px);
-  grid-template-columns: clamp(8.25rem, 10.5vw, 11rem) max-content;
+  width: min(100%, 1230px);
+  grid-template-columns: clamp(11.5rem, 14vw, 14rem) max-content;
   align-items: center;
   justify-content: center;
-  column-gap: clamp(1.6rem, 3.1vw, 3.35rem);
-  margin: clamp(1.65rem, 3.25vw, 3rem) auto 0;
-  padding: clamp(.7rem, 1.35vw, 1.15rem) clamp(.35rem, 1vw, .8rem) clamp(1.35rem, 2.5vw, 2.3rem);
+  column-gap: clamp(1.6rem, 2.7vw, 2.8rem);
+  margin: clamp(1.8rem, 3.5vw, 3.2rem) auto 0;
+  padding: clamp(.8rem, 1.5vw, 1.25rem) clamp(.6rem, 1.2vw, 1rem) clamp(1.5rem, 2.8vw, 2.5rem);
   background:
-    radial-gradient(circle at 34% 48%, color-mix(in srgb, var(--accent) 15%, transparent), transparent 42%),
-    radial-gradient(circle at 66% 54%, color-mix(in srgb, var(--blue) 7%, transparent), transparent 48%);
+    radial-gradient(circle at 28% 48%, color-mix(in srgb, var(--accent) 17%, transparent), transparent 38%),
+    radial-gradient(circle at 70% 52%, color-mix(in srgb, var(--blue) 8%, transparent), transparent 46%);
+  isolation: isolate;
 }
 
 .signature-wordmark-wrap::before {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: block;
   width: 100%;
   aspect-ratio: 1;
   grid-column: 1;
   grid-row: 1;
-  background: url("assets/yk-chatgpt-shared-logo.png") center / contain no-repeat;
+  background: url("assets/yk-chatgpt-shared-logo.png") center / 108% 108% no-repeat;
   content: "";
   filter:
-    drop-shadow(0 22px 48px rgba(0, 0, 0, .28))
-    drop-shadow(0 0 30px color-mix(in srgb, var(--accent) 24%, transparent));
+    drop-shadow(0 28px 54px rgba(0, 0, 0, .34))
+    drop-shadow(0 0 34px color-mix(in srgb, var(--accent) 30%, transparent));
+  transform: translateZ(0);
+}
+
+.signature-wordmark-wrap::after {
+  position: absolute;
+  z-index: 0;
+  width: clamp(15rem, 25vw, 28rem);
+  height: clamp(15rem, 25vw, 28rem);
+  grid-column: 1;
+  grid-row: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 13%, transparent), transparent 67%);
+  content: "";
+  pointer-events: none;
+  filter: blur(18px);
 }
 
 .signature-wordmark {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   width: auto;
+  min-width: 0;
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
-  gap: .07em;
+  gap: .075em;
   grid-column: 2;
   grid-row: 1;
   margin: 0;
+  border-left: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  padding-left: clamp(1.7rem, 2.8vw, 3rem);
   overflow: visible;
   font-family: var(--font-sans);
   font-weight: 900;
@@ -130,13 +218,13 @@
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  letter-spacing: -.04em;
+  letter-spacing: -.041em;
   white-space: nowrap;
-  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, .12));
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, .13));
 }
 
 .signature-wordmark .signature-first {
-  font-size: clamp(4rem, 6.45vw, 7.15rem);
+  font-size: clamp(4rem, 6.2vw, 7.15rem);
   background-image:
     repeating-linear-gradient(
       0deg,
@@ -148,7 +236,7 @@
 }
 
 .signature-wordmark .signature-last {
-  font-size: clamp(4.25rem, 6.95vw, 7.7rem);
+  font-size: clamp(4.25rem, 6.65vw, 7.65rem);
   background-image:
     repeating-linear-gradient(
       0deg,
@@ -161,7 +249,7 @@
 
 .signature-wordmark::after {
   position: absolute;
-  inset: -4% -5%;
+  inset: -5% -4% -5% 0;
   background: linear-gradient(105deg, transparent 36%, rgba(255, 255, 255, .11) 49%, transparent 61%);
   content: "";
   pointer-events: none;
@@ -187,17 +275,21 @@
 
 @media (max-width: 1180px) {
   .signature-wordmark-wrap {
-    width: min(100%, 960px);
-    grid-template-columns: clamp(7.25rem, 11.5vw, 9.25rem) max-content;
-    column-gap: clamp(1.35rem, 2.7vw, 2.45rem);
+    width: min(100%, 980px);
+    grid-template-columns: clamp(9.5rem, 13.2vw, 11.5rem) max-content;
+    column-gap: clamp(1.25rem, 2.3vw, 2rem);
+  }
+
+  .signature-wordmark {
+    padding-left: clamp(1.35rem, 2.4vw, 2.25rem);
   }
 
   .signature-wordmark .signature-first {
-    font-size: clamp(3.55rem, 7.4vw, 6.15rem);
+    font-size: clamp(3.5rem, 7vw, 6rem);
   }
 
   .signature-wordmark .signature-last {
-    font-size: clamp(3.8rem, 7.95vw, 6.65rem);
+    font-size: clamp(3.75rem, 7.45vw, 6.45rem);
   }
 }
 
@@ -211,27 +303,34 @@
   }
 
   .signature-wordmark-wrap {
-    width: min(100%, 760px);
-    grid-template-columns: clamp(5.8rem, 13vw, 7.6rem) max-content;
-    column-gap: clamp(1rem, 2.6vw, 1.8rem);
-    margin-top: 1.8rem;
+    width: min(100%, 780px);
+    grid-template-columns: clamp(7.5rem, 15vw, 9rem) max-content;
+    column-gap: clamp(1rem, 2.1vw, 1.6rem);
+    margin-top: 1.9rem;
   }
 
   .signature-wordmark {
     gap: .075em;
+    padding-left: clamp(1.05rem, 2.3vw, 1.7rem);
     line-height: .83;
   }
 
   .signature-wordmark .signature-first {
-    font-size: clamp(2.85rem, 8.5vw, 4.85rem);
+    font-size: clamp(2.85rem, 8.2vw, 4.75rem);
   }
 
   .signature-wordmark .signature-last {
-    font-size: clamp(3.05rem, 9.15vw, 5.25rem);
+    font-size: clamp(3.05rem, 8.75vw, 5.1rem);
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 700px) {
+  .site-header .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+    width: 46px !important;
+    height: 46px !important;
+    flex-basis: 46px !important;
+  }
+
   .signature-footer-meta {
     grid-template-columns: 1fr;
     justify-items: center;
@@ -246,13 +345,22 @@
   .signature-wordmark-wrap {
     width: 100%;
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
     justify-items: center;
-    row-gap: 1.15rem;
+    row-gap: 1rem;
     padding-inline: 0;
   }
 
   .signature-wordmark-wrap::before {
-    width: clamp(4.8rem, 23vw, 6.5rem);
+    width: clamp(7.25rem, 31vw, 10rem);
+    grid-column: 1;
+    grid-row: 1;
+    background-size: 108% 108%;
+  }
+
+  .signature-wordmark-wrap::after {
+    width: 15rem;
+    height: 15rem;
     grid-column: 1;
     grid-row: 1;
   }
@@ -262,6 +370,10 @@
     gap: .08em;
     grid-column: 1;
     grid-row: 2;
+    border-top: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+    border-left: 0;
+    padding-top: 1.25rem;
+    padding-left: 0;
     line-height: .85;
     text-align: center;
   }
@@ -271,21 +383,21 @@
   }
 
   .signature-wordmark .signature-first {
-    font-size: clamp(2.75rem, 15vw, 4.7rem);
+    font-size: clamp(2.7rem, 14.3vw, 4.55rem);
   }
 
   .signature-wordmark .signature-last {
-    font-size: clamp(2.95rem, 16vw, 5.05rem);
+    font-size: clamp(2.9rem, 15.3vw, 4.9rem);
   }
 }
 
 @media (max-width: 380px) {
   .signature-wordmark .signature-first {
-    font-size: clamp(2.3rem, 14vw, 3.25rem);
+    font-size: clamp(2.3rem, 13.6vw, 3.25rem);
   }
 
   .signature-wordmark .signature-last {
-    font-size: clamp(2.48rem, 15vw, 3.55rem);
+    font-size: clamp(2.48rem, 14.6vw, 3.55rem);
   }
 }
 
@@ -294,7 +406,8 @@
     animation: none;
   }
 
-  .signature-linkedin {
+  .signature-linkedin,
+  .site-header .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
     transition: none;
   }
 }
