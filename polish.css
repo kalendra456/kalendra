@@ -29,12 +29,6 @@
   transform: translateX(108%);
 }
 
-.resume-button {
-  border-color: color-mix(in srgb, var(--blue) 34%, var(--border));
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--blue) 12%, transparent), color-mix(in srgb, var(--accent) 7%, transparent)),
-    var(--surface-soft);
-}
 
 /* Certification hierarchy */
 .credential-list > .credential-badge {
