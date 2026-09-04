@@ -1,0 +1,33 @@
+name: Integrate KALENDRA OS launch
+
+on:
+  push:
+    branches:
+      - kalendra-os-interactive-workspace
+    paths:
+      - .github/workflows/add-os-entry.yml
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the feature commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate tested sources and link existing portfolio
+        run: python3 .github/scripts/add-os-entry.py
+      - name: Remove one-time integration files
+        run: |
+          rm .github/scripts/add-os-entry.py
+          rm .github/workflows/add-os-entry.yml
+      - name: Commit homepage entry on the feature branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/scripts/add-os-entry.py .github/workflows/add-os-entry.yml
+          git commit -m "Add recruiter-view launch for KALENDRA OS"
+          git push origin HEAD:kalendra-os-interactive-workspace
