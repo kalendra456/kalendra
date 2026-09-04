@@ -5,7 +5,7 @@
   overflow: hidden;
   margin-top: clamp(2rem, 4vw, 3.5rem);
   border-top: 1px solid var(--border);
-  padding: clamp(1.35rem, 2.5vw, 2rem) 0 clamp(.4rem, 1vw, .8rem);
+  padding: clamp(1.35rem, 2.5vw, 2rem) 0 clamp(.8rem, 1.5vw, 1.35rem);
 }
 
 .signature-footer-meta {
@@ -73,49 +73,55 @@
 
 .signature-wordmark-wrap {
   position: relative;
+  display: grid;
   width: 100%;
-  margin-top: clamp(2rem, 4.5vw, 4rem);
-  padding-bottom: clamp(.55rem, 1.2vw, 1rem);
+  place-items: center;
+  margin-top: clamp(2rem, 4.25vw, 3.8rem);
+  padding: clamp(.35rem, 1vw, .75rem) 0 clamp(.7rem, 1.4vw, 1.15rem);
 }
 
 .signature-wordmark-wrap::before {
   position: absolute;
-  inset: -24% 12% 8%;
-  background: radial-gradient(circle at 35% 55%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 48%);
+  inset: -12% 18% 2%;
+  background:
+    radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 54%);
   content: "";
   pointer-events: none;
-  filter: blur(16px);
+  filter: blur(18px);
 }
 
 .signature-wordmark {
   position: relative;
   display: flex;
-  width: min(100%, 1120px);
-  align-items: baseline;
+  width: min(100%, 900px);
+  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  gap: .11em;
+  gap: .035em;
   margin: 0 auto;
   overflow: visible;
   font-family: var(--font-sans);
-  font-size: clamp(2.9rem, 6.15vw, 6.9rem);
-  font-weight: 880;
-  line-height: .9;
-  letter-spacing: -.045em;
+  font-weight: 900;
+  line-height: .79;
   text-align: center;
   text-transform: uppercase;
-  white-space: nowrap;
   user-select: none;
 }
 
 .signature-wordmark span {
-  display: inline-block;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .1));
+  letter-spacing: -.045em;
+  white-space: nowrap;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .11));
 }
 
 .signature-wordmark .signature-first {
+  font-size: clamp(3rem, 5.25vw, 5.9rem);
   background-image:
     repeating-linear-gradient(
       0deg,
@@ -127,6 +133,7 @@
 }
 
 .signature-wordmark .signature-last {
+  font-size: clamp(3.2rem, 5.75vw, 6.45rem);
   background-image:
     repeating-linear-gradient(
       0deg,
@@ -139,7 +146,7 @@
 
 .signature-wordmark::after {
   position: absolute;
-  inset: 0;
+  inset: -4% 8%;
   background: linear-gradient(105deg, transparent 36%, rgba(255, 255, 255, .11) 49%, transparent 61%);
   content: "";
   pointer-events: none;
@@ -163,13 +170,6 @@
     linear-gradient(90deg, #132235, #627187);
 }
 
-@media (max-width: 1100px) {
-  .signature-wordmark {
-    font-size: clamp(2.75rem, 6.9vw, 5.8rem);
-    letter-spacing: -.04em;
-  }
-}
-
 @media (max-width: 820px) {
   .signature-footer-meta {
     grid-template-columns: 1fr auto;
@@ -184,8 +184,16 @@
   }
 
   .signature-wordmark {
-    font-size: clamp(2.7rem, 10.2vw, 5.1rem);
-    line-height: .92;
+    gap: .045em;
+    line-height: .81;
+  }
+
+  .signature-wordmark .signature-first {
+    font-size: clamp(2.8rem, 10vw, 5.2rem);
+  }
+
+  .signature-wordmark .signature-last {
+    font-size: clamp(3rem, 10.8vw, 5.65rem);
   }
 }
 
@@ -202,19 +210,31 @@
   }
 
   .signature-wordmark {
-    flex-direction: column;
-    align-items: center;
-    gap: .04em;
-    font-size: clamp(2.65rem, 14vw, 4.5rem);
-    line-height: .82;
-    letter-spacing: -.04em;
-    white-space: normal;
+    width: 100%;
+    gap: .06em;
+    line-height: .84;
+  }
+
+  .signature-wordmark span {
+    letter-spacing: -.035em;
+  }
+
+  .signature-wordmark .signature-first {
+    font-size: clamp(2.45rem, 13vw, 4.25rem);
+  }
+
+  .signature-wordmark .signature-last {
+    font-size: clamp(2.65rem, 14vw, 4.6rem);
   }
 }
 
 @media (max-width: 380px) {
-  .signature-wordmark {
-    font-size: clamp(2.35rem, 13.5vw, 3.25rem);
+  .signature-wordmark .signature-first {
+    font-size: clamp(2.15rem, 12.5vw, 3rem);
+  }
+
+  .signature-wordmark .signature-last {
+    font-size: clamp(2.35rem, 13.5vw, 3.3rem);
   }
 }
 
