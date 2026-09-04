@@ -1,0 +1,39 @@
+name: Apply Circular Elite logo v2
+
+on:
+  push:
+    branches:
+      - logo-v2-svg
+    paths:
+      - .logo-v2/READY
+
+permissions:
+  contents: write
+
+jobs:
+  apply-logo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out logo branch
+        uses: actions/checkout@v4
+        with:
+          ref: logo-v2-svg
+          fetch-depth: 0
+
+      - name: Apply SVG logo across portfolio
+        run: python3 .github/scripts/apply-logo-v2.py
+
+      - name: Remove temporary migration files
+        run: |
+          rm -rf .logo-v2
+          rm -f .github/scripts/apply-logo-v2.py
+          rm -f .github/workflows/apply-logo-v2.yml
+
+      - name: Commit completed logo integration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Apply redesigned Circular Elite SVG logo"
+          git push origin HEAD:logo-v2-svg
