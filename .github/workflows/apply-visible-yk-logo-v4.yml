@@ -1,0 +1,39 @@
+name: Apply verified visible YK logo
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .logo-v4/READY
+
+permissions:
+  contents: write
+
+jobs:
+  apply-logo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Apply verified PNG to every branding surface
+        run: python3 .github/scripts/apply-visible-yk-logo-v4.py
+
+      - name: Remove temporary migration files
+        run: |
+          rm -rf .logo-v4
+          rm -f .github/scripts/apply-visible-yk-logo-v4.py
+          rm -f .github/workflows/apply-visible-yk-logo-v4.yml
+
+      - name: Commit production logo correction
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Use verified visible YK logo across portfolio"
+          git push origin HEAD:main
