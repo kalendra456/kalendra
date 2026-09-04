@@ -1,0 +1,39 @@
+name: Activate Circular Elite SVG
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .brand-update/ACTIVATE_SVG
+
+permissions:
+  contents: write
+
+jobs:
+  activate-svg:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Activate visible vector logo
+        run: python3 .github/scripts/fix-circular-elite-logo.py
+
+      - name: Remove temporary activation files
+        run: |
+          rm -rf .brand-update
+          rm -f .github/scripts/fix-circular-elite-logo.py
+          rm -f .github/workflows/activate-circular-elite-svg.yml
+
+      - name: Commit visible logo fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Fix Circular Elite logo visibility with SVG"
+          git push origin HEAD:main
