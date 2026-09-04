@@ -46,7 +46,7 @@ A fast, accessible, dependency-free portfolio for **Yaswanth Kalendra**, positio
 │   ├── index.html             # Recognition proof archive
 │   └── images/                # Existing proof screenshots
 ├── assets/
-│   ├── yk-circular-elite.png  # Primary Circular Elite YK identity mark
+│   ├── yk-circular-elite.svg  # Primary scalable Circular Elite YK identity mark
 │   ├── yk-mark.svg            # Legacy vector identity mark
 │   ├── Yaswanth_Kalendra_Resume.pdf # ATS-friendly recruiter resume
 │   └── recognitions/          # Main-page recognition previews

@@ -9,9 +9,9 @@
   "theme_color": "#07111f",
   "icons": [
     {
-      "src": "assets/yk-circular-elite.png",
-      "sizes": "256x256",
-      "type": "image/png",
+      "src": "assets/yk-circular-elite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "any"
     }
   ]

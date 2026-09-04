@@ -95,7 +95,7 @@
   aspect-ratio: 1;
   grid-column: 1;
   grid-row: 1;
-  background: url("assets/yk-circular-elite.png") center / contain no-repeat;
+  background: url("assets/yk-circular-elite.svg") center / contain no-repeat;
   content: "";
   filter:
     drop-shadow(0 22px 48px rgba(0, 0, 0, .28))
