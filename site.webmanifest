@@ -9,9 +9,9 @@
   "theme_color": "#07111f",
   "icons": [
     {
-      "src": "assets/yk-circular-elite-v2.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "assets/yk-chatgpt-shared-logo.png",
+      "sizes": "256x256",
+      "type": "image/png",
       "purpose": "any"
     }
   ]
