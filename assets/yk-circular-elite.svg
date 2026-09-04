@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Yaswanth Kalendra Circular Elite logo</title>
+  <desc id="desc">A metallic YK monogram inside a luminous cyan circular security emblem.</desc>
+  <defs>
+    <radialGradient id="disc" cx="50%" cy="38%" r="68%">
+      <stop offset="0" stop-color="#12385e"/>
+      <stop offset=".48" stop-color="#071b31"/>
+      <stop offset="1" stop-color="#020913"/>
+    </radialGradient>
+    <linearGradient id="cyan" x1="80" y1="80" x2="430" y2="430" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8af7ff"/>
+      <stop offset=".3" stop-color="#12dffc"/>
+      <stop offset=".7" stop-color="#168cff"/>
+      <stop offset="1" stop-color="#52d7c5"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="130" y1="145" x2="375" y2="375" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/>
+      <stop offset=".22" stop-color="#b6c7da"/>
+      <stop offset=".43" stop-color="#f7fbff"/>
+      <stop offset=".64" stop-color="#8198b0"/>
+      <stop offset=".82" stop-color="#ecf4fb"/>
+      <stop offset="1" stop-color="#738ba4"/>
+    </linearGradient>
+    <pattern id="hex" width="30" height="26" patternUnits="userSpaceOnUse">
+      <path d="M7.5 1h15L30 13l-7.5 12h-15L0 13 7.5 1Z" fill="none" stroke="#42cfe8" stroke-opacity=".12" stroke-width="1"/>
+    </pattern>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000814" flood-opacity=".78"/>
+    </filter>
+    <clipPath id="innerClip"><circle cx="256" cy="256" r="190"/></clipPath>
+  </defs>
+
+  <circle cx="256" cy="256" r="238" fill="#03101d" stroke="#0d314d" stroke-width="4"/>
+  <circle cx="256" cy="256" r="226" fill="none" stroke="#12dffc" stroke-opacity=".24" stroke-width="22" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="226" fill="none" stroke="url(#cyan)" stroke-width="11"/>
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#e8f5ff" stroke-opacity=".78" stroke-width="4"/>
+  <circle cx="256" cy="256" r="201" fill="url(#disc)" stroke="#159fe6" stroke-width="3"/>
+  <circle cx="256" cy="256" r="190" fill="url(#hex)" opacity=".7" clip-path="url(#innerClip)"/>
+  <ellipse cx="256" cy="129" rx="128" ry="54" fill="#22bffd" opacity=".12" filter="url(#glow)"/>
+
+  <g filter="url(#shadow)">
+    <path d="M105 151h58l78 94 77-94h59l-112 135v98h-49v-98L105 151Z" fill="url(#metal)" stroke="#eaf7ff" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M268 208h49v62l67-62h65l-90 83 98 94h-68l-72-72v72h-49V208Z" fill="url(#metal)" stroke="#dff3ff" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M317 270l67-62h65l-90 83-42-21Z" fill="url(#cyan)" stroke="#61efff" stroke-width="2" stroke-linejoin="round"/>
+  </g>
+
+  <circle cx="256" cy="256" r="216" fill="none" stroke="#8af7ff" stroke-opacity=".42" stroke-width="1.5" stroke-dasharray="4 9"/>
+</svg>
