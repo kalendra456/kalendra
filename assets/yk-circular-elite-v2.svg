@@ -52,6 +52,7 @@
     <clipPath id="discClip"><circle cx="512" cy="512" r="345"/></clipPath>
   </defs>
 
+  <!-- circular badge -->
   <circle cx="512" cy="512" r="468" fill="url(#halo)"/>
   <circle cx="512" cy="512" r="438" fill="#02070e" stroke="#123452" stroke-width="4"/>
   <circle cx="512" cy="512" r="420" fill="none" stroke="url(#steel)" stroke-width="22"/>
@@ -60,6 +61,7 @@
   <circle cx="512" cy="512" r="354" fill="url(#disc)" stroke="#2ac7ff" stroke-opacity=".7" stroke-width="3"/>
   <circle cx="512" cy="512" r="345" fill="url(#hex)" opacity=".75" clip-path="url(#discClip)"/>
 
+  <!-- segmented ring accents -->
   <g fill="url(#cyan)" opacity=".96" filter="url(#cyanGlow)">
     <path d="M250 167a401 401 0 0 1 165-61l7 24a375 375 0 0 0-154 57z"/>
     <path d="M609 106a401 401 0 0 1 165 61l-18 20a375 375 0 0 0-154-57z"/>
@@ -71,10 +73,12 @@
     <path d="M106 415a401 401 0 0 1 61-165l20 18a375 375 0 0 0-57 154z"/>
   </g>
 
+  <!-- inner shield -->
   <path d="M512 210 755 326v195c0 159-98 270-243 333C367 791 269 680 269 521V326l243-116Z" fill="#07172c" fill-opacity=".35" stroke="#05101e" stroke-width="36"/>
   <path d="M512 225 735 333v185c0 145-87 247-223 308-136-61-223-163-223-308V333l223-108Z" fill="none" stroke="url(#steel)" stroke-opacity=".65" stroke-width="12"/>
   <path d="M512 240 719 341v176c0 135-80 230-207 288-127-58-207-153-207-288V341l207-101Z" fill="none" stroke="url(#cyan)" stroke-opacity=".82" stroke-width="6" filter="url(#cyanGlow)"/>
 
+  <!-- circuit details -->
   <g stroke="url(#cyan)" stroke-width="4" stroke-linecap="round" opacity=".92">
     <path d="M238 438v68h34v82"/><path d="M274 413v44h34v55"/>
     <path d="M786 438v68h-34v82"/><path d="M750 413v44h-34v55"/>
@@ -84,20 +88,37 @@
     <circle cx="786" cy="438" r="7"/><circle cx="752" cy="588" r="7"/><circle cx="750" cy="413" r="7"/><circle cx="716" cy="512" r="7"/>
   </g>
 
-  <g>
-    <polygon points="206,306 344,306 510,474 680,306 818,306 566,560 566,778 512,842 448,778 448,560" fill="url(#steelDark)" stroke="#effaff" stroke-width="3" stroke-linejoin="round"/>
-    <polygon points="206,306 344,306 510,474 680,306 818,306 566,560 566,778 512,842 448,778 448,560" fill="none" stroke="#13bfff" stroke-width="7" stroke-linejoin="round"/>
-    <polygon points="548,292 630,292 630,764 548,828" fill="url(#steelDark)" stroke="#eaf8ff" stroke-width="3" stroke-linejoin="round"/>
-    <polygon points="548,292 630,292 630,764 548,828" fill="none" stroke="#13bfff" stroke-width="7" stroke-linejoin="round"/>
-    <polygon points="604,492 786,316 918,316 698,536" fill="url(#cyanPlate)" stroke="#b8ffff" stroke-width="3" stroke-linejoin="round"/>
-    <polygon points="604,492 786,316 918,316 698,536" fill="none" stroke="#4fefff" stroke-width="7" stroke-linejoin="round"/>
-    <polygon points="610,558 700,484 918,726 782,726" fill="url(#steelDark)" stroke="#eefaff" stroke-width="3" stroke-linejoin="round"/>
-    <polygon points="610,558 700,484 918,726 782,726" fill="none" stroke="#13bfff" stroke-width="7" stroke-linejoin="round"/>
-    <path d="M230 322H334L497 487" fill="none" stroke="#fff" stroke-opacity=".58" stroke-width="5" stroke-linecap="round"/>
-    <path d="M700 323H790L641 486" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="5" stroke-linecap="round"/>
-    <path d="M647 565L699 521L883 720" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="5" stroke-linecap="round"/>
+  <!-- YK monogram, all vector geometry -->
+  <g filter="url(#softShadow)">
+    <!-- Y: deliberately separated and centered left -->
+    <polygon points="214,302 350,302 484,444 612,302 742,302 540,522 540,786 480,848 416,786 416,522"
+      fill="url(#steelDark)" stroke="#effaff" stroke-width="3" stroke-linejoin="round"/>
+    <polygon points="214,302 350,302 484,444 612,302 742,302 540,522 540,786 480,848 416,786 416,522"
+      fill="none" stroke="#13bfff" stroke-width="7" stroke-linejoin="round"/>
+
+    <!-- K: moved right with a clear gap from Y -->
+    <polygon points="574,294 654,294 654,770 574,832"
+      fill="url(#cyanPlate)" stroke="#dffcff" stroke-width="3" stroke-linejoin="round"/>
+    <polygon points="574,294 654,294 654,770 574,832"
+      fill="none" stroke="#13bfff" stroke-width="7" stroke-linejoin="round"/>
+
+    <polygon points="636,474 782,322 900,322 716,516"
+      fill="url(#cyanPlate)" stroke="#dffcff" stroke-width="3" stroke-linejoin="round"/>
+    <polygon points="636,474 782,322 900,322 716,516"
+      fill="none" stroke="#4fefff" stroke-width="7" stroke-linejoin="round"/>
+
+    <polygon points="638,558 716,494 898,720 780,720"
+      fill="url(#steelDark)" stroke="#eefaff" stroke-width="3" stroke-linejoin="round"/>
+    <polygon points="638,558 716,494 898,720 780,720"
+      fill="none" stroke="#13bfff" stroke-width="7" stroke-linejoin="round"/>
+
+    <!-- restrained bevel glints -->
+    <path d="M238 320H340L472 458" fill="none" stroke="#fff" stroke-opacity=".56" stroke-width="5" stroke-linecap="round"/>
+    <path d="M654 466L784 338H866" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="5" stroke-linecap="round"/>
+    <path d="M672 568L714 534L856 708" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="5" stroke-linecap="round"/>
   </g>
 
+  <!-- cardinal light ticks -->
   <g stroke="#d9ffff" stroke-width="6" stroke-linecap="round" filter="url(#cyanGlow)">
     <path d="M512 91v38"/><path d="M512 895v38"/><path d="M91 512h38"/><path d="M895 512h38"/>
   </g>
