@@ -1,0 +1,160 @@
+name: Use exact ChatGPT shared logo
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".logo-update/USE_EXACT_SHARED_LOGO"
+
+permissions:
+  contents: write
+
+jobs:
+  update-logo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Replace the vector approximation with the exact generated logo
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # The exact generated Circular Elite artwork is already stored as this PNG.
+          # Copy it to a new filename so browsers cannot reuse a cached missing/older asset.
+          cp assets/yk-circular-elite.png assets/yk-chatgpt-shared-logo.png
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+
+          replacements = {
+              "index.html": [
+                  ("assets/yk-circular-elite.svg", "assets/yk-chatgpt-shared-logo.png"),
+                  ('type="image/svg+xml"', 'type="image/png"'),
+                  ("style.css?v=24", "style.css?v=25"),
+                  ("footer-signature.css?v=3", "footer-signature.css?v=4"),
+              ],
+              "case-studies/index.html": [
+                  ("../assets/yk-circular-elite.svg", "../assets/yk-chatgpt-shared-logo.png"),
+                  ('type="image/svg+xml"', 'type="image/png"'),
+                  ("../style.css?v=24", "../style.css?v=25"),
+                  ("../footer-signature.css?v=3", "../footer-signature.css?v=4"),
+              ],
+              "photo-gallery/index.html": [
+                  ("../assets/yk-circular-elite.svg", "../assets/yk-chatgpt-shared-logo.png"),
+                  ('type="image/svg+xml"', 'type="image/png"'),
+                  ("../style.css?v=24", "../style.css?v=25"),
+                  ("../footer-signature.css?v=3", "../footer-signature.css?v=4"),
+              ],
+              "404.html": [
+                  ("/kalendra/assets/yk-circular-elite.svg", "/kalendra/assets/yk-chatgpt-shared-logo.png"),
+                  ('type="image/svg+xml"', 'type="image/png"'),
+                  ("/kalendra/style.css?v=24", "/kalendra/style.css?v=25"),
+              ],
+              "footer-signature.css": [
+                  ('url("assets/yk-circular-elite.svg")', 'url("assets/yk-chatgpt-shared-logo.png")'),
+              ],
+              "style.css": [
+                  ('yk-circular-elite.svg', 'yk-chatgpt-shared-logo.png'),
+              ],
+          }
+
+          for filename, changes in replacements.items():
+              path = Path(filename)
+              text = path.read_text(encoding="utf-8")
+              for old, new in changes:
+                  if old not in text:
+                      raise SystemExit(f"Expected reference missing in {filename}: {old}")
+                  text = text.replace(old, new)
+              path.write_text(text, encoding="utf-8")
+
+          # Reinforce visibility independently of the original width/height attributes.
+          style_path = Path("style.css")
+          style = style_path.read_text(encoding="utf-8")
+          visibility = '''
+
+/* Exact ChatGPT-generated Circular Elite logo */
+.brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+  display: block !important;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  object-fit: contain;
+  opacity: 1 !important;
+  visibility: visible !important;
+  border-radius: 50%;
+  filter:
+    drop-shadow(0 8px 18px rgba(0, 0, 0, .22))
+    drop-shadow(0 0 11px color-mix(in srgb, var(--accent) 32%, transparent));
+}
+
+.footer-brand .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+  width: 42px;
+  height: 42px;
+  flex-basis: 42px;
+}
+
+.error-panel .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+  width: 64px;
+  height: 64px;
+  flex-basis: 64px;
+}
+
+@media (max-width: 620px) {
+  .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+}
+'''
+          if "/* Exact ChatGPT-generated Circular Elite logo */" not in style:
+              style += visibility
+              style_path.write_text(style, encoding="utf-8")
+
+          manifest_path = Path("site.webmanifest")
+          manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+          manifest["icons"] = [{
+              "src": "assets/yk-chatgpt-shared-logo.png",
+              "sizes": "256x256",
+              "type": "image/png",
+              "purpose": "any"
+          }]
+          manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+          # Basic integrity checks.
+          logo = Path("assets/yk-chatgpt-shared-logo.png")
+          data = logo.read_bytes()
+          if not data.startswith(b"\x89PNG\r\n\x1a\n") or len(data) < 10_000:
+              raise SystemExit("Exact logo copy is missing or invalid")
+
+          production = [
+              Path("index.html"), Path("case-studies/index.html"),
+              Path("photo-gallery/index.html"), Path("404.html"),
+              Path("footer-signature.css"), Path("style.css"),
+              Path("site.webmanifest"),
+          ]
+          combined = "\n".join(p.read_text(encoding="utf-8") for p in production)
+          if "yk-circular-elite.svg" in combined:
+              raise SystemExit("The approximate SVG is still referenced by a production surface")
+          if combined.count("yk-chatgpt-shared-logo.png") < 10:
+              raise SystemExit("The exact shared logo was not propagated everywhere")
+          PY
+
+          rm -rf .logo-update
+          rm -f .github/workflows/use-exact-shared-logo.yml
+
+      - name: Commit exact shared logo
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Use exact ChatGPT-shared Circular Elite logo"
+          git push origin HEAD:main
