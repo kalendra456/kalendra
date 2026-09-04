@@ -1,0 +1,96 @@
+name: Apply signature footer
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".footer-signature/READY"
+
+permissions:
+  contents: write
+
+jobs:
+  apply-footer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Add large portfolio wordmark and LinkedIn footer
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          pages = [
+              (Path('index.html'), 'footer-signature.css?v=1'),
+              (Path('case-studies/index.html'), '../footer-signature.css?v=1'),
+              (Path('photo-gallery/index.html'), '../footer-signature.css?v=1'),
+          ]
+
+          block = '''
+    <!-- signature-footer -->
+    <div class="shell signature-footer" aria-label="Yaswanth Kalendra portfolio signature">
+      <div class="signature-footer-meta">
+        <span>© 2026 Yaswanth Kalendra</span>
+        <span class="signature-footer-role">Offensive Security · VAPT · Application Security</span>
+        <a class="signature-linkedin" href="https://www.linkedin.com/in/yaswanth-kalendra-kukkala-37b7701a0/" target="_blank" rel="noopener noreferrer" aria-label="Yaswanth Kalendra on LinkedIn">
+          <span class="signature-linkedin-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5.2 3.7a2.1 2.1 0 1 1 0 4.2 2.1 2.1 0 0 1 0-4.2ZM3.4 9.2H7V20H3.4V9.2Zm5.8 0h3.4v1.5h.05c.48-.9 1.64-1.85 3.38-1.85 3.62 0 4.29 2.38 4.29 5.48V20h-3.57v-5.03c0-1.2-.02-2.75-1.68-2.75-1.68 0-1.94 1.31-1.94 2.66V20H9.2V9.2Z"/></svg>
+          </span>
+          <span>LinkedIn</span>
+        </a>
+      </div>
+      <div class="signature-wordmark-wrap" aria-hidden="true">
+        <div class="signature-wordmark">
+          <span class="signature-first">YASWANTH</span>
+          <span class="signature-last">KALENDRA</span>
+        </div>
+      </div>
+    </div>
+'''
+
+          for path, stylesheet in pages:
+              text = path.read_text(encoding='utf-8')
+
+              link = f'  <link rel="stylesheet" href="{stylesheet}">\n'
+              if stylesheet not in text:
+                  if '</head>' not in text:
+                      raise SystemExit(f'Missing </head> in {path}')
+                  text = text.replace('</head>', link + '</head>', 1)
+
+              if '<!-- signature-footer -->' not in text:
+                  footer_start = text.find('<footer')
+                  if footer_start < 0:
+                      raise SystemExit(f'Footer not found in {path}')
+                  footer_end = text.find('</footer>', footer_start)
+                  if footer_end < 0:
+                      raise SystemExit(f'Footer closing tag not found in {path}')
+                  text = text[:footer_end] + block + text[footer_end:]
+
+              path.write_text(text, encoding='utf-8')
+
+          # Disclosure and accidental-resume controls remain unchanged.
+          combined = '\n'.join(p.read_text(encoding='utf-8') for p, _ in pages)
+          for forbidden in ('3958760', 'WorldIDSource', 'CVSS 9.2', '$25K'):
+              if forbidden in combined:
+                  raise SystemExit(f'Private active-report detail detected: {forbidden}')
+          if 'Download resume (PDF)' in combined or 'Resume PDF' in combined:
+              raise SystemExit('Resume download option was reintroduced')
+          PY
+
+          rm -rf .footer-signature
+          rm -f .github/workflows/apply-signature-footer.yml
+
+      - name: Commit signature footer
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Add large signature wordmark and LinkedIn footer"
+          git push origin HEAD:main
