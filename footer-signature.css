@@ -95,11 +95,11 @@
   aspect-ratio: 1;
   grid-column: 1;
   grid-row: 1;
-  background: url("assets/yk-mark.svg") center / contain no-repeat;
+  background: url("assets/yk-circular-elite.png") center / contain no-repeat;
   content: "";
   filter:
-    drop-shadow(0 20px 42px rgba(0, 0, 0, .24))
-    drop-shadow(0 0 26px color-mix(in srgb, var(--accent) 18%, transparent));
+    drop-shadow(0 22px 48px rgba(0, 0, 0, .28))
+    drop-shadow(0 0 30px color-mix(in srgb, var(--accent) 24%, transparent));
 }
 
 .signature-wordmark {

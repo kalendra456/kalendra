@@ -3813,3 +3813,32 @@ html[data-theme="light"] .sun-icon {
     opacity: 0;
   }
 }
+
+
+/* Circular Elite brand mark */
+.brand-mark[src$="yk-circular-elite.png"] {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  border-radius: 50%;
+  filter:
+    drop-shadow(0 8px 18px rgba(0, 0, 0, .2))
+    drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 28%, transparent));
+}
+
+.footer-brand .brand-mark[src$="yk-circular-elite.png"] {
+  width: 42px;
+  height: 42px;
+}
+
+.error-panel .brand-mark[src$="yk-circular-elite.png"] {
+  width: 64px;
+  height: 64px;
+}
+
+@media (max-width: 620px) {
+  .brand-mark[src$="yk-circular-elite.png"] {
+    width: 42px;
+    height: 42px;
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "Yaswanth Kalendra — Application Security Portfolio",
+  "name": "Yaswanth Kalendra \u2014 Application Security Portfolio",
   "short_name": "Kalendra Security",
   "description": "Application security, offensive research, vulnerability validation, and SOC engineering portfolio.",
   "start_url": "/kalendra/",
@@ -9,10 +9,10 @@
   "theme_color": "#07111f",
   "icons": [
     {
-      "src": "assets/yk-mark.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "assets/yk-circular-elite.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
