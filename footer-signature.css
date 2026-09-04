@@ -1,0 +1,204 @@
+/* Signature footer wordmark — portfolio identity treatment */
+
+.signature-footer {
+  position: relative;
+  overflow: hidden;
+  margin-top: clamp(2rem, 5vw, 4rem);
+  border-top: 1px solid var(--border);
+  padding: clamp(1.4rem, 3vw, 2.2rem) 0 0;
+}
+
+.signature-footer-meta {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .035em;
+}
+
+.signature-footer-meta > :last-child {
+  justify-self: end;
+}
+
+.signature-footer-role {
+  color: var(--muted-strong);
+  text-align: center;
+}
+
+.signature-linkedin {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface-soft);
+  color: var(--text-strong);
+  padding: .45rem .68rem .45rem .5rem;
+  font-family: var(--font-sans);
+  font-size: .72rem;
+  font-weight: 760;
+  transition: transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.signature-linkedin:hover,
+.signature-linkedin:focus-visible {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, #0a66c2 62%, var(--border));
+  background: color-mix(in srgb, #0a66c2 10%, var(--surface-raised));
+  box-shadow: 0 12px 32px rgba(10, 102, 194, .13);
+}
+
+.signature-linkedin-icon {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: #0a66c2;
+  color: #fff;
+}
+
+.signature-linkedin-icon svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  stroke: none;
+}
+
+.signature-wordmark-wrap {
+  position: relative;
+  margin-top: clamp(2.1rem, 5.5vw, 5.2rem);
+  padding-bottom: clamp(.7rem, 1.6vw, 1.3rem);
+}
+
+.signature-wordmark-wrap::before {
+  position: absolute;
+  inset: -26% 10% 10%;
+  background: radial-gradient(circle at 35% 55%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 46%);
+  content: "";
+  pointer-events: none;
+  filter: blur(16px);
+}
+
+.signature-wordmark {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+  justify-content: center;
+  gap: .085em;
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  font-size: clamp(3.15rem, 8.4vw, 9.25rem);
+  font-weight: 900;
+  line-height: .82;
+  letter-spacing: -.065em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.signature-wordmark span {
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, .12));
+}
+
+.signature-wordmark .signature-first {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--accent) 98%, #1388ff) 0 1px,
+      color-mix(in srgb, var(--accent) 64%, transparent) 1px 2px,
+      transparent 2px 3px
+    ),
+    linear-gradient(90deg, #1587ff, var(--accent));
+}
+
+.signature-wordmark .signature-last {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--text-strong) 88%, transparent) 0 1px,
+      color-mix(in srgb, var(--muted-strong) 62%, transparent) 1px 2px,
+      transparent 2px 3px
+    ),
+    linear-gradient(90deg, var(--text-strong), var(--muted));
+}
+
+.signature-wordmark::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 36%, rgba(255, 255, 255, .13) 49%, transparent 61%);
+  content: "";
+  pointer-events: none;
+  transform: translateX(-125%);
+  animation: signatureSweep 10s ease-in-out infinite 2.5s;
+}
+
+@keyframes signatureSweep {
+  0%, 72%, 100% { transform: translateX(-125%); }
+  82% { transform: translateX(125%); }
+}
+
+[data-theme="light"] .signature-wordmark .signature-last {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(17, 35, 55, .92) 0 1px,
+      rgba(64, 83, 105, .62) 1px 2px,
+      transparent 2px 3px
+    ),
+    linear-gradient(90deg, #132235, #627187);
+}
+
+@media (max-width: 820px) {
+  .signature-footer-meta {
+    grid-template-columns: 1fr auto;
+  }
+
+  .signature-footer-role {
+    display: none;
+  }
+
+  .signature-wordmark {
+    font-size: clamp(2.8rem, 11vw, 5.6rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .signature-footer-meta {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .signature-footer-meta > :last-child {
+    justify-self: center;
+  }
+
+  .signature-wordmark {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    font-size: clamp(3rem, 17vw, 5.4rem);
+    line-height: .76;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signature-wordmark::after {
+    animation: none;
+  }
+
+  .signature-linkedin {
+    transition: none;
+  }
+}
