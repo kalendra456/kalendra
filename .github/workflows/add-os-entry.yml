@@ -6,6 +6,7 @@ on:
       - kalendra-os-interactive-workspace
     paths:
       - .github/workflows/add-os-entry.yml
+      - .github/scripts/add-os-entry.py
 
 permissions:
   contents: write
