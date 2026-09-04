@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080f18">
+  <title>KALENDRA/OS — Yaswanth Kalendra's Security Workspace</title>
+  <meta name="description" content="Explore Yaswanth Kalendra's offensive-security portfolio through an interactive desktop: application security, VAPT, research, public recognition and defensive engineering.">
+  <link rel="canonical" href="https://kalendra456.github.io/kalendra/os/">
+  <meta property="og:title" content="KALENDRA/OS — Offensive mindset. Defensible outcomes.">
+  <meta property="og:description" content="An interactive security portfolio. Open the research, explore the methodology, inspect the evidence.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kalendra456.github.io/kalendra/os/">
+  <link rel="icon" href="../assets/yk-final-logo-v4.png" type="image/png">
+  <link rel="stylesheet" href="desktop.css?v=1">
+  <script src="content.js?v=1" defer></script>
+  <script src="desktop.js?v=1" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="../">Skip interactive experience — recruiter view</a>
+  <div class="wallpaper" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="orbital-core"></div><div class="wallpaper-grid"></div><span class="wallpaper-word">KALENDRA<span>/OS</span></span></div>
+  <header class="system-bar">
+    <button class="system-brand" type="button" data-open="home" aria-label="Open KALENDRA/OS overview"><span class="system-mark">K<span>/</span></span><span>KALENDRA<span class="accent">/OS</span></span><small>PERSONAL WORKSPACE</small></button>
+    <nav class="system-menu" aria-label="Workspace controls"><button type="button" id="desktopToggle">Desktop</button><button type="button" data-open="terminal">Terminal</button><button type="button" id="helpButton">Help</button></nav>
+    <div class="system-right"><a class="recruiter-link" href="../">Recruiter view <span aria-hidden="true">↗</span></a><button class="bar-icon" type="button" id="paletteButton" aria-label="Search apps and commands" title="Search apps (Ctrl / ⌘ K)"><span data-icon="search"></span></button><button class="bar-icon" id="themeButton" type="button" aria-label="Switch to light theme" title="Switch theme"><span data-icon="sun"></span></button><time id="clock" aria-label="Current time in India">IST</time></div>
+  </header>
+  <main id="workspace" aria-label="Interactive portfolio desktop">
+    <nav class="desktop-apps" id="desktopApps" aria-label="Desktop applications"></nav>
+    <aside class="desktop-widgets" aria-label="Workspace information">
+      <section class="widget identity-widget"><div class="widget-label"><span class="status-dot"></span> OFFENSIVE FIRST</div><h2>Break assumptions.<br>Build assurance.</h2><p>Application security and VAPT, informed by real-world defensive operations.</p><button class="text-button" type="button" data-open="profile">Meet the researcher <span>↗</span></button></section>
+      <section class="widget lifecycle-widget"><div class="widget-label">THE DELIVERY MODEL <span>05</span></div><div class="mini-flow"><span>Scope</span><i></i><span>Validate</span><i></i><span>Close</span></div><p>Evidence before severity.<br>Business impact before bounty.</p><button class="text-button" type="button" data-open="methodology">Inspect the workflow <span>↗</span></button></section>
+      <section class="widget shortcuts-widget"><div class="widget-label">QUICK ACCESS</div><a href="https://www.linkedin.com/in/yaswanth-kalendra-kukkala-37b7701a0/" target="_blank" rel="noopener noreferrer"><span data-icon="linkedin"></span> LinkedIn <span>↗</span></a><a href="https://github.com/kalendra456" target="_blank" rel="noopener noreferrer"><span data-icon="code"></span> GitHub <span>↗</span></a><button type="button" data-open="contact"><span data-icon="mail"></span> Discuss a role <span>↗</span></button></section>
+      <div class="workspace-note"><span data-icon="lock"></span><p>Public portfolio. Private details protected.<br>No live scanning or visitor tracking.</p></div>
+    </aside>
+    <div class="desktop-caption"><span>YASWANTH KALENDRA</span><span>APPLICATION SECURITY / VAPT / RESEARCH</span></div>
+    <div id="windowLayer"></div>
+    <p class="sr-only" id="windowInstructions">Drag the title bar to move a window. Focus its title bar and use arrow keys to move, or Shift and arrow keys to resize. On small screens, windows fill the workspace.</p>
+  </main>
+  <footer class="dock-area"><div class="dock-hint"><span class="status-dot"></span><span id="workspaceStatus">Your workspace is ready</span><button type="button" id="motionButton" aria-pressed="false">Motion: on</button></div><nav class="dock" id="dock" aria-label="Application dock"></nav><span class="desktop-version">K/OS 1.0 <span>·</span> PUBLIC EDITION</span></footer>
+  <dialog class="command-dialog" id="commandDialog" aria-label="Search applications"><form method="dialog" class="command-search"><span data-icon="search"></span><input id="commandSearch" type="search" placeholder="Where do you want to go?" aria-label="Search applications and actions" autocomplete="off"><button class="escape-key" aria-label="Close search">ESC</button></form><p class="command-label">APPLICATIONS &amp; ACTIONS</p><div id="commandResults" class="command-results"></div><div class="command-footer"><span><kbd>↑</kbd><kbd>↓</kbd> Navigate <kbd>↵</kbd> Open</span><span>KALENDRA/OS</span></div></dialog>
+  <dialog class="help-dialog" id="helpDialog" aria-labelledby="helpTitle"><form method="dialog"><button class="dialog-close" aria-label="Close help">×</button></form><p class="eyebrow">MAKE YOURSELF AT HOME</p><h2 id="helpTitle">A portfolio you can explore.</h2><p>Open an app from the desktop or dock. Windows can move, resize, minimize and maximize. A dot under a dock icon means the app is open; click it to bring the app back.</p><div class="help-keys"><span>Search every app</span><kbd>Ctrl / ⌘ K</kbd><span>Open the portfolio terminal</span><kbd>Ctrl / ⌘ `</kbd><span>Move a focused title bar</span><kbd>Arrow keys</kbd><span>Resize a focused title bar</span><kbd>Shift + arrows</kbd><span>Close a dialog</span><kbd>Esc</kbd></div><p>On mobile, apps open as full-screen panels. The terminal only navigates this public portfolio; it does not execute system commands.</p><a class="primary-button" href="../">Prefer a simple page? Open recruiter view ↗</a></dialog>
+  <dialog class="proof-dialog" id="proofDialog" aria-labelledby="proofTitle"><header><h2 id="proofTitle">Public recognition</h2><form method="dialog"><button class="dialog-close" aria-label="Close evidence">×</button></form></header><img id="proofImage" alt=""><p id="proofDescription"></p><a id="proofOriginal" target="_blank" rel="noopener noreferrer">Open original evidence ↗</a></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <noscript><div class="no-script"><h1>KALENDRA/OS</h1><p>This interactive desktop needs JavaScript. All professional information remains available in the standard portfolio.</p><a href="../">Open recruiter view →</a></div></noscript>
+</body>
+</html>
