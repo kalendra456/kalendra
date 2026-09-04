@@ -3816,7 +3816,7 @@ html[data-theme="light"] .sun-icon {
 
 
 /* Circular Elite brand mark */
-.brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+.brand-mark[src$="yk-final-logo-v4.png"] {
   width: 46px;
   height: 46px;
   object-fit: contain;
@@ -3826,18 +3826,18 @@ html[data-theme="light"] .sun-icon {
     drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 28%, transparent));
 }
 
-.footer-brand .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+.footer-brand .brand-mark[src$="yk-final-logo-v4.png"] {
   width: 42px;
   height: 42px;
 }
 
-.error-panel .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+.error-panel .brand-mark[src$="yk-final-logo-v4.png"] {
   width: 64px;
   height: 64px;
 }
 
 @media (max-width: 620px) {
-  .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+  .brand-mark[src$="yk-final-logo-v4.png"] {
     width: 42px;
     height: 42px;
   }
@@ -3845,7 +3845,7 @@ html[data-theme="light"] .sun-icon {
 
 
 /* Exact ChatGPT-shared Circular Elite logo */
-.brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+.brand-mark[src$="yk-final-logo-v4.png"] {
   display: block !important;
   width: 46px;
   height: 46px;
@@ -3859,20 +3859,20 @@ html[data-theme="light"] .sun-icon {
     drop-shadow(0 0 11px color-mix(in srgb, var(--accent) 32%, transparent));
 }
 
-.footer-brand .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+.footer-brand .brand-mark[src$="yk-final-logo-v4.png"] {
   width: 42px;
   height: 42px;
   flex-basis: 42px;
 }
 
-.error-panel .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+.error-panel .brand-mark[src$="yk-final-logo-v4.png"] {
   width: 64px;
   height: 64px;
   flex-basis: 64px;
 }
 
 @media (max-width: 620px) {
-  .brand-mark[src$="yk-chatgpt-shared-logo.png"] {
+  .brand-mark[src$="yk-final-logo-v4.png"] {
     width: 42px;
     height: 42px;
     flex-basis: 42px;
