@@ -1,0 +1,68 @@
+/* Keep the workspace launch action visible in the sticky Recruiter View header. */
+#siteHeader .header-inner { gap: 1rem; }
+#siteHeader .header-actions { gap: .5rem; flex: 0 0 auto; }
+#siteHeader .desktop-nav { gap: 1rem; }
+#siteHeader .desktop-nav a { white-space: nowrap; font-size: .8rem; }
+#siteHeader .topbar-os-launch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 42px;
+  flex: 0 0 auto;
+  padding: .65rem .85rem;
+  border: 1px solid var(--accent, #62ded5);
+  border-radius: 11px;
+  background: var(--surface-soft, #0e2330);
+  color: var(--text-strong, #edf5fa);
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: .75rem;
+  font-weight: 750;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+#siteHeader .topbar-os-launch svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: var(--accent, #62ded5);
+  stroke-width: 1.7;
+  flex: 0 0 auto;
+}
+#siteHeader .topbar-os-launch:hover { background: var(--surface-raised, #17313e); }
+#siteHeader .topbar-os-launch:focus-visible { outline: 2px solid var(--accent, #62ded5); outline-offset: 4px; }
+/* The direct launch stays labelled; the adjacent icon reopens the two-view chooser. */
+#siteHeader .vc-toggle { width: 38px; min-height: 40px; padding: 8px; }
+#siteHeader .vc-toggle > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (max-width: 1380px) {
+  #siteHeader .desktop-nav { display: none; }
+  #siteHeader .menu-toggle { display: inline-grid; }
+  #siteHeader .mobile-nav:not([hidden]) { display: grid; gap: .35rem; padding-block: .8rem 1rem; }
+  #siteHeader .mobile-nav a { padding: .65rem .75rem; border-radius: 8px; }
+}
+@media (max-width: 900px) {
+  #siteHeader .header-cta { display: none; }
+}
+@media (max-width: 600px) {
+  :root { --header-height: 116px; }
+  #siteHeader .header-inner { flex-wrap: wrap; min-height: 0; gap: 8px; padding-block: 10px; }
+  #siteHeader .header-inner > .brand { flex: 1 1 100%; }
+  #siteHeader .header-actions { width: 100%; gap: 6px; }
+  #siteHeader .topbar-os-launch { order: -1; margin-right: auto; min-height: 40px; padding: .55rem .65rem; font-size: 12px; }
+  #siteHeader .topbar-os-launch svg { width: 15px; height: 15px; }
+  #siteHeader .icon-button, #siteHeader .vc-toggle { width: 36px; min-width: 36px; height: 40px; min-height: 40px; flex: 0 0 36px; }
+  #siteHeader .brand-copy span { display: block; font-size: .62rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #siteHeader .topbar-os-launch { transition: none; }
+}
+@media print { #siteHeader .topbar-os-launch { display: none; } }

@@ -1,0 +1,95 @@
+name: Publish and verify top-bar OS launcher
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-topbar-launch.yml
+      - .github/scripts/install-topbar-launch.py
+      - .github/scripts/check-topbar-launch.py
+      - topbar-launch.css
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-topbar-launch
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out exact change
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Install native top-bar launch link
+        run: python3 .github/scripts/install-topbar-launch.py
+
+      - name: Install browser test tools
+        run: |
+          python3 -m pip install --disable-pip-version-check playwright==1.57.0
+          if ! command -v google-chrome >/dev/null 2>&1; then
+            python3 -m playwright install --with-deps chromium
+          fi
+
+      - name: Test launcher and both view choosers before publishing
+        env:
+          PORTFOLIO_URL: http://127.0.0.1:8765/kalendra/
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory .. >/tmp/topbar-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+          sleep 1
+          CHECK_OUTPUT=verification/local/launcher python3 .github/scripts/check-topbar-launch.py
+          CHECK_OUTPUT=verification/local/chooser python3 .github/scripts/check-view-choice.py
+
+      - name: Publish tested header and remove one-time installer
+        run: |
+          set -euo pipefail
+          rm .github/scripts/install-topbar-launch.py .github/workflows/publish-topbar-launch.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- index.html .github/scripts/install-topbar-launch.py .github/workflows/publish-topbar-launch.yml
+          git diff --cached --stat
+          git commit -m "Keep Launch KALENDRA OS in the top navigation bar"
+          git push origin HEAD:main
+
+      - name: Wait for public header update
+        run: |
+          python3 - <<'PY'
+          import time
+          from urllib.request import Request, urlopen
+          for attempt in range(40):
+              try:
+                  url = 'https://kalendra456.github.io/kalendra/?topbar-check=' + str(time.time_ns())
+                  with urlopen(Request(url, headers={'Cache-Control': 'no-cache'}), timeout=15) as response:
+                      source = response.read().decode('utf-8')
+                  if 'class="os-launch topbar-os-launch"' in source and 'topbar-launch.css?v=1' in source:
+                      print('Public homepage serves the new top-bar link.')
+                      break
+              except Exception as error:
+                  print(type(error).__name__, flush=True)
+              time.sleep(5)
+          else:
+              raise SystemExit('Public homepage has not updated yet')
+          PY
+
+      - name: Check the deployed site in Chromium
+        run: |
+          CHECK_OUTPUT=verification/live/launcher python3 .github/scripts/check-topbar-launch.py
+          CHECK_OUTPUT=verification/live/chooser python3 .github/scripts/check-view-choice.py
+
+      - name: Save browser verification and screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: topbar-launch-verification
+          path: verification/
+          retention-days: 7
