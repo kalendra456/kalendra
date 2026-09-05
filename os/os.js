@@ -23,6 +23,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const mobile = matchMedia('(max-width: 700px)');
   const windows = new Map();
+  const wm = window.createKalendraWindowManager({ layer, mobile, windows, icon, announce, activate: id => focusWindow(id, false) });
   let active = '', topZ = 5, desktopHidden = false, toastTimer, paletteReturnFocus;
   let paletteMatches = [], paletteSelection = 0;
   let termHistory = [], termIndex = 0, termDraft = '';
@@ -47,27 +48,10 @@
   function toggleTheme() { const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = theme; savePreference('kalendra-os-theme', theme); updatePreferences(); announce(`${theme} theme enabled`); }
   reduced.addEventListener('change', updatePreferences);
   function toast(text) { const node = document.getElementById('toast'); node.textContent = text; node.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => { node.hidden = true; }, 4500); }
-  function bounds() { return { width: layer.clientWidth, height: layer.clientHeight }; }
-  function initialRect(id, offset = 0) {
-    const b = bounds();
-    const reserve = b.width >= 1250 ? 414 : b.width > 1000 ? 348 : 125;
-    const width = Math.min(id === 'home' ? 940 : 800, Math.max(330, b.width - reserve));
-    const height = Math.min(id === 'home' ? 664 : 618, Math.max(260, b.height - 30));
-    const x = Math.min(Math.max(110, (b.width - (b.width > 1000 ? 252 : 40) - width) / 2) + offset, Math.max(0,b.width-width-12));
-    const y = Math.min(Math.max(15, (b.height-height)/2) + offset, Math.max(0,b.height-height-8));
-    return { x, y, width, height };
-  }
-  function fitRect(rect) {
-    const b = bounds();
-    const width = Math.min(Math.max(330, rect.width), Math.max(1,b.width-16));
-    const height = Math.min(Math.max(250, rect.height), Math.max(1,b.height-16));
-    return { width, height, x:Math.max(0,Math.min(rect.x,b.width-width)), y:Math.max(0,Math.min(rect.y,b.height-height)) };
-  }
-  function applyRect(win, rect) {
-    win.rect = fitRect(rect);
-    const r = win.rect;
-    Object.assign(win.node.style, { left:`${r.x}px`, top:`${r.y}px`, width:`${r.width}px`, height:`${r.height}px` });
-  }
+  function bounds() { return wm.bounds(); }
+  function initialRect(id, offset=0) { return wm.initialRect(id,offset); }
+  function fitRect(rect) { return wm.fitRect(rect); }
+  function applyRect(win,rect) { wm.applyRect(win,rect); }
   function setHash(id) { try { const next = id ? `#${id}` : location.pathname + location.search; history.replaceState(null,'',next); } catch (_) { /* Local previews may have restricted history. */ } }
   function updateDock() {
     document.querySelectorAll('[data-dock]').forEach(button => {
@@ -121,36 +105,17 @@
     if(id==='terminal') { setupTerminal(node); node.querySelector('input').focus({preventScroll:true}); }
     announce(`${app.title} opened`);
   }
-  function closeWindow(id) { const win=windows.get(id);if(!win)return;win.node.remove();windows.delete(id);announce(`${apps[id].title} closed`);focusNext(); }
-  function minimizeWindow(id) { const win=windows.get(id);if(!win)return;win.node.hidden=true;announce(`${apps[id].title} minimized. Restore it from the dock.`);focusNext(); }
-  function maximizeWindow(id) {
-    const win=windows.get(id);if(!win||mobile.matches)return;
-    win.maximized=!win.maximized;win.node.classList.toggle('is-maximized',win.maximized);
-    const b=win.node.querySelector('[data-window-action=maximize]'); b.innerHTML=icon(win.maximized?'restore':'maximize'); b.setAttribute('aria-label',`${win.maximized?'Restore':'Maximize'} window`);b.title=win.maximized?'Restore':'Maximize';
-    focusWindow(id,false);announce(`${apps[id].title} ${win.maximized?'maximized':'restored'}`);
-  }
-  function setupDrag(win,bar,grip) {
-    function pointer(e, resizing) {
-      if(mobile.matches||win.maximized||e.button!==0||(!resizing&&e.target.closest('button')))return;
-      e.preventDefault();const target=resizing?grip:bar, start={x:e.clientX,y:e.clientY,...win.rect};
-      // Preserve pointer coordinates separately from the window rectangle.
-      const px=e.clientX,py=e.clientY;target.setPointerCapture(e.pointerId);win.node.classList.add('is-dragging');
-      function move(ev){const dx=ev.clientX-px,dy=ev.clientY-py;applyRect(win,resizing?{...start,width:start.width+dx,height:start.height+dy}:{...start,x:start.x+dx,y:start.y+dy});}
-      function end(){win.node.classList.remove('is-dragging');target.removeEventListener('pointermove',move);target.removeEventListener('pointerup',end);target.removeEventListener('pointercancel',end);target.removeEventListener('lostpointercapture',end);}
-      target.addEventListener('pointermove',move);target.addEventListener('pointerup',end);target.addEventListener('pointercancel',end);target.addEventListener('lostpointercapture',end);
-    }
-    bar.addEventListener('pointerdown',e=>pointer(e,false));grip.addEventListener('pointerdown',e=>pointer(e,true));
-    grip.addEventListener('keydown',e=>{const moves={ArrowRight:[20,0],ArrowLeft:[-20,0],ArrowDown:[0,20],ArrowUp:[0,-20]};if(!moves[e.key]||mobile.matches)return;e.preventDefault();const [dx,dy]=moves[e.key];applyRect(win,{...win.rect,width:win.rect.width+dx,height:win.rect.height+dy});announce(`Window size ${Math.round(win.rect.width)} by ${Math.round(win.rect.height)}`);});
-  }
+  function closeWindow(id) { const win=windows.get(id);if(!win)return;wm.detach(win);win.node.remove();windows.delete(id);announce(`${apps[id].title} closed`);focusNext(); }
+  function minimizeWindow(id) { const win=windows.get(id);if(!win)return;wm.cancelInteraction();win.node.hidden=true;announce(`${apps[id].title} minimized. Restore it from the dock.`);focusNext(); }
+  function maximizeWindow(id) { wm.toggleMaximize(id); }
+  function setupDrag(win,bar,grip) { wm.attach(win,bar,grip); }
   function showDesktop() {
     const visible=[...windows.values()].some(w=>!w.node.hidden);
     if(visible){windows.forEach(w=>{w.wasVisible=!w.node.hidden;w.node.hidden=true;});active='';desktopHidden=true;setHash('');updateDock();document.getElementById('show-desktop').focus();}
     else if(windows.size){windows.forEach(w=>{if(!desktopHidden||w.wasVisible)w.node.hidden=false;});desktopHidden=false;focusNext();}
     else openApp('home');
   }
-  function arrangeWindows() { let i=0;windows.forEach((w,id)=>{if(w.maximized)maximizeWindow(id);applyRect(w,initialRect(id,(i++%4)*22));});toast('Open windows recentered.'); }
-  let resizeTimer;
-  addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(!mobile.matches)windows.forEach(w=>applyRect(w,w.rect));},100);});
+  function arrangeWindows() { wm.arrange();toast('Open windows recentered.'); }
   // Command palette: actions are selected from a fixed registry, never evaluated as code.
   const commands=[...Object.entries(apps).map(([id,a])=>({id,title:a.title,desc:a.subtitle,keywords:a.keywords,icon:id,run:()=>openApp(id)})),{id:'desktop',title:'Show desktop',desc:'Minimize or restore open windows',keywords:'minimize restore clear',icon:'home',run:showDesktop},{id:'arrange',title:'Arrange windows',desc:'Recenter the workspace',keywords:'reset layout',icon:'restore',run:arrangeWindows},{id:'theme',title:'Switch color theme',desc:'Midnight / light',keywords:'theme dark light',icon:'sun',run:toggleTheme},{id:'recruiter',title:'Recruiter View',desc:'Return to the standard portfolio',keywords:'exit traditional portfolio',icon:'external',run:()=>location.assign(SITE)}];
   function renderPalette(){const query=paletteInput.value.trim().toLowerCase();paletteMatches=commands.filter(c=>`${c.title} ${c.desc} ${c.keywords}`.toLowerCase().includes(query));paletteSelection=0;results.replaceChildren();if(!paletteMatches.length){results.append(element('p','palette-empty','No matching apps. Try “skills”, “contact”, or “terminal”.'));return;}paletteMatches.forEach((c,i)=>{const button=element('button','palette-result');button.type='button';button.innerHTML=icon(c.icon);const text=element('span');text.append(element('strong','',c.title),element('small','',c.desc));button.append(text);button.addEventListener('click',()=>executePalette(i));button.addEventListener('pointerenter',()=>{paletteSelection=i;selectPalette(false);});results.append(button);});selectPalette(false);}

@@ -1,0 +1,116 @@
+name: Verify OS window controls
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, os-window-controls-20260905]
+    paths:
+      - os/window-manager.js
+      - os/window-controls.css
+      - os/os.js
+      - os/index.html
+      - .github/scripts/check-window-controls.py
+      - .github/scripts/install-window-controls.py
+      - .github/workflows/window-controls-check.yml
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    if: github.ref_name == 'os-window-controls-20260905'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 1
+      - name: Integrate verified source
+        run: |
+          python3 .github/scripts/install-window-controls.py
+          node --check os/window-manager.js
+          node --check os/os.js
+      - name: Install browser tools
+        run: |
+          python3 -m pip install --disable-pip-version-check playwright==1.57.0
+          if ! command -v google-chrome >/dev/null 2>&1; then
+            python3 -m playwright install --with-deps chromium
+          fi
+      - name: Test windows and existing navigation against local build
+        env:
+          PORTFOLIO_URL: http://127.0.0.1:8765/kalendra/
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory .. >/tmp/window-controls-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+          sleep 1
+          CHECK_OUTPUT=verification/local/windows python3 .github/scripts/check-window-controls.py
+          CHECK_OUTPUT=verification/local/chooser python3 .github/scripts/check-view-choice.py
+          CHECK_OUTPUT=verification/local/topbar python3 .github/scripts/check-topbar-launch.py
+      - name: Commit tested integration on feature branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- os/os.js os/index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Integrate tested maximize restore and resizing controls"
+            git push origin HEAD:os-window-controls-20260905
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: os-window-controls-local
+          path: verification/
+          retention-days: 14
+
+  live:
+    if: github.ref_name == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Install browser tools
+        run: |
+          python3 -m pip install --disable-pip-version-check playwright==1.57.0
+          if ! command -v google-chrome >/dev/null 2>&1; then
+            python3 -m playwright install --with-deps chromium
+          fi
+      - name: Wait for the exact files to reach GitHub Pages
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, time, urllib.request
+          base = 'https://kalendra456.github.io/kalendra/'
+          files = ['os/index.html', 'os/os.js', 'os/window-manager.js', 'os/window-controls.css']
+          expected = {name: hashlib.sha256(Path(name).read_bytes()).hexdigest() for name in files}
+          for attempt in range(40):
+              try:
+                  ready = True
+                  for name in files:
+                      request = urllib.request.Request(base + name + '?wm-check=' + str(time.time_ns()), headers={'Cache-Control':'no-cache'})
+                      with urllib.request.urlopen(request, timeout=15) as response:
+                          ready = ready and hashlib.sha256(response.read()).hexdigest() == expected[name]
+                  if ready:
+                      print('Exact window-control source is served by GitHub Pages.')
+                      break
+              except Exception as error:
+                  print(type(error).__name__, flush=True)
+              time.sleep(5)
+          else:
+              raise SystemExit('Updated source has not reached Pages within the verification window.')
+          PY
+      - name: Verify live windows and view navigation in Chromium
+        run: |
+          CHECK_OUTPUT=verification/live/windows python3 .github/scripts/check-window-controls.py
+          CHECK_OUTPUT=verification/live/chooser python3 .github/scripts/check-view-choice.py
+          CHECK_OUTPUT=verification/live/topbar python3 .github/scripts/check-topbar-launch.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: os-window-controls-live
+          path: verification/
+          retention-days: 14
