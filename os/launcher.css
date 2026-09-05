@@ -1,0 +1,11 @@
+/* Scoped entry point; preserves the existing portfolio layout and typography. */
+.experience-switch{display:flex;align-items:center;flex-wrap:wrap;gap:.65rem;margin:1.25rem 0 0;font-family:inherit}
+.experience-switch .experience-label{width:100%;font-family:var(--font-mono,monospace);color:var(--muted,#a0afc2);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}
+.experience-switch .current-view,.experience-switch .os-launch{display:inline-flex;align-items:center;gap:.55rem;min-height:38px;padding:.6rem .85rem;border:1px solid var(--border,#243246);border-radius:8px;font-size:.75rem;line-height:1.4}
+.experience-switch .current-view{color:var(--muted,#a0afc2);background:var(--surface-soft,transparent)}
+.experience-switch .current-view:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent,#63dfd1)}
+.experience-switch .os-launch{color:var(--text-strong,#eaf1f9);background:var(--accent-soft,rgba(99,223,209,.08));border-color:color-mix(in srgb,var(--accent,#63dfd1) 38%,var(--border,#243246));font-weight:600;text-decoration:none;transition:background .15s,border-color .15s}
+.experience-switch .os-launch span{color:var(--accent,#63dfd1)}
+.experience-switch .os-launch:hover{border-color:var(--accent,#63dfd1);background:color-mix(in srgb,var(--accent,#63dfd1) 14%,transparent)}
+.experience-switch .os-launch:focus-visible{outline:2px solid var(--accent,#63dfd1);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){.experience-switch .os-launch{transition:none}}
