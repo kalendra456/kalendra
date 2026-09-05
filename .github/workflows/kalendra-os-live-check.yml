@@ -48,6 +48,7 @@ jobs:
           def watch(page):
               page.set_default_timeout(15000)
               page.on('pageerror', lambda error: errors.append(str(error)))
+              page.add_locator_handler(page.locator('#portfolio-view-dialog[open]'), lambda: page.locator('#portfolio-view-dialog .vc-stay').click())
 
           try:
               with sync_playwright() as p:
