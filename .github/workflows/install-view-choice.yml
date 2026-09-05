@@ -28,7 +28,7 @@ jobs:
       - name: Validate complete source files and integrate both pages
         run: |
           set -euo pipefail
-          test "$(git hash-object view-choice.js)" = "27f2f0ab75b4e32962ccf505f5b3ae3bcef7a23f"
+          test "$(git hash-object view-choice.js)" = "a63583db87ee145a85fc10f6097c9c09828ae3d3"
           test "$(git hash-object view-choice.css)" = "953fccd5f76fdbd7ebe79e9c2240ccb4d05d5306"
           node --check view-choice.js
           python3 .github/scripts/install-view-choice.py
