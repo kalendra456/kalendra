@@ -1,0 +1,175 @@
+name: KALENDRA OS live browser check
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kalendra-os-live-check.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify-public-workspace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Install browser test tools
+        run: |
+          python3 -m pip install --disable-pip-version-check playwright==1.57.0
+          if ! command -v google-chrome >/dev/null 2>&1; then
+            python3 -m playwright install --with-deps chromium
+          fi
+
+      - name: Verify published portfolio and interactive workspace
+        run: |
+          mkdir -p verification
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          import os
+          import shutil
+          import time
+          from playwright.sync_api import sync_playwright
+
+          SITE = 'https://kalendra456.github.io/kalendra/'
+          OUT = Path('verification')
+          checks = []
+          errors = []
+          report = {'site': SITE, 'checks': checks, 'javascript_errors': errors}
+
+          def check(name, condition):
+              checks.append({'name': name, 'passed': bool(condition)})
+              print(('PASS ' if condition else 'FAIL ') + name, flush=True)
+              if not condition:
+                  raise AssertionError(name)
+
+          def watch(page):
+              page.set_default_timeout(15000)
+              page.on('pageerror', lambda error: errors.append(str(error)))
+
+          try:
+              with sync_playwright() as p:
+                  options = {'headless': True, 'args': ['--no-sandbox']}
+                  chrome = shutil.which('google-chrome')
+                  if chrome:
+                      options['executable_path'] = chrome
+                  browser = p.chromium.launch(**options)
+                  context = browser.new_context(viewport={'width': 1440, 'height': 900}, reduced_motion='reduce')
+                  page = context.new_page()
+                  watch(page)
+                  response = page.goto(SITE + '?check=' + str(int(time.time())), wait_until='domcontentloaded', timeout=60000)
+                  check('Recruiter homepage returns HTTP 200', response.status == 200)
+                  launch = page.locator('a.os-launch')
+                  launch.wait_for(state='visible', timeout=30000)
+                  check('Homepage retains Recruiter View', page.locator('.current-view').inner_text() == 'Recruiter View')
+                  check('Exactly one workspace launcher is present', launch.count() == 1 and launch.get_attribute('href') == 'os/')
+                  check('No resume download button was restored', page.locator('a[download][href*="Resume"], a[download][href*="resume"]').count() == 0)
+                  page.locator('.site-header .brand-mark').evaluate('(e) => e.decode()')
+                  check('Existing homepage logo decodes', page.locator('.site-header .brand-mark').evaluate('(e) => e.naturalWidth > 0'))
+                  page.screenshot(path=str(OUT / 'homepage-launcher.png'))
+                  launch.click()
+                  page.wait_for_selector('#window-home', timeout=30000)
+                  check('Homepage launcher opens the live workspace', '/kalendra/os/' in page.url)
+                  check('Workspace stylesheet is applied', page.locator('.system-bar').evaluate('(e) => getComputedStyle(e).position') == 'fixed')
+                  page.locator('.system-brand img').evaluate('(e) => e.decode()')
+                  check('Workspace brand image decodes', page.locator('.system-brand img').evaluate('(e) => e.naturalWidth > 0'))
+                  check('Reduced-motion preference is respected', page.locator('html').get_attribute('data-motion') == 'reduce')
+                  page.screenshot(path=str(OUT / 'workspace-desktop.png'))
+
+                  apps = ['home', 'profile', 'surface', 'findings', 'lab', 'recognition', 'operations', 'terminal', 'contact', 'config']
+                  for app in apps:
+                      page.locator('[data-dock="' + app + '"]').click()
+                      check(app + ' application opens', page.locator('#window-' + app + '.is-active').count() == 1)
+                      if app != 'home':
+                          page.locator('#window-' + app + ' [data-window-action="close"]').click()
+
+                  home = page.locator('#window-home')
+                  page.locator('#window-home [data-window-action="maximize"]').click()
+                  check('Window maximize works', 'is-maximized' in home.get_attribute('class'))
+                  page.locator('#window-home [data-window-action="maximize"]').click()
+                  page.locator('#window-home [data-window-action="minimize"]').click()
+                  check('Window minimize works', not home.is_visible())
+                  page.locator('[data-dock="home"]').click()
+                  check('Dock restores a minimized window', home.is_visible())
+                  before = home.bounding_box()
+                  page.mouse.move(before['x'] + 240, before['y'] + 20)
+                  page.mouse.down()
+                  page.mouse.move(before['x'] + 270, before['y'] + 40, steps=5)
+                  page.mouse.up()
+                  after = home.bounding_box()
+                  check('Window drag works', after['x'] >= before['x'] + 29 and after['y'] >= before['y'] + 19)
+                  grip = page.locator('#window-home .resize-grip')
+                  grip.focus()
+                  page.keyboard.press('ArrowLeft')
+                  check('Window keyboard resize works', abs(home.bounding_box()['width'] - (after['width'] - 20)) < 2)
+
+                  page.keyboard.press('Control+k')
+                  page.locator('#palette-input').fill('contact')
+                  page.keyboard.press('Enter')
+                  check('Command palette launches Contact', page.locator('#window-contact.is-active').count() == 1)
+                  page.keyboard.press('Alt+w')
+                  page.locator('[data-dock="terminal"]').click()
+                  terminal = page.locator('#terminal-input')
+                  terminal.fill('whoami')
+                  terminal.press('Enter')
+                  check('Portfolio terminal returns profile information', 'Yaswanth' in page.locator('.terminal-output').inner_text())
+                  terminal.fill('skills')
+                  terminal.press('Enter')
+                  page.screenshot(path=str(OUT / 'workspace-terminal.png'))
+                  terminal.fill('who')
+                  terminal.press('Tab')
+                  check('Terminal Tab completion works', terminal.input_value() == 'whoami')
+                  page.locator('#window-terminal [data-window-action="close"]').click()
+
+                  page.locator('[data-dock="recognition"]').click()
+                  proof_buttons = page.locator('#window-recognition [data-proof]')
+                  for i in range(proof_buttons.count()):
+                      proof_buttons.nth(i).click()
+                      image = page.locator('#proof-image')
+                      image.wait_for(state='visible', timeout=30000)
+                      check('Public evidence image ' + str(i + 1) + ' loads', image.evaluate('(e) => e.complete && e.naturalWidth > 0'))
+                      page.keyboard.press('Escape')
+                  page.locator('#window-recognition [data-window-action="close"]').click()
+                  page.locator('.system-right [data-theme-toggle]').click()
+                  check('Light theme works', page.locator('html').get_attribute('data-theme') == 'light')
+                  page.screenshot(path=str(OUT / 'workspace-light.png'))
+                  page.locator('.system-right [data-theme-toggle]').click()
+
+                  responsive = []
+                  for width, height in [(1920,1080), (1440,900), (1366,768), (1024,768), (820,1180), (700,850), (390,844), (360,800), (320,700)]:
+                      mobile_page = context.new_page(viewport={'width': width, 'height': height}) if False else context.new_page()
+                      mobile_page.set_viewport_size({'width': width, 'height': height})
+                      watch(mobile_page)
+                      mobile_page.goto(SITE + 'os/', wait_until='domcontentloaded', timeout=60000)
+                      mobile_page.wait_for_selector('#window-home')
+                      for app in apps:
+                          mobile_page.locator('[data-dock="' + app + '"]').evaluate('(e) => e.click()')
+                          body = mobile_page.locator('#window-' + app + ' .window-body')
+                          dimensions = body.evaluate('(e) => ({client: e.clientWidth, scroll: e.scrollWidth})')
+                          if dimensions['scroll'] > dimensions['client'] + 1:
+                              responsive.append({'width': width, 'app': app, 'dimensions': dimensions})
+                      if width == 390:
+                          mobile_page.locator('[data-dock="home"]').evaluate('(e) => e.click()')
+                          mobile_page.screenshot(path=str(OUT / 'workspace-mobile.png'))
+                      mobile_page.close()
+                  report['responsive_issues'] = responsive
+                  check('No horizontal app-content overflow across 90 viewport/app combinations', not responsive)
+                  check('No uncaught JavaScript errors during live checks', not errors)
+                  browser.close()
+          finally:
+              (OUT / 'results.json').write_text(json.dumps(report, indent=2), encoding='utf-8')
+              passed = sum(c['passed'] for c in checks)
+              summary = '# KALENDRA/OS live verification\n\n' + str(passed) + '/' + str(len(checks)) + ' checks passed.\n\n'
+              summary += '\n'.join(('- [x] ' if c['passed'] else '- [ ] ') + c['name'] for c in checks)
+              Path(os.environ['GITHUB_STEP_SUMMARY']).write_text(summary + '\n', encoding='utf-8')
+          PY
+
+      - name: Save live verification report and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kalendra-os-live-verification
+          path: verification/
+          retention-days: 14
