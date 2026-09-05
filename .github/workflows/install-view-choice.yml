@@ -32,6 +32,7 @@ jobs:
           test "$(git hash-object view-choice.css)" = "953fccd5f76fdbd7ebe79e9c2240ccb4d05d5306"
           node --check view-choice.js
           python3 .github/scripts/install-view-choice.py
+          git restore -- .github/workflows/kalendra-os-live-check.yml
 
       - name: Install browser test tools
         run: |
@@ -56,7 +57,7 @@ jobs:
           rm .github/scripts/install-view-choice.py .github/workflows/install-view-choice.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- index.html os/index.html .github/workflows/kalendra-os-live-check.yml .github/scripts/install-view-choice.py .github/workflows/install-view-choice.yml
+          git add -- index.html os/index.html .github/scripts/install-view-choice.py .github/workflows/install-view-choice.yml
           git commit -m "Ask visitors to choose Recruiter View or KALENDRA OS on both routes"
           git push origin HEAD:main
 
