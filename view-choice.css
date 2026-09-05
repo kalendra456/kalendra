@@ -1,0 +1,58 @@
+/* Scoped shared chooser; existing Recruiter View and OS branding stay unchanged. */
+.vc-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:8px 11px;border:1px solid #365563;border-radius:10px;background:#0e2330;color:#e7f5fa;font:600 12px/1.2 var(--font-sans,system-ui,sans-serif);white-space:nowrap;cursor:pointer;flex-shrink:0}
+.vc-toggle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;flex-shrink:0}
+.vc-toggle:hover{border-color:#59d9d1;background:#17313e}
+.vc-toggle:focus-visible{outline:2px solid #59d9d1;outline-offset:3px}
+#portfolio-view-dialog{--vc-bg:#0b1825;--vc-card:#112331;--vc-text:#edf5fa;--vc-muted:#a9bccb;--vc-line:#304656;--vc-accent:#62ded5;box-sizing:border-box;width:min(850px,calc(100vw - 32px));max-width:850px;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);inset:0;margin:auto;padding:28px 30px 20px;overflow:auto;border:1px solid var(--vc-line);border-radius:24px;background:radial-gradient(ellipse at 100% 0%,#16414a60,transparent 55%),var(--vc-bg);color:var(--vc-text);box-shadow:0 32px 100px #0009;font:400 14px/1.55 var(--font-sans,system-ui,sans-serif);text-align:left;letter-spacing:normal;isolation:isolate}
+#portfolio-view-dialog:not([open]){display:none}
+#portfolio-view-dialog[open]{animation:vc-enter 200ms ease-out both}
+#portfolio-view-dialog::backdrop{background:#020913de;backdrop-filter:blur(12px)}
+#portfolio-view-dialog *{box-sizing:border-box}
+#portfolio-view-dialog .vc-heading-row{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px}
+#portfolio-view-dialog .vc-identity{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--vc-accent);font-size:16px;letter-spacing:-.03em}
+#portfolio-view-dialog .vc-identity span{font-size:13px;color:var(--vc-text);letter-spacing:0;font-weight:650}
+#portfolio-view-dialog .vc-edition{font:500 9px/1.4 ui-monospace,monospace;letter-spacing:.08em;color:var(--vc-muted);text-align:right}
+#portfolio-view-dialog .vc-eyebrow{margin:0 0 8px;color:var(--vc-accent);font:600 10px/1.4 ui-monospace,monospace;letter-spacing:.12em}
+#portfolio-view-dialog h2{margin:0;font-size:clamp(23px,3.4vw,34px);line-height:1.15;letter-spacing:-.035em;font-weight:750;color:var(--vc-text);max-width:none}
+#portfolio-view-dialog #vc-description{margin:12px 0 24px;font-size:14px;line-height:1.6;color:var(--vc-muted);max-width:none}
+#portfolio-view-dialog .vc-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#portfolio-view-dialog .vc-option{display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:18px;border:1px solid var(--vc-line);border-radius:16px;background:var(--vc-card);color:var(--vc-text);text-decoration:none;transition:transform 180ms,border-color 180ms,background 180ms}
+#portfolio-view-dialog .vc-option:hover{transform:translateY(-3px);border-color:var(--vc-accent)}
+#portfolio-view-dialog .vc-option:focus-visible{outline:2px solid var(--vc-accent);outline-offset:4px}
+#portfolio-view-dialog .vc-option-label{margin:16px 0 7px;color:var(--vc-accent);font:600 9px/1.4 ui-monospace,monospace;letter-spacing:.09em}
+#portfolio-view-dialog .vc-option-title{font-size:22px;font-weight:750;line-height:1.25;letter-spacing:-.025em}
+#portfolio-view-dialog .vc-option-description{margin-top:10px;color:var(--vc-muted);font-size:13px;line-height:1.65}
+#portfolio-view-dialog .vc-option-tags{margin:16px 0 18px;font-size:10px;line-height:1.6;color:var(--vc-muted)}
+#portfolio-view-dialog .vc-option-action{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto;border-top:1px solid var(--vc-line);padding-top:14px;font-size:12px;font-weight:700}
+#portfolio-view-dialog .vc-option-action>span{color:var(--vc-accent);font-size:20px;line-height:1}
+#portfolio-view-dialog .vc-preview{position:relative;display:block;height:108px;overflow:hidden;border-radius:8px;border:1px solid #254555;background:#071521;color:#a7c8d4}
+#portfolio-view-dialog .vc-page{padding:14px 20px}
+#portfolio-view-dialog .vc-mini-nav{display:block;height:5px;margin-bottom:15px;border-radius:2px;background:linear-gradient(90deg,#55d5cd 15%,transparent 15% 60%,#385869 60%)}
+#portfolio-view-dialog .vc-mini-title{display:block;width:60%;height:9px;background:#d7e7f0;border-radius:2px;margin-bottom:8px}
+#portfolio-view-dialog .vc-mini-line{display:block;width:85%;height:4px;background:#466576;border-radius:2px;margin-bottom:5px}
+#portfolio-view-dialog .vc-short{width:68%}
+#portfolio-view-dialog .vc-mini-cards{display:flex;gap:7px;margin-top:10px}
+#portfolio-view-dialog .vc-mini-cards i{height:17px;flex:1;border:1px solid #3c6572;border-radius:3px;background:#10303a}
+#portfolio-view-dialog .vc-desktop{background:radial-gradient(ellipse at 80% 80%,#0d434e,transparent 70%),#071521}
+#portfolio-view-dialog .vc-mini-apps{position:absolute;left:14px;top:14px;display:grid;gap:7px}
+#portfolio-view-dialog .vc-mini-apps i{width:12px;height:12px;background:#174751;border:1px solid #397a86;border-radius:3px}
+#portfolio-view-dialog .vc-mini-window{position:absolute;top:12px;left:23%;width:67%;height:67px;border:1px solid #467485;border-radius:5px;background:#0e2432;display:grid;padding:4px 8px;gap:4px}
+#portfolio-view-dialog .vc-mini-window>span{font:7px/1 ui-monospace,monospace;color:#74b5bd;letter-spacing:2px}
+#portfolio-view-dialog .vc-mini-window b{font:500 8px/1.5 ui-monospace,monospace;color:#a6cecf}
+#portfolio-view-dialog .vc-mini-window em{font:500 11px/1.5 ui-monospace,monospace;color:#68e9db}
+#portfolio-view-dialog .vc-mini-window em span{margin-left:4px}
+#portfolio-view-dialog .vc-mini-dock{position:absolute;bottom:6px;left:42%;display:flex;gap:5px;padding:4px 7px;border:1px solid #315767;border-radius:5px;background:#132b37}
+#portfolio-view-dialog .vc-mini-dock i{width:8px;height:8px;border-radius:2px;background:#51b4b6}
+#portfolio-view-dialog .vc-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px}
+#portfolio-view-dialog .vc-bottom p{margin:0;color:var(--vc-muted);font-size:11px;line-height:1.5}
+#portfolio-view-dialog .vc-stay{background:transparent;color:var(--vc-muted);font:500 11px/1.5 var(--font-sans,system-ui,sans-serif);border:0;border-radius:5px;padding:9px 4px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+#portfolio-view-dialog .vc-stay:hover{color:var(--vc-text)}
+#portfolio-view-dialog .vc-stay:focus-visible{outline:2px solid var(--vc-accent);outline-offset:2px}
+[data-theme="light"] #portfolio-view-dialog{--vc-bg:#f4f8fa;--vc-card:#fff;--vc-text:#102738;--vc-muted:#526776;--vc-line:#c7d7df;--vc-accent:#087b7b;background:radial-gradient(ellipse at 100% 0%,#71c9ca26,transparent 55%),var(--vc-bg)}
+[data-theme="light"] .vc-toggle{background:#eff7f8;color:#15364a;border-color:#bdcfd9}
+@keyframes vc-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:600px){#portfolio-view-dialog{width:calc(100vw - 24px);padding:20px 18px 14px;border-radius:18px;max-height:calc(100dvh - 24px)}#portfolio-view-dialog .vc-heading-row{margin-bottom:20px}#portfolio-view-dialog .vc-edition{display:none}#portfolio-view-dialog #vc-description{font-size:13px;margin-bottom:18px}#portfolio-view-dialog .vc-options{grid-template-columns:1fr;gap:12px}#portfolio-view-dialog .vc-preview{display:none}#portfolio-view-dialog .vc-option{padding:16px}#portfolio-view-dialog .vc-option-label{margin-top:0}#portfolio-view-dialog .vc-option-title{font-size:21px}#portfolio-view-dialog .vc-option-tags{margin:10px 0 12px}#portfolio-view-dialog .vc-bottom{align-items:flex-start;flex-direction:column;gap:3px;margin-top:14px}}
+@media(max-width:520px){.site-header .vc-toggle{width:34px;min-height:36px;padding:8px}.site-header .vc-toggle>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.system-right .vc-toggle{padding:6px 8px;min-height:34px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){#portfolio-view-dialog[open]{animation:none}#portfolio-view-dialog .vc-option{transition:none}#portfolio-view-dialog .vc-option:hover{transform:none}}
+[data-motion="reduce"] #portfolio-view-dialog[open]{animation:none}
+@media print{#portfolio-view-dialog,.vc-toggle{display:none!important}}
