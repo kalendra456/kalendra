@@ -72,7 +72,7 @@ jobs:
                   launch.click()
                   page.wait_for_selector('#window-home', timeout=30000)
                   check('Homepage launcher opens the live workspace', '/kalendra/os/' in page.url)
-                  check('Workspace stylesheet is applied', page.locator('.system-bar').evaluate('(e) => getComputedStyle(e).position') == 'fixed')
+                  check('Workspace stylesheet is applied', page.locator('.system-bar').evaluate('(e) => getComputedStyle(e).display') == 'flex')
                   page.locator('.system-brand img').evaluate('(e) => e.decode()')
                   check('Workspace brand image decodes', page.locator('.system-brand img').evaluate('(e) => e.naturalWidth > 0'))
                   check('Reduced-motion preference is respected', page.locator('html').get_attribute('data-motion') == 'reduce')
@@ -100,8 +100,7 @@ jobs:
                   page.mouse.up()
                   after = home.bounding_box()
                   check('Window drag works', after['x'] >= before['x'] + 29 and after['y'] >= before['y'] + 19)
-                  grip = page.locator('#window-home .resize-grip')
-                  grip.focus()
+                  page.locator('#window-home .resize-grip').focus()
                   page.keyboard.press('ArrowLeft')
                   check('Window keyboard resize works', abs(home.bounding_box()['width'] - (after['width'] - 20)) < 2)
 
@@ -139,7 +138,7 @@ jobs:
 
                   responsive = []
                   for width, height in [(1920,1080), (1440,900), (1366,768), (1024,768), (820,1180), (700,850), (390,844), (360,800), (320,700)]:
-                      mobile_page = context.new_page(viewport={'width': width, 'height': height}) if False else context.new_page()
+                      mobile_page = context.new_page()
                       mobile_page.set_viewport_size({'width': width, 'height': height})
                       watch(mobile_page)
                       mobile_page.goto(SITE + 'os/', wait_until='domcontentloaded', timeout=60000)
