@@ -83,6 +83,14 @@
   document.addEventListener('keydown', event => {
     if (!dialog.open) return;
     event.stopImmediatePropagation();
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      const controls = [...dialog.querySelectorAll('a[href], button:not([disabled])')];
+      const index = controls.indexOf(document.activeElement);
+      const next = event.shiftKey ? (index <= 0 ? controls.length - 1 : index - 1) : (index + 1) % controls.length;
+      controls[next]?.focus({ preventScroll: true });
+      return;
+    }
     if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') event.preventDefault();
     if (event.key === 'Escape') { event.preventDefault(); closeChooser(); }
   }, true);
