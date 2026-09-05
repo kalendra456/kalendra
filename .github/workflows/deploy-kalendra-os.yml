@@ -25,7 +25,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          base64 -d .kalendra-os/runtime.b64 > /tmp/kalendra-os-runtime.tgz
+          cat .kalendra-os/chunks/chunk-* > /tmp/kalendra-os-runtime.b64
+          base64 -d /tmp/kalendra-os-runtime.b64 > /tmp/kalendra-os-runtime.tgz
           tar -xzf /tmp/kalendra-os-runtime.tgz
 
       - name: Integrate Recruiter View launcher
